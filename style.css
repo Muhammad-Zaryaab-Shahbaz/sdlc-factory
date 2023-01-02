@@ -1,0 +1,17 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+
+input{
+    border: none;
+    outline: none;
+}
+input:active{
+    outline: none;
+}
+
+.flex-50{
+    flex:  0 0 50%;
+}
