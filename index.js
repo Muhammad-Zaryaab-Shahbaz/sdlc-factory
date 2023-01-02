@@ -1,7 +1,7 @@
 
 const body = document.querySelector('.Mainbody');
-console.log(body);
-console.log(document.querySelector('.heyy'));
+let finalMonth, initialInvestment, totalMoneyMade;
+
 // sdlc section
 
 let plaining = 0;
@@ -35,20 +35,15 @@ const handleInputsValuesSdlc = (el) => {
     const total = +(plaining + defineRequirements + designPrototyping + softwaredevelopment + testing + development + operationMaintenance)
     remainingDoc.innerHTML = +(sprintValue - total);
 
-    // console.log('srpint', sprintValue, 'total', total, 'remaining', sprintValue - total);
-
-
-    // if (devValue == 0 || sprintsValue == 0) {
-    //     remainingDoc.innerHTML = '';
-    //     return
-    // }
-    // remainingDoc.innerHTML = totalRemainBudget(devValue, sprintsValue)
+    
   })
 }
 
 const handlerSubmitingSdlc = (handler) => {
   if (plaining == 0 || defineRequirements == 0 || designPrototyping == 0 || softwaredevelopment == 0 || operationMaintenance == 0 || development == 0 || testing == 0) return;
-  console.log('submit');
+  const total = plaining + defineRequirements + designPrototyping + softwaredevelopment + operationMaintenance + development + testing;
+  console.log(total,sprintValue);
+  if (total > sprintValue) return;
   handler()
 }
 
@@ -175,6 +170,28 @@ const othersMotnhs = (value) => {
 
 
 // templates for differnet pages
+const finalResultTemp = (values) => {
+  const html = `
+  <div class="bg-white w-1/3 p-4 gap-12 flex-col flex items-center">
+    <div class="w-full" >
+        <span class="flex  items-center w-full p-4 border-b">
+            <h1 class="mr-auto">Final</h1>
+            <b>${values.finalMonth.toFixed(2)}</b>
+        </span>
+        <span class="flex items-center w-full p-4 border-b">
+            <h1 class="flex-1">Initial Investment</h1>
+            <b>${values.initialInvestment.toFixed(2)}</b>
+        </span>
+        <span class="flex items-center w-full p-4 border-b">
+            <h1 class="flex-1">Total Money Made</h1>
+            <b>${values.totalMoneyMade.toFixed(2)}</b>
+        </span>
+    </div>
+    <button class="final-submit bg-red-100 px-4 rounded py-1">Submit</button>
+</div> 
+  `
+  return html;
+}
 const listMonths = (month, monthName) => {
   const html = `
   <tr class="bg-white border-b">
@@ -191,13 +208,13 @@ const listMonths = (month, monthName) => {
       ${month.moneyIn.toFixed(2)}
       </td>
       <td class="text-sm text-gray-900 font-light px-2 py-2 whitespace-nowrap">
-      ${month.droidProduced.toFixed(2)}
+      ${Math.round(month.droidProduced)}
       </td>
       <td class="text-sm text-gray-900 font-light px-2 py-2 whitespace-nowrap">
       ${month.defectivePercentage.toFixed(2)}%
       </td>
       <td class="text-sm text-gray-900 font-light px-2 py-2 whitespace-nowrap">
-      ${month.defectiveCount.toFixed(2)}
+      ${Math.round(month.defectiveCount)}
   </td>
 </tr>
   `
@@ -206,7 +223,7 @@ const listMonths = (month, monthName) => {
 
 const monthTemp = (month) => {
   const html = `
-  <div class="flex flex-col">
+  <div class="flex flex-col ">
   <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class=" py-2 inline-block min-w-full sm:px-2 lg:px-8">
           <div class="overflow-hidden ">
@@ -258,6 +275,7 @@ const monthTemp = (month) => {
 
                   </tbody>
               </table>
+              <div class='bg-red-100 text-center p-2'><button class="monthSubmit bg-white  py-1 px-4 red-100">Submit</button></div>
           </div>
       </div>
   </div>
@@ -466,6 +484,8 @@ const mainTemp = () => {
 }
 
 
+
+
 // main page 
 
 let devValue = 0;
@@ -531,7 +551,7 @@ const userHandler = (handler) => {
 
 // months handler
 
-const monthsTemplates = (remainingValue) => {
+const monthsTemplates = (remainingValue, handler) => {
   // const monthsObject = months(remainingValue);
   const january = januaryMonth(remainingValue);
   const febuary = othersMotnhs(january.fundStart - january.moneyOut + january.moneyIn)
@@ -547,15 +567,42 @@ const monthsTemplates = (remainingValue) => {
   const december = othersMotnhs(november.fundStart - november.moneyOut + november.moneyIn)
 
   const monthsData = [january, febuary, march, aprial, may, june, july, august, september, octorber, november, december];
+  finalMonth = (december.fundStart - december.moneyOut + december.moneyIn);
+  initialInvestment = remainingValue;
+  totalMoneyMade = finalMonth - initialInvestment;
+
+
   const html = monthTemp(monthsData);
   const parentEl = document.querySelector('.body');
   parentEl.insertAdjacentHTML('afterbegin', html);
+
+  const submitMonthBtn = document.querySelector('.monthSubmit');
+  submitMonthBtn.addEventListener('click', handler);
 }
 
-const monthsHandler = (remainingValue) => { monthsTemplates(remainingValue) };
+const monthsHandler = (remainingValue, handler) => { monthsTemplates(remainingValue, handler) };
+
+
+
+// total result module 
+const finalTemplatesGen = (values) => {
+
+  const html = finalResultTemp(values);
+
+  const parentEl = document.querySelector('.body');
+  parentEl.insertAdjacentHTML('afterbegin', html);
+}
+const finalHandler = (handler, values) => {
+  finalTemplatesGen(values)
+  const submitBtn = document.querySelector('.final-submit');
+  submitBtn.addEventListener('click', handler);
+}
+
+
+
+
 
 // to show different screens
-
 let screen = 1;
 
 const screenAdd = () => {
@@ -567,7 +614,6 @@ const screenAdd = () => {
 
 const modulesHandler = () => {
   if (screen == 1) {
-    console.log(body);
     body.innerHTML = '';
     return userHandler(screenAdd)
   }
@@ -577,7 +623,17 @@ const modulesHandler = () => {
   }
   else if (screen == 3) {
     body.innerHTML = '';
-    return monthsHandler(remainingValue);
+    return monthsHandler(remainingValue, screenAdd);
+
+  }
+  else if (screen == 4) {
+    body.innerHTML = '';
+    const values = { finalMonth, initialInvestment, totalMoneyMade }
+    return finalHandler(screenAdd, values)
+  }
+  else if (screen == 5) {
+    body.innerHTML = '';
+    return body.innerHTML = '<h1>5th screen here </h1>'
   }
 }
 
