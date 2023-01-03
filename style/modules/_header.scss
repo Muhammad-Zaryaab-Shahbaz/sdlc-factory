@@ -1,0 +1,47 @@
+.header {
+    text-align: center;
+    padding: .2rem .5rem;
+    border-bottom: .1px solid #ececec7a;
+    // width: 98%;
+    // margin: auto;
+}
+
+header {
+
+    h1 {
+        font-size: 2.5rem;
+        font-weight: 500;
+    }
+
+    p {
+        word-spacing: -.05rem;
+    }
+}
+
+.offical-header {
+    background-color: #151c2b;
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+
+    .image-container {
+        img {
+            width: 100%;
+            max-height: 65px;
+        }
+    }
+
+    .header-content {
+        margin-left: -5rem;
+        flex: 1;
+        text-align: center;
+
+        h1 {
+            font-size: 2rem;
+        }
+
+        p {
+            color: #a3ea2a;
+        }
+    }
+}

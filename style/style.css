@@ -1,0 +1,194 @@
+* {
+  margin: 0%;
+  padding: 0%;
+  box-sizing: border-box;
+}
+
+.header {
+  text-align: center;
+  padding: 0.2rem 0.5rem;
+  border-bottom: 0.1px solid rgba(236, 236, 236, 0.4784313725);
+}
+
+header h1 {
+  font-size: 2.5rem;
+  font-weight: 500;
+}
+header p {
+  word-spacing: -0.05rem;
+}
+
+.offical-header {
+  background-color: #151c2b;
+  display: flex;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+.offical-header .image-container img {
+  width: 100%;
+  max-height: 65px;
+}
+.offical-header .header-content {
+  margin-left: -5rem;
+  flex: 1;
+  text-align: center;
+}
+.offical-header .header-content h1 {
+  font-size: 2rem;
+}
+.offical-header .header-content p {
+  color: #a3ea2a;
+}
+
+.thirdScreenWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 10px;
+  width: 70%;
+  margin: auto;
+  gap: 10px;
+  border: 1px solid white;
+}
+.thirdScreenWrapper form, .thirdScreenWrapper div {
+  flex: 0 0 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px 0;
+}
+.thirdScreenWrapper form span, .thirdScreenWrapper div span {
+  display: flex;
+  flex-direction: row;
+}
+.thirdScreenWrapper form span input, .thirdScreenWrapper form span label, .thirdScreenWrapper form span p, .thirdScreenWrapper div span input, .thirdScreenWrapper div span label, .thirdScreenWrapper div span p {
+  flex: 0 0 50%;
+}
+.thirdScreenWrapper form span input, .thirdScreenWrapper form span p, .thirdScreenWrapper div span input, .thirdScreenWrapper div span p {
+  height: 2rem !important;
+}
+.thirdScreenWrapper form span input, .thirdScreenWrapper div span input {
+  color: white;
+}
+
+tbody, thead {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background-color: red;
+  width: 100%;
+}
+
+body {
+  background-color: #212c42;
+  padding: 0.5rem;
+  min-height: 100vh;
+  color: #ececec;
+}
+
+.wrapper {
+  border: 1px solid #ececec;
+  min-height: 95vh;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.introduction {
+  width: 80%;
+}
+.introduction h1 {
+  color: #a3ea2a;
+  font-size: 1.75rem;
+  font-weight: 400;
+  text-decoration: underline;
+  margin-bottom: 1rem;
+}
+.introduction ul {
+  margin-left: 4rem;
+  list-style: disc;
+}
+.introduction ul li {
+  margin-top: 0.5rem;
+}
+
+.btn-container {
+  width: 100%;
+  text-align: center;
+  height: 5rem;
+  padding: 1rem;
+  margin-top: 1rem !important;
+}
+.btn-container button,
+.btn-container input[type=submit] {
+  cursor: pointer;
+  background-color: #454e60;
+  width: 50%;
+  margin: auto;
+  padding: 0.7rem 0;
+  transition: 0.3s all ease-in-out;
+  border-radius: 10px;
+  font-weight: 600;
+  border: none;
+  color: #ececec;
+}
+.btn-container button:hover,
+.btn-container input[type=submit]:hover {
+  background-color: rgba(69, 78, 96, 0.5294117647);
+  border: 1px solid #ececec;
+}
+.btn-container button:active,
+.btn-container input[type=submit]:active {
+  border: none;
+}
+
+.user-form-container {
+  width: 60%;
+  border-radius: 10px !important;
+  border: 1px solid #ececec !important;
+  padding: 1rem;
+  text-align: center;
+  
+}
+.user-form-container form span {
+  border-bottom: 1px solid #ececec;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  text-align: center;
+  
+}
+.user-form-container form span label {
+  padding: 0.5rem 0;
+  font-weight: 700;
+  text-align: center;
+  
+}
+.user-form-container form span input {
+  height: 100% !important;
+  padding: 0.5rem !important;
+  background-color: rgba(69, 78, 96, 0.5294117647);
+  color: white;
+  text-align: center;
+}
+.user-form-container form span p {
+  text-align: center !important;
+  width: 50% !important;
+}
+input {
+  border: none;
+  outline: none;
+  background-color: #151c2b;
+  text-align: center;
+  height: 100% !important;
+  width: 50%;
+}/*# sourceMappingURL=style.css.map */
