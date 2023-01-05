@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&family=Ubuntu");
 * {
   margin: 0%;
   padding: 0%;
@@ -84,10 +85,12 @@ body {
   padding: 0.5rem;
   min-height: 100vh;
   color: #ececec;
+  font-family: "Source Sans Pro", "Ubuntu", sans-serif !important;
 }
 
 .wrapper {
   border: 1px solid #ececec;
+  background-color: #212c42;
   min-height: 95vh;
   border-radius: 10px;
   overflow: hidden;
@@ -130,7 +133,7 @@ body {
 .btn-container button,
 .btn-container input[type=submit] {
   cursor: pointer;
-  background-color: #454e60;
+  background-color: rgba(69, 78, 96, 0.5294117647);
   width: 50%;
   margin: auto;
   padding: 0.7rem 0;
@@ -139,10 +142,11 @@ body {
   font-weight: 600;
   border: none;
   color: #ececec;
+  font-size: 1.2rem;
 }
 .btn-container button:hover,
 .btn-container input[type=submit]:hover {
-  background-color: rgba(69, 78, 96, 0.5294117647);
+  background-color: #212c42;
   border: 1px solid #ececec;
 }
 .btn-container button:active,
@@ -153,27 +157,95 @@ body {
 .user-form-container {
   width: 60%;
   border-radius: 10px !important;
-  border: 1px solid #ececec !important;
   padding: 1rem;
-  text-align: center;
-  
 }
 .user-form-container form span {
-  border-bottom: 1px solid #ececec;
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 1rem;
+  overflow: hidden;
+  padding: 0.5rem;
+}
+.user-form-container form span .developer-container-input {
+  width: 50%;
+  position: relative;
+  height: 100% !important;
+  padding: 1rem !important;
+  background-color: rgba(69, 78, 96, 0.5294117647);
+  color: white;
   text-align: center;
-  
+}
+.user-form-container form span .developer-container-input input {
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  top: 0%;
+  left: 0%;
+}
+.user-form-container form span .developer-container-input .user-btn-container {
+  top: 0%;
+  left: 0%;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  display: flex;
+  transition: 1s all;
+}
+.user-form-container form span .developer-container-input .user-btn-container:focus-within {
+  outline: 1px solid white;
+}
+.user-form-container form span .developer-container-input .user-btn-container input:focus {
+  outline: none !important;
+  border: none;
+}
+.user-form-container form span .developer-container-input .user-btn-container button {
+  background-color: rgba(69, 78, 96, 0.5294117647) !important;
+  color: white;
+  z-index: 40;
+  height: 100%;
+  font-weight: 600;
+  border: none;
+  outline: none;
+  top: 0%;
+  padding: 0 0.1rem;
+  cursor: pointer;
+  min-width: 2.5rem;
+  transition: 0.3s all ease-in-out;
+}
+.user-form-container form span .developer-container-input .user-btn-container button:hover {
+  background-color: #212c42 !important;
+  outline: 1px solid #ececec;
+}
+.user-form-container form span .developer-container-input button:nth-of-type(1) {
+  margin-right: 0.3rem;
+}
+.user-form-container form span .developer-container-input button:nth-of-type(2) {
+  margin-right: 0.3rem;
+}
+.user-form-container form span .developer-container-input button:nth-of-type(4) {
+  margin-right: 0.3rem;
+}
+.user-form-container form span .developer-container-input button:nth-of-type(5) {
+  margin-right: 0.3rem;
 }
 .user-form-container form span label {
   padding: 0.5rem 0;
   font-weight: 700;
-  text-align: center;
-  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0 10px;
 }
-.user-form-container form span input {
+.user-form-container form span label i {
+  font-size: 1.5rem;
+  min-width: 2rem;
+}
+.user-form-container form span .inputs-user:focus {
+  border: 1px solid white;
+}
+.user-form-container form span input,
+.user-form-container form span .inputs-user {
   height: 100% !important;
   padding: 0.5rem !important;
   background-color: rgba(69, 78, 96, 0.5294117647);
@@ -182,13 +254,13 @@ body {
 }
 .user-form-container form span p {
   text-align: center !important;
-  width: 50% !important;
+  width: 50%;
 }
+
 input {
   border: none;
   outline: none;
   background-color: #151c2b;
-  text-align: center;
   height: 100% !important;
   width: 50%;
 }/*# sourceMappingURL=style.css.map */

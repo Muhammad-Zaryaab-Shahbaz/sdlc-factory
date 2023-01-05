@@ -1,54 +1,17 @@
+let screen = 1;
+
+const screenAdd = () => {
+  screen = screen + 1;
+  modulesHandler()
+}
+
 
 const wrapper = document.querySelector('.wrapper');
 let finalMonth, initialInvestment, totalMoneyMade;
 
-// sdlc section
-
-let plaining = 0;
-let defineRequirements = 0;
-let designPrototyping = 0;
-let softwaredevelopment = 0;
-let testing = 0;
-let operationMaintenance = 0;
-let development = 0;
-let sprintValue = 0
-
-//  Submit and input handlers for different inputs and buttons
-
-const thirdScreenInputHandler = (el) => {
-  const remainingDoc = document.querySelector('#sprint-remaining');
-  el.addEventListener('input', (e) => {
-
-    if (e.target.name == 'plaining') plaining = (+e.target.value);
-    if (e.target.name == 'definerequirements') defineRequirements = (+e.target.value);
-    if (e.target.name == 'designprototyping') designPrototyping = (+e.target.value);
-    if (e.target.name == 'softwaredevelopment') softwaredevelopment = (+e.target.value);
-    if (e.target.name == 'testing') testing = (+e.target.value);
-    if (e.target.name == 'development') development = (+e.target.value);
-    if (e.target.name == 'operationmaintaince') operationMaintenance = (+e.target.value);
-
-    const total = +(plaining + defineRequirements + designPrototyping + softwaredevelopment + testing + development + operationMaintenance)
-    remainingDoc.innerHTML = +(sprintValue - total);
-
-
-  })
-}
-
-const thirdScreenSubmitHandler = (handler) => {
-  if (plaining == 0 || defineRequirements == 0 || designPrototyping == 0 || softwaredevelopment == 0 || operationMaintenance == 0 || development == 0 || testing == 0) return;
-  const total = plaining + defineRequirements + designPrototyping + softwaredevelopment + operationMaintenance + development + testing;
-  console.log(total, sprintValue);
-  if (total > sprintValue) return;
-  handler()
-}
-
 
 // calculating values
-function getRandomInt(min, max) {
-  // min = Math.ceil(min);
-  // max = Math.floor(max);
-  return Math.random() * (max - min + 1) + min;
-}
+function getRandomInt(min, max) {return Math.random() * (max - min + 1) + min};
 const sdlc = {
   rateOfNewBugs: {
     lower: 0,
@@ -146,30 +109,339 @@ const othersMotnhs = (value) => {
 
 
 // templates for differnet pages
+// 1st screen temp and inputs handlers
+const addDevFn = (add)=>{
+  const develpers = document.querySelector('.develpers');
+  const prevValue = +develpers.value;
+  const remainingDoc = document.querySelector('#budget-remaining');
+  const inputsValidationContainer = document.querySelectorAll('.user-btn-container')
+  inputsValidationContainer[0].style.outline ='none'
+
+  devValue = (+prevValue) + (+add)
+  develpers.value = devValue;
+    if (devValue == 0 || sprintsValue == 0) {
+      remainingDoc.innerHTML = '';
+      return
+    }
+
+    remainingDoc.innerHTML = totalRemainBudget(devValue, sprintsValue);
+    remainingValue = totalRemainBudget(devValue, sprintsValue);
+}
+const minusDevFn = (minus)=>{
+  const develpers = document.querySelector('.develpers');
+  const prevValue = +develpers.value;
+  const remainingDoc = document.querySelector('#budget-remaining');
+  if((+prevValue) < minus ) return;
+
+  devValue = (+prevValue) - (minus)
+  develpers.value = devValue;
+    if (devValue == 0 || sprintsValue == 0) {
+      remainingDoc.innerHTML = '';
+      return
+    }
+
+    remainingDoc.innerHTML = totalRemainBudget(devValue, sprintsValue);
+    remainingValue = totalRemainBudget(devValue, sprintsValue);
+}
+const addSprintFn = (add)=>{
+  const sprint = document.querySelector('.sprints');
+  const prevValue = +sprint.value;
+  const remainingDoc = document.querySelector('#budget-remaining');
+  const inputsValidationContainer = document.querySelectorAll('.user-btn-container')
+  inputsValidationContainer[1].style.outline ='none'
+
+  sprintsValue = (+prevValue) + (+add)
+  sprint.value = sprintsValue;
+
+    if (devValue == 0 || sprintsValue == 0) {
+      remainingDoc.innerHTML = '';
+      return
+    }
+
+    remainingDoc.innerHTML = totalRemainBudget(devValue, sprintsValue);
+    remainingValue = totalRemainBudget(devValue, sprintsValue);
+}
+const minusSprintFn = (minus)=>{
+  const sprint = document.querySelector('.sprints');
+  const prevValue = +sprint.value;
+  const remainingDoc = document.querySelector('#budget-remaining');
+  if((+prevValue) < minus ) return;
+
+  sprintsValue = (+prevValue) - (minus)
+  sprint.value = sprintsValue;
+    if (devValue == 0 || sprintsValue == 0) {
+      remainingDoc.innerHTML = '';
+      return
+    }
+
+    remainingDoc.innerHTML = totalRemainBudget(devValue, sprintsValue);
+    remainingValue = totalRemainBudget(devValue, sprintsValue);
+}
 const firstScreenTemp = () => {
-  return (`
-  <div class="header">
-  <header>
-      <h1 class="heading_header"> Mission ELF-Possible </h1>
-      <p class="heading__description"> You will be presented with three different cases, each harder than the
-          previous one. Your objective is to get inside the perimeter, locate the vault area, and get access
-          to it without being caught. </p>
-  </header>
-</div>
-<div class="content">
-  <div class="introduction">
-      <h1 class="introduction__heading"> Introduction </h1>
-      <ul>
-          <li>Santa's Naughty or Nice list for the year is in the vault. As the Bad Yeti, we want that list
-              because it is the last step to destroy Christmas!</li>
-          <li>We won't get it that easily though! They know we are coming, so we have to navigate through
-              Santa's defenses.</li>
-      </ul>
-      <div class="btn-container"> <button class="first-screen">Next</button> </div>
+  const html = ` 
+  <div class="header offical-header">
+  <div class="image-container">
+      <img src="https://assets.tryhackme.com/img/logo/tryhackme_logo_full.svg" alt="image-logo">
+  </div>
+  <div class="header-content">
+      <h1>SDLC Factory Game</h1>
+      <p>Select amount of sprints and developers. </p>
   </div>
 </div>
-  `)
+<div class="content">
+  <div class="user-form-container">
+      <form action="#" class="user-form  flex flex-col autocomplete="off" p-8">
+          <span >
+              <label for="price-total">
+              <i class="fa-solid fa-sack-dollar"></i>
+              Total Budget :
+              </label>
+              <p type="text"  id="price-total">R1,000,000</p>
+          </span>
+          <span >
+              <label for="price-dev">
+              <i class="fa-solid fa-arrow-up-wide-short"></i>
+              Cost of developer per sprint :
+              </label>
+              <p type="text"  id="price-dev">3,000</p>
+          </span>
+          <span >
+              <label for="develpers">
+                <i class="fa-solid fa-user-plus"></i>
+                Number of developers :
+              </label>
+              <div class='developer-container-input'>
+                <div class='user-btn-container'>
+                  <button onClick='addDevFn(1)'>+1</button>
+                  <button onClick='addDevFn(5)'>+5</button>
+                  <button onClick='addDevFn(10)'>+10</button>
+                  <input type="text" value="" class="inputs-user develpers" name="devValue" id="develpers" autocomplete="off">
+                  <button onClick='minusDevFn(1)'>-1</button>
+                  <button onClick='minusDevFn(5)'>-5</button>
+                  <button onClick='minusDevFn(10)'>-10</button>
+                </div>
+              </div>
+          </span>
+          <span >
+          <label for="sprints">
+          <i class="fa-sharp fa-solid fa-arrows-spin"></i>
+      Number of sprints :
+          </label>
+          <div class='developer-container-input'>
+            <div class='user-btn-container'>
+              <button onClick='addSprintFn(1)'>+1</button>
+              <button onClick='addSprintFn(5)'>+5</button>
+              <button onClick='addSprintFn(10)'>+10</button>
+              <input type="text" class="inputs-user sprints" value="" name="sprintsValue" id="sprints" autocomplete="off">
+              <button onClick='minusSprintFn(1)'>-1</button>
+              <button onClick='minusSprintFn(5)'>-5</button>
+              <button onClick='minusSprintFn(10)'>-10</button>
+            </div>
+          </div>
+      </span>
+          <span >
+              <label for="budget-remaining">
+              <i class="fa-solid fa-money-bill"></i>
+              Budget Remaining :
+              </label>
+              <p id="budget-remaining"></p>
+          </span>
+          
+          <div class="btn-container"><input type="submit" value="Next" class="submit-first"></div>
+      </form>
+  </div>
+</div>
+ 
+  `
+
+  return html
 }
+
+
+// 2nd screen temp and inputs handlers
+const secondScreenTemp = () => {
+  const html = `
+  <div class="header offical-header">
+  <div class="image-container">
+    <img src="https://assets.tryhackme.com/img/logo/tryhackme_logo_full.svg" alt="image-logo">
+  </div>
+  <div class="header-content">
+    <h1>SDLC Factory Game</h1>
+    <p>Select amount of sprints and developers. </p>
+  </div>
+</div>
+
+<div class="secondScreenWrapper">
+  <div class="sdlc-form">
+    <span>
+      <label for="plaining">
+        <img src="./images/sdlc-icons/Planning.png" alt="planing-icon">
+        <img src="./images/text-images/Planning.png" alt="planing-text">
+
+      </label>
+      <input type="number" class="inputs-sdlc " name="plaining" id="plaining ">
+    </span>
+    <span>
+      <label for="definerequirements">Define Requirements</label>
+      <input type="number" class="inputs-sdlc " name="definerequirements" id="definerequirements ">
+    </span>
+    <span>
+      <label for="designprototyping">Design & Prototyping</label>
+      <input type="number" class="inputs-sdlc " name="designprototyping" id="designprototyping ">
+    </span>
+    <span>
+      <label for="softwaredevelopment">Software Development</label>
+      <input type="number" class="inputs-sdlc " name="softwaredevelopment" id="softwaredevelopment ">
+    </span>
+    <span>
+      <label for="testing">Testing</label>
+      <input type="number" class="inputs-sdlc " name="testing" id="testing ">
+    </span>
+    <span>
+      <label for="development">Development</label>
+      <input type="number" class="inputs-sdlc " name="development" id="development ">
+    </span>
+
+    <span>
+      <label for="operationmaintaince">Operations & Maintenance</label>
+      <input type="number" class="inputs-sdlc " name="operationmaintaince" id="operationmaintaince ">
+    </span>
+
+    <span>
+      <label for="sprint-invest-total">Sprint-Investment total</label>
+      <p  id="sprint-invest-total"></p>
+    </span>
+    <span>
+      <label for="sprint-remaining">Sprints Avaiable</label>
+      <p  id="sprint-remaining"></p>
+    </span>
+
+
+    <div class="btn-container"><input type="submit" value="next ->" ></div>
+  </div>
+
+
+  <div class="flex flex-col flex-1">
+    <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class=" py-2 inline-block min-w-full sm:px-6 lg:px-8">
+        <div class="overflow-hidden ">
+          <table class="min-w-full">
+            <thead class="border-b bg-red-100">
+              <tr>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                  #
+                </th>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                  Game Metrics
+                </th>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                  Lower Limit
+                </th>
+                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                  Upper Limit
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="bg-white border-b">
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">1</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  Rate of new bugs
+                </td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  0%
+                </td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  5%
+                </td>
+              </tr>
+              <tr class="bg-white border-b">
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">2</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  Cost to fix bugs
+                </td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  R579.42
+                </td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  R1000.00
+                </td>
+              </tr>
+              <tr class="bg-white border-b">
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">3</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  Droid production rate
+                </td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  100
+                </td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  166
+                </td>
+              </tr>
+              <tr class="bg-white border-b">
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">4</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  Percentage of defective droids
+                </td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  0%
+                </td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  5%
+                </td>
+              </tr>
+              <tr class="bg-white border-b">
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">5</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  Droid production cost
+                </td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  10000
+                </td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  13687
+                </td>
+              </tr>
+              <tr class="bg-white border-b">
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">6</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  Droid upsell percentage
+                </td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  20%
+                </td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  63%
+                </td>
+              </tr>
+              <tr class="bg-white border-b">
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">7</td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  Droid sell cost
+                </td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  R12000.00
+                </td>
+                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  R22372.73
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+  
+  `
+
+  return html;
+}
+
+// 3rd screen temp and inputs handlers
 const finalResultTemp = (values) => {
   const html = `
   <div class="bg-white w-1/3 p-4 gap-12 flex-col flex items-center">
@@ -247,7 +519,7 @@ const monthTemp = (month) => {
                           </th>
                           <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-4 text-left">
                               Defective Percentage
-                          </th>
+                          </th>;
                           <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-4 text-left">
                               Defective Count
                           </th>
@@ -285,258 +557,39 @@ const monthTemp = (month) => {
   return html;
 }
 
-const thridScreenTemp = () => {
-  const html = `
-  <div class="header offical-header">
-  <div class="image-container">
-      <img src="https://assets.tryhackme.com/img/logo/tryhackme_logo_full.svg" alt="image-logo">
-  </div>
-  <div class="header-content">
-      <h1>SDLC Factory Game</h1>
-      <p>Select amount of sprints and developers. </p>
-  </div>
-</div>
-<div class="thirdScreenWrapper flex items-center gap-12 flex-row ">
-  <form action="#" class=" sdlc-form  flex flex-col gap-y-4 bg-white py-8">
-      <span class="border-b flex">
-          <label for="plaining" class="w-52">Plaining</label>
-          <input type="number" class="inputs-sdlc bg-red-100" name="plaining" id="plaining ">
-      </span>
-      <span class="border-b flex">
-          <label for="definerequirements" class="w-52">Define Requirements</label>
-          <input type="number" class="inputs-sdlc bg-red-100" name="definerequirements"
-              id="definerequirements ">
-      </span>
-      <span class="border-b flex">
-          <label for="designprototyping" class="w-52">Design & Prototyping</label>
-          <input type="number" class="inputs-sdlc bg-red-100" name="designprototyping"
-              id="designprototyping ">
-      </span>
-      <span class="border-b flex">
-          <label for="softwaredevelopment" class="w-52">Software Development</label>
-          <input type="number" class="inputs-sdlc bg-red-100" name="softwaredevelopment"
-              id="softwaredevelopment ">
-      </span>
-      <span class="border-b flex">
-          <label for="testing" class="w-52">Testing</label>
-          <input type="number" class="inputs-sdlc bg-red-100" name="testing" id="testing ">
-      </span>
-      <span class="border-b flex">
-          <label for="development" class="w-52">Development</label>
-          <input type="number" class="inputs-sdlc bg-red-100" name="development" id="development ">
-      </span>
-
-      <span class="border-b flex">
-          <label for="operationmaintaince" class="w-52">Operations & Maintenance</label>
-          <input type="number" class="inputs-sdlc bg-red-100" name="operationmaintaince"
-              id="operationmaintaince ">
-      </span>
-
-      <span class="border-b flex">
-          <label for="sprint-invest-total" class="w-52">Sprint-Investment total</label>
-          <p class="flex-1" id="sprint-invest-total"></p>
-      </span>
-      <span class="border-b flex">
-          <label for="sprint-remaining" class="w-52">Sprints Avaiable</label>
-          <p class="flex-1" id="sprint-remaining"></p>
-      </span>
-
-      
-      <div class="btn-container"><input type="submit" value="next ->" class="bg-red-100 mt-4 cursor-pointer"></div>
-  </form>
-
-  <div class="flex flex-col flex-1">
-      <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div class=" py-2 inline-block min-w-full sm:px-6 lg:px-8">
-              <div class="overflow-hidden ">
-                  <table class="min-w-full">
-                      <thead class="border-b bg-red-100">
-                          <tr>
-                              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                  #
-                              </th>
-                              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                  Game Metrics
-                              </th>
-                              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                  Lower Limit
-                              </th>
-                              <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                  Upper Limit
-                              </th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <tr class="bg-white border-b">
-                              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">1</td>
-                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                  Rate of new bugs
-                              </td>
-                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                  0%
-                              </td>
-                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                  5%
-                              </td>
-                          </tr>
-                          <tr class="bg-white border-b">
-                              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">2</td>
-                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                  Cost to fix bugs
-                              </td>
-                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                  R579.42
-                              </td>
-                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                  R1000.00
-                              </td>
-                          </tr>
-                          <tr class="bg-white border-b">
-                              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">3</td>
-                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                  Droid production rate
-                              </td>
-                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                  100
-                              </td>
-                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                  166
-                              </td>
-                          </tr>
-                          <tr class="bg-white border-b">
-                              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">4</td>
-                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                  Percentage of defective droids
-                              </td>
-                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                  0%
-                              </td>
-                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                  5%
-                              </td>
-                          </tr>
-                          <tr class="bg-white border-b">
-                              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">5</td>
-                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                  Droid production cost
-                              </td>
-                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                  10000
-                              </td>
-                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                  13687
-                              </td>
-                          </tr>
-                          <tr class="bg-white border-b">
-                              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">6</td>
-                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                  Droid upsell percentage
-                              </td>
-                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                  20%
-                              </td>
-                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                  63%
-                              </td>
-                          </tr>
-                          <tr class="bg-white border-b">
-                              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">7</td>
-                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                  Droid sell cost
-                              </td>
-                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                  R12000.00
-                              </td>
-                              <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                  R22372.73
-                              </td>
-                          </tr>
-                      </tbody>
-                  </table>
-              </div>
-          </div>
-      </div>
-  </div>
-
-</div>
-  `
-
-  return html;
-}
-
-const sceondScreenTemp = () => {
-  const html = ` 
-  <div class="header offical-header">
-  <div class="image-container">
-      <img src="https://assets.tryhackme.com/img/logo/tryhackme_logo_full.svg" alt="image-logo">
-  </div>
-  <div class="header-content">
-      <h1>SDLC Factory Game</h1>
-      <p>Select amount of sprints and developers. </p>
-  </div>
-</div>
-<div class="content">
-  <div class="user-form-container">
-      <form action="#" class="user-form  flex flex-col   p-8">
-          <span >
-              <label for="price-total" class="w-48">Total Budget Available</label>
-              <p type="text"  id="price-total">1,000,000</p>
-          </span>
-          <span >
-              <label for="price-dev" class="w-48">Developer per Pay</label>
-              <p type="text"  id="price-dev">3,000</p>
-          </span>
-          <span >
-              <label for="develpers" class="w-48">Enter No Of Dev</label>
-              <input type="text" class="inputs-user" name="devValue" id="develpers ">
-          </span>
-          <span >
-              <label for="sprints" class="w-48">Enter No Of Sprints</label>
-              <input type="text" class="inputs-user" name="sprintsValue" id="sprints ">
-          </span>
-          <span >
-              <label for="budget-remaining" class="w-48">Budget Remaining</label>
-              <p type="text"  id="budget-remaining"></p>
-          </span>
-          
-          <div class="btn-container"><input type="submit" value="next" class="cursor-pointer"></div>
-      </form>
-  </div>
-</div>
- 
-  `
-
-  return html
-}
 
 
 
 
-// main page 
-
+// 1st screen logic 
 let devValue = 0;
 let sprintsValue = 0;
 let remainingValue = 0;
-
 const userCalc = {
   totalBudget: 1000000,
   costPerDev: 3000
 }
-
 const totalRemainBudget = (noOfDev, noOfSprints) => {
   const budget = userCalc.totalBudget;
   const cost = userCalc.costPerDev;
   return (budget - cost * noOfDev * noOfSprints)
 }
-
-//  user first page
-
-
 const handleInputsValues = (el) => {
   const remainingDoc = document.querySelector('#budget-remaining');
+  const inputsValidationContainer = document.querySelectorAll('.user-btn-container')
+
   el.addEventListener('input', (e) => {
-    if (e.target.name == 'devValue') devValue = e.target.value;
-    if (e.target.name == 'sprintsValue') sprintsValue = e.target.value;
+
+    if (e.target.name == 'devValue'){
+       devValue = e.target.value;
+       inputsValidationContainer[0].style.outline ='none'
+      }
+    if (e.target.name == 'sprintsValue') {
+      sprintsValue = e.target.value
+      inputsValidationContainer[1].style.outline ='none'
+
+
+    };
     if (devValue == 0 || sprintsValue == 0) {
       remainingDoc.innerHTML = '';
       return
@@ -545,49 +598,85 @@ const handleInputsValues = (el) => {
     remainingValue = totalRemainBudget(devValue, sprintsValue);
   })
 }
-
 const handlerSubmiting = (handler) => {
-  if (devValue == 0 || sprintsValue == 0) return;
-  console.log('submit');
+  const inputsValidationContainer = document.querySelectorAll('.user-btn-container')
+  if(devValue ===0) inputsValidationContainer[0].style.outline = '1px solid red';
+  if(sprintsValue ===0) inputsValidationContainer[1].style.outline = '1px solid red';
+
+  if (devValue == 0 || sprintsValue == 0) {
+
+    return
+  };
+  handler()
+}
+
+
+// 2nd screen logic
+let plaining = 0;
+let defineRequirements = 0;
+let designPrototyping = 0;
+let softwaredevelopment = 0;
+let testing = 0;
+let operationMaintenance = 0;
+let development = 0;
+let sprintValue = 0
+
+const secondcreenInputHandler = (el) => {
+  const remainingDoc = document.querySelector('#sprint-remaining');
+  el.addEventListener('input', (e) => {
+
+    if (e.target.name == 'plaining') plaining = (+e.target.value);
+    if (e.target.name == 'definerequirements') defineRequirements = (+e.target.value);
+    if (e.target.name == 'designprototyping') designPrototyping = (+e.target.value);
+    if (e.target.name == 'softwaredevelopment') softwaredevelopment = (+e.target.value);
+    if (e.target.name == 'testing') testing = (+e.target.value);
+    if (e.target.name == 'development') development = (+e.target.value);
+    if (e.target.name == 'operationmaintaince') operationMaintenance = (+e.target.value);
+
+    const total = +(plaining + defineRequirements + designPrototyping + softwaredevelopment + testing + development + operationMaintenance)
+    remainingDoc.innerHTML = +(sprintValue - total);
+
+
+  })
+}
+const secondScreenSubmitHandler = (handler) => {
+  if (plaining == 0 || defineRequirements == 0 || designPrototyping == 0 || softwaredevelopment == 0 || operationMaintenance == 0 || development == 0 || testing == 0) return;
+  const total = plaining + defineRequirements + designPrototyping + softwaredevelopment + operationMaintenance + development + testing;
+  console.log(total, sprintValue);
+  if (total > sprintValue) return;
   handler()
 }
 
 
 
+// 3rd screen logic
+const fourthScreenHandler = (remainingValue, handler) => {
+  // const monthsObject = months(remainingValue);
+  const january = januaryMonth(remainingValue);
+  const febuary = othersMotnhs(january.fundStart - january.moneyOut + january.moneyIn)
+  const march = othersMotnhs(febuary.fundStart - febuary.moneyOut + febuary.moneyIn)
+  const aprial = othersMotnhs(march.fundStart - march.moneyOut + march.moneyIn)
+  const may = othersMotnhs(aprial.fundStart - aprial.moneyOut + aprial.moneyIn)
+  const june = othersMotnhs(may.fundStart - may.moneyOut + may.moneyIn)
+  const july = othersMotnhs(june.fundStart - june.moneyOut + june.moneyIn)
+  const august = othersMotnhs(july.fundStart - july.moneyOut + july.moneyIn)
+  const september = othersMotnhs(august.fundStart - august.moneyOut + august.moneyIn)
+  const octorber = othersMotnhs(september.fundStart - september.moneyOut + september.moneyIn)
+  const november = othersMotnhs(octorber.fundStart - octorber.moneyOut + octorber.moneyIn)
+  const december = othersMotnhs(november.fundStart - november.moneyOut + november.moneyIn)
+
+  const monthsData = [january, febuary, march, aprial, may, june, july, august, september, octorber, november, december];
+  finalMonth = (december.fundStart - december.moneyOut + december.moneyIn);
+  initialInvestment = remainingValue;
+  totalMoneyMade = finalMonth - initialInvestment;
 
 
+  const html = monthTemp(monthsData);
+  const parentEl = document.querySelector('.wrapper');
+  parentEl.insertAdjacentHTML('afterbegin', html);
 
-// months handler
-
-
-
-const fourthScreenHandler = (remainingValue, handler) => { 
-   // const monthsObject = months(remainingValue);
-   const january = januaryMonth(remainingValue);
-   const febuary = othersMotnhs(january.fundStart - january.moneyOut + january.moneyIn)
-   const march = othersMotnhs(febuary.fundStart - febuary.moneyOut + febuary.moneyIn)
-   const aprial = othersMotnhs(march.fundStart - march.moneyOut + march.moneyIn)
-   const may = othersMotnhs(aprial.fundStart - aprial.moneyOut + aprial.moneyIn)
-   const june = othersMotnhs(may.fundStart - may.moneyOut + may.moneyIn)
-   const july = othersMotnhs(june.fundStart - june.moneyOut + june.moneyIn)
-   const august = othersMotnhs(july.fundStart - july.moneyOut + july.moneyIn)
-   const september = othersMotnhs(august.fundStart - august.moneyOut + august.moneyIn)
-   const octorber = othersMotnhs(september.fundStart - september.moneyOut + september.moneyIn)
-   const november = othersMotnhs(octorber.fundStart - octorber.moneyOut + octorber.moneyIn)
-   const december = othersMotnhs(november.fundStart - november.moneyOut + november.moneyIn)
- 
-   const monthsData = [january, febuary, march, aprial, may, june, july, august, september, octorber, november, december];
-   finalMonth = (december.fundStart - december.moneyOut + december.moneyIn);
-   initialInvestment = remainingValue;
-   totalMoneyMade = finalMonth - initialInvestment;
- 
- 
-   const html = monthTemp(monthsData);
-   const parentEl = document.querySelector('.wrapper');
-   parentEl.insertAdjacentHTML('afterbegin', html);
- 
-   const submitMonthBtn = document.querySelector('.monthSubmit');
-   submitMonthBtn.addEventListener('click', handler);
+  const submitMonthBtn = document.querySelector('.monthSubmit');
+  submitMonthBtn.addEventListener('click', handler);
 };
 
 
@@ -606,26 +695,19 @@ const finalHandler = (handler, values) => {
   submitBtn.addEventListener('click', handler);
 }
 
-
 // first screen handler
-const firstScreenHandler = (handler)=>{
+const firstScreenHandler = (handler) => {
   const html = firstScreenTemp();
-  const parentEl = document.querySelector('.wrapper');
-  parentEl.insertAdjacentHTML('afterbegin', html);
-
-  const nextBtn = document.querySelector('.first-screen');
-  nextBtn.addEventListener('click',handler)
-}
-// sceond screen handler
-const sceondScreenHandler = (handler) => {
-  const html = sceondScreenTemp();
   const parentEl = document.querySelector('.wrapper');
   parentEl.insertAdjacentHTML('afterbegin', html);
 
 
   // user for submiting form to move next page
   const userForm = document.querySelector('.user-form');
-  userForm?.addEventListener('submit', (e) => {
+  userForm?.addEventListener('submit', (e) => e.preventDefault());
+
+  const submitFirst = document.querySelector('.submit-first');
+  submitFirst?.addEventListener('click', (e) => {
     e.preventDefault();
     handlerSubmiting(handler)
   });
@@ -633,11 +715,12 @@ const sceondScreenHandler = (handler) => {
   // user input validating
   const inputs = document.querySelectorAll('.inputs-user');
   inputs?.forEach(handleInputsValues);
-
 }
-// third screen handler
-const thridScreenHandler = (handler, value) => {
-  const html = thridScreenTemp();
+
+
+// second screen handler
+const secondScreenHandler = (handler, value) => {
+  const html = secondScreenTemp();
   const parentEl = document.querySelector('.wrapper');
   parentEl.insertAdjacentHTML('afterbegin', html);
 
@@ -647,43 +730,28 @@ const thridScreenHandler = (handler, value) => {
   const sdlcForm = document.querySelector('.sdlc-form');
   sdlcForm?.addEventListener('submit', (e) => {
     e.preventDefault();
-    thirdScreenSubmitHandler(handler)
+    secondScreenSubmitHandler(handler)
   });
 
   const inputs = document.querySelectorAll('.inputs-sdlc');
-  inputs?.forEach(thirdScreenInputHandler);
+  inputs?.forEach(secondcreenInputHandler);
 
   const investment = document.querySelector('#sprint-invest-total');
   investment.innerHTML = sprintValue;
-
-
 }
 
 
 
 
 // to show different screens
-let screen = 1;
-
-const screenAdd = () => {
-  screen = screen + 1;
-  modulesHandler()
-}
-
-
-
 const modulesHandler = () => {
-  if(screen == 0){
-    wrapper.innerHTML = ''
-    return firstScreenHandler(screenAdd)
-  }
-  else if (screen == 1) {
+   if (screen == 1) {
     wrapper.innerHTML = '';
-    return sceondScreenHandler(screenAdd)
+    return firstScreenHandler(screenAdd)
   }
   else if (screen == 2) {
     wrapper.innerHTML = '';
-    return thridScreenHandler(screenAdd, sprintsValue)
+    return secondScreenHandler(screenAdd, 400000)
   }
   else if (screen == 3) {
     wrapper.innerHTML = '';
