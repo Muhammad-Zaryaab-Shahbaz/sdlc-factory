@@ -1,0 +1,156 @@
+.user-form-container {
+    width: 60%;
+    border-radius: 10px !important;
+    padding: 1rem;
+
+    form {
+        span {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            padding: .5rem;
+
+            .developer-container-input {
+                width: 50%;
+                position: relative;
+                height: 100% !important;
+                padding: 1rem !important;
+                background-color: #454e6087;
+                color: white;
+                text-align: center;
+
+                input {
+                    width: 100%;
+                    height: 100%;
+                    z-index: 100;
+                    top: 0%;
+                    left: 0%;
+                }
+
+                .user-btn-container {
+                    top: 0%;
+                    left: 0%;
+                    height: 100%;
+                    position: absolute;
+                    width: 100%;
+                    display: flex;
+
+                    &:focus-within {
+                        outline: 1px solid white !important;
+                    }
+
+                    input {
+                        &:focus {
+                            outline: none !important;
+                            border: none;
+                        }
+                    }
+
+                    button {
+                        background-color: #454e6087 !important;
+                        color: white;
+                        z-index: 40;
+                        height: 100%;
+                        font-weight: 600;
+                        border: none;
+                        outline: none;
+                        top: 0%;
+                        padding: 0 .1rem;
+                        cursor: pointer;
+                        min-width: 2.5rem;
+                        transition: .3s all ease-in-out;
+
+                        &:hover {
+                            background-color: #212c42 !important;
+                            outline: 1px solid #ececec;
+                        }
+                    }
+                }
+
+                button:nth-of-type(1) {
+                    margin-right: .3rem;
+                }
+
+                button:nth-of-type(2) {
+                    margin-right: .3rem;
+                }
+
+                button:nth-of-type(4) {
+                    margin-right: .3rem;
+                }
+
+                button:nth-of-type(5) {
+                    margin-right: .3rem;
+                }
+            }
+
+            label {
+                padding: .5rem 0;
+                font-weight: 700;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 0 10px;
+
+                i {
+                    font-size: 1.5rem;
+                    min-width: 2rem;
+                }
+            }
+
+            .inputs-user {
+                &:focus {
+                    border: 1px solid white;
+                }
+            }
+
+            input,
+            .inputs-user {
+                height: 100% !important;
+                padding: .5rem !important;
+                background-color: #454e6087;
+                color: white;
+                text-align: center;
+                border: none;
+                outline: none;
+            }
+
+            p {
+                text-align: center !important;
+                width: 50%;
+            }
+        }
+    }
+}
+
+@media screen and (max-width:1050px) {
+    .user-form-container{
+    width: 80%;
+  }
+}
+
+@media screen and (max-width:765px) {
+    .user-form-container{
+    width: 95%;
+  }
+}
+@media screen and (max-width:665px) {
+    .user-form-container{
+    span{
+        padding: .1rem;
+        justify-content: center;
+        &:nth-of-type(3),&:nth-of-type(4){
+        flex-direction: column;
+        align-items: flex-start !important;
+
+        }
+        
+        .developer-container-input{
+            width: 90% !important;
+
+        }
+    }
+  }
+}

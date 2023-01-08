@@ -1,50 +1,50 @@
 let screen = 1;
+let sdlc;
 
 const screenAdd = () => {
   screen = screen + 1;
   modulesHandler()
 }
 
-
 const wrapper = document.querySelector('.wrapper');
 let finalMonth, initialInvestment, totalMoneyMade;
 
-
 // calculating values
-function getRandomInt(min, max) {return Math.random() * (max - min + 1) + min};
-const sdlc = {
-  rateOfNewBugs: {
-    lower: 0,
-    upper: 5
-  },
-  costToFixBugs: {
-    lower: 579.42,
-    upper: 1000.00
-  },
-  droidProductionRate: {
-    lower: 100,
-    upper: 166
-  },
-  percentageOfDefectiveDroids: {
-    lower: 0,
-    upper: 5
-  },
-  droidProductionCost: {
-    lower: 10000,
-    upper: 13687
-  },
-  droidUpSellPercentage: {
-    lower: 20,
-    upper: 63
-  },
-  droidUpSellCost: {
-    lower: 12000.00,
-    upper: 22372.73
-  },
-}
-const januaryMonth = (value) => {
+function getRandomInt(min, max) { return Math.random() * (max - min + 1) + min };
+// const sdlc = {
+//   rateOfNewBugs: {
+//     lower: 0,
+//     upper: 5
+//   },
+//   costToFixBugs: {
+//     lower: 579.42,
+//     upper: 1000.00
+//   },
+//   droidProductionRate: {
+//     lower: 100,
+//     upper: 166
+//   },
+//   percentageOfDefectiveDroids: {
+//     lower: 0,
+//     upper: 5
+//   },
+//   droidProductionCost: {
+//     lower: 10000,
+//     upper: 13687
+//   },
+//   droidUpSellPercentage: {
+//     lower: 20,
+//     upper: 63
+//   },
+//   droidUpSellCost: {
+//     lower: 12000.00,
+//     upper: 22372.73
+//   },
+// }
+const januaryMonth = (fundStart, sdlc) => {
+  console.log(sdlc);
   const obj = {
-    fundStart: value,
+    fundStart: fundStart,
     moneyOut: function () { return ((this.droidProduced() * this.droidProductionCost()) + (this.numberOfBugs() * this.bugFixCost())) },
     moneyIn: function () { return ((this.droidProduced() - this.defectiveCount()) * this.droidSellCost()) },
     droidProduced: function () { return getRandomInt(sdlc.droidProductionRate.lower, sdlc.droidProductionRate.upper) },
@@ -73,10 +73,9 @@ const januaryMonth = (value) => {
 
   return obj2;
 }
-
-const othersMotnhs = (value) => {
+const othersMotnhs = (fundStart, sdlc) => {
   const obj = {
-    fundStart: function () { return value },
+    fundStart: function () { return fundStart },
     moneyOut: function () { return ((this.droidProduced() * this.droidProductionCost()) + (this.numberOfBugs() * this.bugFixCost())) },
     moneyIn: function () { return ((this.droidProduced() - this.defectiveCount()) * this.droidSellCost()) },
     droidProduced: function () { return getRandomInt(sdlc.droidProductionRate.lower, sdlc.droidProductionRate.upper) },
@@ -107,75 +106,75 @@ const othersMotnhs = (value) => {
 
 }
 
-
 // templates for differnet pages
 // 1st screen temp and inputs handlers
-const addDevFn = (add)=>{
+const addDevFn = (add) => {
+
   const develpers = document.querySelector('.develpers');
   const prevValue = +develpers.value;
   const remainingDoc = document.querySelector('#budget-remaining');
   const inputsValidationContainer = document.querySelectorAll('.user-btn-container')
-  inputsValidationContainer[0].style.outline ='none'
+  inputsValidationContainer[0].style.outline = 'none'
 
   devValue = (+prevValue) + (+add)
   develpers.value = devValue;
-    if (devValue == 0 || sprintsValue == 0) {
-      remainingDoc.innerHTML = '';
-      return
-    }
+  if (devValue == 0 || sprintsValue == 0) {
+    remainingDoc.innerHTML = '';
+    return
+  }
 
-    remainingDoc.innerHTML = totalRemainBudget(devValue, sprintsValue);
-    remainingValue = totalRemainBudget(devValue, sprintsValue);
+  remainingDoc.innerHTML = totalRemainBudget(devValue, sprintsValue);
+  remainingValue = totalRemainBudget(devValue, sprintsValue);
 }
-const minusDevFn = (minus)=>{
+const minusDevFn = (minus) => {
   const develpers = document.querySelector('.develpers');
   const prevValue = +develpers.value;
   const remainingDoc = document.querySelector('#budget-remaining');
-  if((+prevValue) < minus ) return;
+  if ((+prevValue) < minus) return;
 
   devValue = (+prevValue) - (minus)
   develpers.value = devValue;
-    if (devValue == 0 || sprintsValue == 0) {
-      remainingDoc.innerHTML = '';
-      return
-    }
+  if (devValue == 0 || sprintsValue == 0) {
+    remainingDoc.innerHTML = '';
+    return
+  }
 
-    remainingDoc.innerHTML = totalRemainBudget(devValue, sprintsValue);
-    remainingValue = totalRemainBudget(devValue, sprintsValue);
+  remainingDoc.innerHTML = totalRemainBudget(devValue, sprintsValue);
+  remainingValue = totalRemainBudget(devValue, sprintsValue);
 }
-const addSprintFn = (add)=>{
+const addSprintFn = (add) => {
   const sprint = document.querySelector('.sprints');
   const prevValue = +sprint.value;
   const remainingDoc = document.querySelector('#budget-remaining');
   const inputsValidationContainer = document.querySelectorAll('.user-btn-container')
-  inputsValidationContainer[1].style.outline ='none'
+  inputsValidationContainer[1].style.outline = 'none'
 
   sprintsValue = (+prevValue) + (+add)
   sprint.value = sprintsValue;
 
-    if (devValue == 0 || sprintsValue == 0) {
-      remainingDoc.innerHTML = '';
-      return
-    }
+  if (devValue == 0 || sprintsValue == 0) {
+    remainingDoc.innerHTML = '';
+    return
+  }
 
-    remainingDoc.innerHTML = totalRemainBudget(devValue, sprintsValue);
-    remainingValue = totalRemainBudget(devValue, sprintsValue);
+  remainingDoc.innerHTML = totalRemainBudget(devValue, sprintsValue);
+  remainingValue = totalRemainBudget(devValue, sprintsValue);
 }
-const minusSprintFn = (minus)=>{
+const minusSprintFn = (minus) => {
   const sprint = document.querySelector('.sprints');
   const prevValue = +sprint.value;
   const remainingDoc = document.querySelector('#budget-remaining');
-  if((+prevValue) < minus ) return;
+  if ((+prevValue) < minus) return;
 
   sprintsValue = (+prevValue) - (minus)
   sprint.value = sprintsValue;
-    if (devValue == 0 || sprintsValue == 0) {
-      remainingDoc.innerHTML = '';
-      return
-    }
+  if (devValue == 0 || sprintsValue == 0) {
+    remainingDoc.innerHTML = '';
+    return
+  }
 
-    remainingDoc.innerHTML = totalRemainBudget(devValue, sprintsValue);
-    remainingValue = totalRemainBudget(devValue, sprintsValue);
+  remainingDoc.innerHTML = totalRemainBudget(devValue, sprintsValue);
+  remainingValue = totalRemainBudget(devValue, sprintsValue);
 }
 const firstScreenTemp = () => {
   const html = ` 
@@ -225,7 +224,7 @@ const firstScreenTemp = () => {
           <span >
           <label for="sprints">
           <i class="fa-sharp fa-solid fa-arrows-spin"></i>
-      Number of sprints :
+          Number of sprints :
           </label>
           <div class='developer-container-input'>
             <div class='user-btn-container'>
@@ -257,8 +256,123 @@ const firstScreenTemp = () => {
   return html
 }
 
-
 // 2nd screen temp and inputs handlers
+const sdlcButtonsAdd = (value, target) => {
+  const remainingDoc = document.querySelector('#sprint-remaining');
+  const inputField = document.querySelector(`.${target}`);
+  const inputValue = +inputField.value;
+
+
+  if (target == 'plaining') {
+    plaining = (+value) + inputValue;
+    inputField.value = plaining;
+  }
+
+  else if (target == 'definerequirements') {
+    defineRequirements = (+value) + inputValue;
+    inputField.value = defineRequirements;
+  }
+
+  else if (target == 'designprototyping') {
+    designPrototyping = (+value) + inputValue;
+    inputField.value = designPrototyping;
+  }
+
+  else if (target == 'softwaredevelopment') {
+    softwaredevelopment = (+value) + inputValue;
+    inputField.value = softwaredevelopment;
+  }
+  else if (target == 'testing') {
+    testing = (+value) + inputValue;
+    inputField.value = testing;
+  }
+  else if (target == 'development') {
+    development = (+value) + inputValue;
+    inputField.value = development;
+  }
+  else if (target == 'operationmaintaince') {
+    operationMaintenance = (+value) + inputValue;
+    inputField.value = operationMaintenance;
+  }
+
+  const total = +(plaining + defineRequirements + designPrototyping + softwaredevelopment + testing + development + operationMaintenance)
+  remainingDoc.innerHTML = +(sprintValue - total);
+  const sdlcInputs = document.querySelectorAll('.inputs-sdlc');
+  sdlcInputs.forEach(el => {
+    const val = (+el.value);
+    if (!val || val == 0) return;
+    else el.parentElement.style.outline = 'none'
+  })
+
+  if (plaining == 0 || defineRequirements == 0 || designPrototyping == 0 || softwaredevelopment == 0 || operationMaintenance == 0 || development == 0 || testing == 0) {
+    const element = document.querySelector('.limts-stats__content');
+    element.innerHTML = '';
+    return
+  } else {
+    upperLowerLimitCalc({ plaining, defineRequirements, designPrototyping, softwaredevelopment, operationMaintenance, development, testing })
+  };
+
+}
+const sdlcButtonsMinus = (value, target) => {
+  const remainingDoc = document.querySelector('#sprint-remaining');
+  const inputField = document.querySelector(`.${target}`);
+  const inputValue = +inputField.value;
+
+  if (target == 'plaining') {
+    if ((inputValue) < value) return;
+    plaining = inputValue - (+value);
+    inputField.value = plaining;
+  }
+
+  else if (target == 'definerequirements') {
+    if ((inputValue) < value) return;
+    defineRequirements = inputValue - (+value);
+    inputField.value = defineRequirements;
+  }
+
+  else if (target == 'designprototyping') {
+    if ((inputValue) < value) return;
+    designPrototyping = inputValue - (+value);
+    inputField.value = designPrototyping;
+  }
+
+  else if (target == 'softwaredevelopment') {
+    if ((inputValue) < value) return;
+    softwaredevelopment = inputValue - (+value);
+    inputField.value = softwaredevelopment;
+  }
+  else if (target == 'testing') {
+    if ((inputValue) < value) return;
+    testing = inputValue - (+value);
+    inputField.value = testing;
+  }
+  else if (target == 'development') {
+    if ((inputValue) < value) return;
+    development = inputValue - (+value);
+    inputField.value = development;
+  }
+  else if (target == 'operationmaintaince') {
+    if ((inputValue) < value) return;
+    operationMaintenance = inputValue - (+value);
+    inputField.value = operationMaintenance;
+  }
+
+  const total = +(plaining + defineRequirements + designPrototyping + softwaredevelopment + testing + development + operationMaintenance)
+  remainingDoc.innerHTML = +(sprintValue - total);
+  const sdlcInputs = document.querySelectorAll('.inputs-sdlc');
+  sdlcInputs.forEach(el => {
+    const val = (+el.value);
+    if (!val || val == 0) return;
+    else el.parentElement.style.outline = 'none'
+  })
+  if (plaining == 0 || defineRequirements == 0 || designPrototyping == 0 || softwaredevelopment == 0 || operationMaintenance == 0 || development == 0 || testing == 0) {
+    const element = document.querySelector('.limts-stats__content');
+    element.innerHTML = '';
+    return
+  } else {
+    upperLowerLimitCalc({ plaining, defineRequirements, designPrototyping, softwaredevelopment, operationMaintenance, development, testing })
+  };
+}
 const secondScreenTemp = () => {
   const html = `
   <div class="header offical-header">
@@ -267,181 +381,192 @@ const secondScreenTemp = () => {
   </div>
   <div class="header-content">
     <h1>SDLC Factory Game</h1>
-    <p>Select amount of sprints and developers. </p>
+    <p>Allocate number of sprints</p>
   </div>
 </div>
-
 <div class="secondScreenWrapper">
   <div class="sdlc-form">
     <span>
       <label for="plaining">
         <img src="./images/sdlc-icons/Planning.png" alt="planing-icon">
         <img src="./images/text-images/Planning.png" alt="planing-text">
-
       </label>
-      <input type="number" class="inputs-sdlc " name="plaining" id="plaining ">
-    </span>
-    <span>
-      <label for="definerequirements">Define Requirements</label>
-      <input type="number" class="inputs-sdlc " name="definerequirements" id="definerequirements ">
-    </span>
-    <span>
-      <label for="designprototyping">Design & Prototyping</label>
-      <input type="number" class="inputs-sdlc " name="designprototyping" id="designprototyping ">
-    </span>
-    <span>
-      <label for="softwaredevelopment">Software Development</label>
-      <input type="number" class="inputs-sdlc " name="softwaredevelopment" id="softwaredevelopment ">
-    </span>
-    <span>
-      <label for="testing">Testing</label>
-      <input type="number" class="inputs-sdlc " name="testing" id="testing ">
-    </span>
-    <span>
-      <label for="development">Development</label>
-      <input type="number" class="inputs-sdlc " name="development" id="development ">
-    </span>
-
-    <span>
-      <label for="operationmaintaince">Operations & Maintenance</label>
-      <input type="number" class="inputs-sdlc " name="operationmaintaince" id="operationmaintaince ">
-    </span>
-
-    <span>
-      <label for="sprint-invest-total">Sprint-Investment total</label>
-      <p  id="sprint-invest-total"></p>
-    </span>
-    <span>
-      <label for="sprint-remaining">Sprints Avaiable</label>
-      <p  id="sprint-remaining"></p>
-    </span>
-
-
-    <div class="btn-container"><input type="submit" value="next ->" ></div>
-  </div>
-
-
-  <div class="flex flex-col flex-1">
-    <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-      <div class=" py-2 inline-block min-w-full sm:px-6 lg:px-8">
-        <div class="overflow-hidden ">
-          <table class="min-w-full">
-            <thead class="border-b bg-red-100">
-              <tr>
-                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                  #
-                </th>
-                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                  Game Metrics
-                </th>
-                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                  Lower Limit
-                </th>
-                <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                  Upper Limit
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="bg-white border-b">
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">1</td>
-                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  Rate of new bugs
-                </td>
-                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  0%
-                </td>
-                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  5%
-                </td>
-              </tr>
-              <tr class="bg-white border-b">
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">2</td>
-                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  Cost to fix bugs
-                </td>
-                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  R579.42
-                </td>
-                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  R1000.00
-                </td>
-              </tr>
-              <tr class="bg-white border-b">
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">3</td>
-                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  Droid production rate
-                </td>
-                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  100
-                </td>
-                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  166
-                </td>
-              </tr>
-              <tr class="bg-white border-b">
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">4</td>
-                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  Percentage of defective droids
-                </td>
-                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  0%
-                </td>
-                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  5%
-                </td>
-              </tr>
-              <tr class="bg-white border-b">
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">5</td>
-                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  Droid production cost
-                </td>
-                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  10000
-                </td>
-                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  13687
-                </td>
-              </tr>
-              <tr class="bg-white border-b">
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">6</td>
-                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  Droid upsell percentage
-                </td>
-                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  20%
-                </td>
-                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  63%
-                </td>
-              </tr>
-              <tr class="bg-white border-b">
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">7</td>
-                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  Droid sell cost
-                </td>
-                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  R12000.00
-                </td>
-                <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                  R22372.73
-                </td>
-              </tr>
-            </tbody>
-          </table>
+      <div class='sdlc-container-input'>
+        <div class='sdlc-btn-container'>
+          <button onClick='sdlcButtonsAdd(1,"plaining")'>+1</button>
+          <button onClick='sdlcButtonsAdd(5,"plaining")'>+5</button>
+          <button onClick='sdlcButtonsAdd(10,"plaining")'>+10</button>
+          <input class="inputs-sdlc plaining" value="" name="plaining" id="plaining " autocomplete="off">
+          <button onClick='sdlcButtonsMinus(1,"plaining")'>-1</button>
+          <button onClick='sdlcButtonsMinus(5,"plaining")'>-5</button>
+          <button onClick='sdlcButtonsMinus(10,"plaining")'>-10</button>
         </div>
       </div>
+    </span>
+    <span>
+      <label for="definerequirements">
+
+        <img src="./images/sdlc-icons/Define and requirements.png" alt="define-requirements-icon">
+        <img src="./images/text-images/Define requitements.png" alt="requirement-text">
+      </label>
+      <div class='sdlc-container-input'>
+        <div class='sdlc-btn-container'>
+          <button onClick='sdlcButtonsAdd(1,"definerequirements")'>+1</button>
+          <button onClick='sdlcButtonsAdd(5,"definerequirements")'>+5</button>
+          <button onClick='sdlcButtonsAdd(10,"definerequirements")'>+10</button>
+          <input class="inputs-sdlc definerequirements" name="definerequirements" id="definerequirements"
+            autocomplete="off">
+          <button onClick='sdlcButtonsMinus(1,"definerequirements")'>-1</button>
+          <button onClick='sdlcButtonsMinus(5,"definerequirements")'>-5</button>
+          <button onClick='sdlcButtonsMinus(10,"definerequirements")'>-10</button>
+        </div>
+      </div>
+    </span>
+    <span>
+      <label for="designprototyping">
+
+        <img src="./images/sdlc-icons/Design and prototyping.png" alt="design-prototyping-icon">
+        <img src="./images/text-images/Design and protoyping.png" alt="image-text">
+      </label>
+      <div class='sdlc-container-input'>
+        <div class='sdlc-btn-container'>
+          <button onClick='sdlcButtonsAdd(1,"designprototyping")'>+1</button>
+          <button onClick='sdlcButtonsAdd(5,"designprototyping")'>+5</button>
+          <button onClick='sdlcButtonsAdd(10,"designprototyping")'>+10</button>
+          <input class="inputs-sdlc designprototyping" name="designprototyping" id="designprototyping "
+            autocomplete="off">
+          <button onClick='sdlcButtonsMinus(1,"designprototyping")'>-1</button>
+          <button onClick='sdlcButtonsMinus(5,"designprototyping")'>-5</button>
+          <button onClick='sdlcButtonsMinus(10,"designprototyping")'>-10</button>
+        </div>
+      </div>
+    </span>
+    <span>
+      <label for="softwaredevelopment">
+        <img src="./images/sdlc-icons/Software developments.png" alt="sd-icon">
+        <img src="./images/text-images/Software developments.png" alt="image-text">
+      </label>
+      <div class='sdlc-container-input'>
+        <div class='sdlc-btn-container'>
+          <button onClick='sdlcButtonsAdd(1,"softwaredevelopment")'>+1</button>
+          <button onClick='sdlcButtonsAdd(5,"softwaredevelopment")'>+5</button>
+          <button onClick='sdlcButtonsAdd(10,"softwaredevelopment")'>+10</button>
+          <input class="inputs-sdlc softwaredevelopment" name="softwaredevelopment" id="softwaredevelopment "
+            autocomplete="off">
+          <button onClick='sdlcButtonsMinus(1,"softwaredevelopment")'>-1</button>
+          <button onClick='sdlcButtonsMinus(5,"softwaredevelopment")'>-5</button>
+          <button onClick='sdlcButtonsMinus(10,"softwaredevelopment")'>-10</button>
+        </div>
+      </div>
+    </span>
+    <span>
+      <label for="testing">
+        <img src="./images/sdlc-icons/Testing.png" alt="testing-icon">
+        <img src="./images/text-images/Testing.png" alt="image-text">
+      </label>
+      <div class='sdlc-container-input'>
+        <div class='sdlc-btn-container'>
+          <button onClick='sdlcButtonsAdd(1,"testing")'>+1</button>
+          <button onClick='sdlcButtonsAdd(5,"testing")'>+5</button>
+          <button onClick='sdlcButtonsAdd(10,"testing")'>+10</button>
+          <input class="inputs-sdlc testing" name="testing" id="testing " autocomplete="off">
+          <button onClick='sdlcButtonsMinus(1,"testing")'>-1</button>
+          <button onClick='sdlcButtonsMinus(5,"testing")'>-5</button>
+          <button onClick='sdlcButtonsMinus(10,"testing")'>-10</button>
+        </div>
+      </div>
+    </span>
+    <span>
+      <label for="development">
+        <img src="./images/sdlc-icons/Deployment.png" alt="development-icon">
+        <img src="./images/text-images/Deployment.png" alt="image-text">
+      </label>
+      <div class='sdlc-container-input'>
+        <div class='sdlc-btn-container'>
+          <button onClick='sdlcButtonsAdd(1,"development")'>+1</button>
+          <button onClick='sdlcButtonsAdd(5,"development")'>+5</button>
+          <button onClick='sdlcButtonsAdd(10,"development")'>+10</button>
+          <input class="inputs-sdlc development" name="development" id="development " autocomplete="off">
+          <button onClick='sdlcButtonsMinus(1,"development")'>-1</button>
+          <button onClick='sdlcButtonsMinus(5,"development")'>-5</button>
+          <button onClick='sdlcButtonsMinus(10,"development")'>-10</button>
+        </div>
+      </div>
+    </span>
+
+    <span>
+      <label for="operationmaintaince">
+        <img src="./images/sdlc-icons/Operations and maintenance.png" alt="maintaince-icon">
+        <img src="./images/text-images/Operations and maintenance.png" alt="image-text">
+      </label>
+      <div class='sdlc-container-input'>
+        <div class='sdlc-btn-container'>
+          <button onClick='sdlcButtonsAdd(1,"operationmaintaince")'>+1</button>
+          <button onClick='sdlcButtonsAdd(5,"operationmaintaince")'>+5</button>
+          <button onClick='sdlcButtonsAdd(10,"operationmaintaince")'>+10</button>
+          <input class="inputs-sdlc operationmaintaince" name="operationmaintaince" id="operationmaintaince "
+            autocomplete="off">
+          <button onClick='sdlcButtonsMinus(1,"operationmaintaince")'>-1</button>
+          <button onClick='sdlcButtonsMinus(5,"operationmaintaince")'>-5</button>
+          <button onClick='sdlcButtonsMinus(10,"operationmaintaince")'>-10</button>
+        </div>
+      </div>
+    </span>
+
+
+    <span>
+      <p id="sprint-remaining">Sprints</p>
+    </span>
+  </div>
+  <div class="limts-stats">
+    <div class="limts-stats__container">
+      <div class="limts-stats__heading">
+        <div>
+          <h1>Game Metrics</h1>
+        </div>
+        <div>
+          <h1>Lower Limit</h1>
+        </div>
+        <div>
+          <h1>Upper Limit</h1>
+        </div>
+      </div>
+      <div class="limts-stats__content">
+   
+      </div>
+
     </div>
   </div>
-
 </div>
-  
+<div class="btn-container second-btn"><input class="sdlc-form-submit" type="submit" value="Start Game"></div>
   `
 
   return html;
 }
 
-// 3rd screen temp and inputs handlers
+// 3rd screen temp 
+const thirdScreenTemp = () => {
+  const html = ` 
+  <div class="header offical-header">
+  <div class="image-container">
+      <img src="https://assets.tryhackme.com/img/logo/tryhackme_logo_full.svg" alt="image-logo">
+  </div>
+  <div class="header-content">
+      <h1>SDLC Factory Game</h1>
+      <p>Factory production line. </p>
+  </div>
+</div>
+  <div class="content">
+      <div class="screen3-container">
+        <img src="./images/screen3-ani/step-1.gif" alt="animations" class="image-animation">
+      </div>
+  </div>
+ 
+  `
+  return html
+
+}
+// 4rd screen temp and inputs handlers
 const finalResultTemp = (values) => {
   const html = `
   <div class="bg-white w-1/3 p-4 gap-12 flex-col flex items-center">
@@ -492,12 +617,11 @@ const listMonths = (month, monthName) => {
   `
   return html
 }
-
 const monthTemp = (month) => {
   const html = `
   <div class="flex flex-col ">
   <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-      <div class=" py-2 inline-block min-w-full sm:px-2 lg:px-8">
+      <div class=" py-2 inline-image-block min-w-full sm:px-2 lg:px-8">
           <div class="overflow-hidden ">
               <table class="min-w-full">
                   <thead class="border-b bg-red-100">
@@ -558,9 +682,6 @@ const monthTemp = (month) => {
 }
 
 
-
-
-
 // 1st screen logic 
 let devValue = 0;
 let sprintsValue = 0;
@@ -580,13 +701,13 @@ const handleInputsValues = (el) => {
 
   el.addEventListener('input', (e) => {
 
-    if (e.target.name == 'devValue'){
-       devValue = e.target.value;
-       inputsValidationContainer[0].style.outline ='none'
-      }
+    if (e.target.name == 'devValue') {
+      devValue = e.target.value;
+      inputsValidationContainer[0].style.outline = 'none'
+    }
     if (e.target.name == 'sprintsValue') {
       sprintsValue = e.target.value
-      inputsValidationContainer[1].style.outline ='none'
+      inputsValidationContainer[1].style.outline = 'none'
 
 
     };
@@ -600,8 +721,8 @@ const handleInputsValues = (el) => {
 }
 const handlerSubmiting = (handler) => {
   const inputsValidationContainer = document.querySelectorAll('.user-btn-container')
-  if(devValue ===0) inputsValidationContainer[0].style.outline = '1px solid red';
-  if(sprintsValue ===0) inputsValidationContainer[1].style.outline = '1px solid red';
+  if (devValue === 0) inputsValidationContainer[0].style.outline = '1px solid red';
+  if (sprintsValue === 0) inputsValidationContainer[1].style.outline = '1px solid red';
 
   if (devValue == 0 || sprintsValue == 0) {
 
@@ -624,6 +745,12 @@ let sprintValue = 0
 const secondcreenInputHandler = (el) => {
   const remainingDoc = document.querySelector('#sprint-remaining');
   el.addEventListener('input', (e) => {
+    const sdlcInputs = document.querySelectorAll('.inputs-sdlc');
+    sdlcInputs.forEach(el => {
+      const val = (+el.value);
+      if (!val || val == 0) return;
+      else el.parentElement.style.outline = 'none'
+    })
 
     if (e.target.name == 'plaining') plaining = (+e.target.value);
     if (e.target.name == 'definerequirements') defineRequirements = (+e.target.value);
@@ -635,35 +762,242 @@ const secondcreenInputHandler = (el) => {
 
     const total = +(plaining + defineRequirements + designPrototyping + softwaredevelopment + testing + development + operationMaintenance)
     remainingDoc.innerHTML = +(sprintValue - total);
-
-
+    if (plaining == 0 || defineRequirements == 0 || designPrototyping == 0 || softwaredevelopment == 0 || operationMaintenance == 0 || development == 0 || testing == 0) return;
+    upperLowerLimitCalc({ plaining, defineRequirements, designPrototyping, softwaredevelopment, operationMaintenance, development, testing })
   })
+
 }
 const secondScreenSubmitHandler = (handler) => {
+  const sdlcInputs = document.querySelectorAll('.inputs-sdlc');
+  sdlcInputs.forEach(el => {
+    const val = (+el.value);
+    if (!val || val == 0) el.parentElement.style.outline = '1px solid red'
+  })
   if (plaining == 0 || defineRequirements == 0 || designPrototyping == 0 || softwaredevelopment == 0 || operationMaintenance == 0 || development == 0 || testing == 0) return;
   const total = plaining + defineRequirements + designPrototyping + softwaredevelopment + operationMaintenance + development + testing;
   console.log(total, sprintValue);
   if (total > sprintValue) return;
   handler()
 }
+const upperLowerLimitCalc = (sprintObject) => {
+  const rate = ((sprintObject.plaining * (-1 / 100) + sprintObject.defineRequirements * (0 / 100) + sprintObject.designPrototyping * (-5 / 100) + sprintObject.softwaredevelopment * (-5 / 100) + sprintObject.testing * (-10 / 100) + sprintObject.development * (2 / 100) + sprintObject.operationMaintenance * (-5 / 100)) * (26 / 100)) * 100;
+  const cost = ((sprintObject.plaining * (-1 / 100) + sprintObject.defineRequirements * (0 / 100) + sprintObject.designPrototyping * (-5 / 100) + sprintObject.softwaredevelopment * (-5 / 100) + sprintObject.testing * (-10 / 100) + sprintObject.development * (2 / 100) + sprintObject.operationMaintenance * (-5 / 100)) * (26 / 100)) * 100;
+  const droidpr = ((sprintObject.plaining * (2 / 100) + sprintObject.defineRequirements * (4 / 100) + sprintObject.designPrototyping * (5 / 100) + sprintObject.softwaredevelopment * (10 / 100) + sprintObject.testing * (2 / 100) + sprintObject.development * (5 / 100) + sprintObject.operationMaintenance * (5 / 100)) * (26 / 100)) * 100;
+  const percentageodd = ((sprintObject.plaining * (-1 / 100) + sprintObject.defineRequirements * (-5 / 100) + sprintObject.designPrototyping * (-5 / 100) + sprintObject.softwaredevelopment * (-1 / 100) + sprintObject.testing * (-5 / 100) + sprintObject.development * (-1 / 100) + sprintObject.operationMaintenance * (-1 / 100)) * (26 / 100)) * 100;
+  const droidpc = ((sprintObject.plaining * (-2 / 100) + sprintObject.defineRequirements * (-5 / 100) + sprintObject.designPrototyping * (-5 / 100) + sprintObject.softwaredevelopment * (10 / 100) + sprintObject.testing * (5 / 100) + sprintObject.development * (5 / 100) + sprintObject.operationMaintenance * (10 / 100)) * (26 / 100)) * 100;
+  const droidsp = ((sprintObject.plaining * (2 / 100) + sprintObject.defineRequirements * (5 / 100) + sprintObject.designPrototyping * (5 / 100) + sprintObject.softwaredevelopment * (8 / 100) + sprintObject.testing * (0 / 100) + sprintObject.development * (0 / 100) + sprintObject.operationMaintenance * (0 / 100)) * (26 / 100)) * 100
+
+  let phases = {
+    rateOfNewBugs: {
+      baseLine: 5,
+      adjustmentPercentage: rate < 0 ? Math.floor(rate) : Math.ceil(rate),
+      lower: function () {
+        if (this.baseLine / 100 + this.adjustmentPercentage / 100 > 0) {
+          return this.baseLine / 100 + this.adjustmentPercentage / 100;
+        } else {
+          return 0;
+        }
+      },
+      upper: function () { return this.baseLine },
+    },
+    costToFixBugs: {
+      baseLine: 1000,
+      adjustmentPercentage: cost < 0 ? Math.floor(cost) : Math.ceil(cost),
+      lower: function () { return ((this.baseLine * (-1 * this.adjustmentPercentage / 100))) },
+      upper: function () { return this.baseLine }
+    },
+    droidProductionRate: {
+      baseLine: 100,
+      adjustmentPercentage: droidpr < 0 ? Math.floor(droidpr) : Math.ceil(droidpr),
+      lower: function () { return (this.baseLine) },
+      upper: function () { return this.baseLine * (this.adjustmentPercentage / 100) + this.baseLine }
+    },
+    percentageOfDefectiveDroids: {
+      baseLine: 5,
+      adjustmentPercentage: percentageodd < 0 ? Math.floor(percentageodd) : Math.ceil(percentageodd),
+      lower: function () {
+        if (this.baseLine / 100 + this.adjustmentPercentage / 100 > 0) {
+          return this.baseLine / 100 + this.adjustmentPercentage / 100;
+        } else {
+          return 0;
+        }
+      },
+      upper: function () { return this.baseLine }
+    },
+    droidProductionCost: {
+      baseLine: 10000,
+      adjustmentPercentage: droidpc < 0 ? Math.floor(droidpc) : Math.ceil(droidpc),
+      lower: function () { return (this.baseLine) },
+      upper: function () { return this.baseLine * (this.adjustmentPercentage / 100) + this.baseLine }
+    },
+    droidUpSellPercentage: {
+      baseLine: 20,
+      adjustmentPercentage: droidsp < 0 ? Math.floor(droidsp) : Math.ceil(droidsp),
+      lower: function () { return (this.baseLine) },
+      upper: function () { return (((this.baseLine / 100) + (this.adjustmentPercentage / 100)) * 100) }
+    },
+    droidUpSellCost: {
+      baseLine: function () { return (phases.droidProductionCost.baseLine * phases.droidUpSellPercentage.baseLine / 100 + phases.droidProductionCost.baseLine) },
+      adjustmentPercentage: null,
+      lower: function () { return (phases.droidProductionCost.lower() * (phases.droidUpSellPercentage.lower() / 100) + phases.droidProductionCost.lower()) },
+      upper: function () { return (phases.droidProductionCost.upper() * (phases.droidUpSellPercentage.upper() / 100) + phases.droidProductionCost.upper()) },
+    },
+  }
+  sdlc = {
+    rateOfNewBugs: {
+      baseLine: phases.rateOfNewBugs.baseLine,
+      adjustmentPercentage: phases.rateOfNewBugs.adjustmentPercentage,
+      lower: phases.rateOfNewBugs.lower(),
+      upper: phases.rateOfNewBugs.upper()
+    },
+    costToFixBugs: {
+      baseLine: phases.costToFixBugs.baseLine,
+      adjustmentPercentage: phases.costToFixBugs.adjustmentPercentage,
+      lower: phases.costToFixBugs.lower(),
+      upper: phases.costToFixBugs.upper()
+    },
+    droidProductionRate: {
+      baseLine: phases.droidProductionRate.baseLine,
+      adjustmentPercentage: phases.droidProductionRate.adjustmentPercentage,
+      lower: phases.droidProductionRate.lower(),
+      upper: phases.droidProductionRate.upper()
+    },
+    percentageOfDefectiveDroids: {
+      baseLine: phases.percentageOfDefectiveDroids.baseLine,
+      adjustmentPercentage: phases.percentageOfDefectiveDroids.adjustmentPercentage,
+      lower: phases.percentageOfDefectiveDroids.lower(),
+      upper: phases.percentageOfDefectiveDroids.upper()
+    },
+    droidProductionCost: {
+      baseLine: phases.droidProductionCost.baseLine,
+      adjustmentPercentage: phases.droidProductionCost.adjustmentPercentage,
+      lower: phases.droidProductionCost.lower(),
+      upper: phases.droidProductionCost.upper()
+    },
+    droidUpSellPercentage: {
+      baseLine: phases.droidUpSellPercentage.baseLine,
+      adjustmentPercentage: phases.droidUpSellPercentage.adjustmentPercentage,
+      lower: phases.droidUpSellPercentage.lower(),
+      upper: phases.droidUpSellPercentage.upper()
+    },
+    droidUpSellCost: {
+      baseLine: phases.droidUpSellCost.baseLine(),
+      adjustmentPercentage: phases.droidUpSellCost.adjustmentPercentage,
+      lower: phases.droidUpSellCost.lower(),
+      upper: phases.droidUpSellCost.upper()
+    },
+  }
+
+  const element = document.querySelector('.limts-stats__content');
+  element.innerHTML = '';
+
+  const html = `
+  <div><b>Rate of new bugs</b>  <p>${sdlc.rateOfNewBugs.lower.toFixed(0)}%</p> <p>${sdlc.rateOfNewBugs.upper.toFixed(0)}%</p> </div>
+  <div><b>Cost to fix bugs</b>  <p>R.${sdlc.costToFixBugs.lower.toFixed(0)}</p> <p>R.${sdlc.costToFixBugs.upper.toFixed(0)}</p> </div>
+  <div><b>Droid production rate</b>  <p>${sdlc.droidProductionRate.lower.toFixed(0)}</p> <p>${sdlc.droidProductionRate.upper.toFixed(0)}</p> </div>
+  <div><b>Percentage of defective droids</b>  <p>${sdlc.percentageOfDefectiveDroids.lower.toFixed(0)}&</p> <p>${sdlc.percentageOfDefectiveDroids.upper.toFixed(0)}%</p> </div>
+  <div><b>Droid production cost</b>  <p>${sdlc.droidProductionCost.lower.toFixed(0)}</p> <p>${sdlc.droidProductionCost.upper.toFixed(0)}</p> </div>
+  <div><b>Droid upsell percentage</b>  <p>${sdlc.droidUpSellPercentage.lower.toFixed(0)}%</p> <p>${sdlc.droidUpSellPercentage.upper.toFixed(0)}%</p> </div>
+  <div><b>Droid sell cost</b>  <p>R.${sdlc.droidUpSellCost.lower.toFixed(0)}</p> <p>R.${sdlc.droidUpSellCost.upper.toFixed(0)}</p> </div>
+  `
+  element.innerHTML = html
 
 
+}
 
 // 3rd screen logic
+let init = 0;
+const thirdScreenAnimationHandler = () => {
+  const animations = ['step-1.gif', 'step-2.gif', 'step-3.gif', 'step-4.gif', 'step-5.gif', 'step-6.gif']
+  const container = document.querySelector('.image-animation');
+
+  if (init == 6) { init = 0 }
+  console.log(init)
+
+  if (init == 0) {
+    console.log('first-image-block');
+    container.src = `./images/screen3-ani/${animations[init]}`
+
+    setTimeout(() => {
+      init = init + 1;
+      thirdScreenAnimationHandler()
+      return
+    }, 1100);
+
+    return
+  }
+  else if (init == 1) {
+    console.log('2nd-image-block');
+    
+    container.src = `./images/screen3-ani/${animations[init]}`
+
+    setTimeout(() => {
+      init = init + 1;
+      thirdScreenAnimationHandler()
+      return
+    }, 3404);
+  }
+  else if (init == 2) {
+    console.log('3rd-image-block');
+    
+    container.src = `./images/screen3-ani/${animations[init]}`
+
+    setTimeout(() => {
+      init = init + 1;
+      thirdScreenAnimationHandler()
+      return
+    }, 4000);
+  }
+  else if (init == 3) {
+    console.log('4th-image-block');
+    
+    container.src = `./images/screen3-ani/${animations[init]}`
+
+    setTimeout(() => {
+      init = init + 1;
+      thirdScreenAnimationHandler()
+      return
+    }, 3000);
+  }
+  else if (init == 4) {
+    console.log('5th-image-block');
+    
+    container.src = `./images/screen3-ani/${animations[init]}`
+
+    setTimeout(() => {
+      init = init + 1;
+      thirdScreenAnimationHandler()
+      return
+    }, 6000);
+  }
+  else if (init == 5) {
+    console.log('6th-image-block');
+    
+    container.src = `./images/screen3-ani/${animations[init]}`
+
+    setTimeout(() => {
+      init = init + 1;
+      thirdScreenAnimationHandler()
+      return
+    }, 6800);
+  }
+
+}
+// 4th screen logic
 const fourthScreenHandler = (remainingValue, handler) => {
   // const monthsObject = months(remainingValue);
-  const january = januaryMonth(remainingValue);
-  const febuary = othersMotnhs(january.fundStart - january.moneyOut + january.moneyIn)
-  const march = othersMotnhs(febuary.fundStart - febuary.moneyOut + febuary.moneyIn)
-  const aprial = othersMotnhs(march.fundStart - march.moneyOut + march.moneyIn)
-  const may = othersMotnhs(aprial.fundStart - aprial.moneyOut + aprial.moneyIn)
-  const june = othersMotnhs(may.fundStart - may.moneyOut + may.moneyIn)
-  const july = othersMotnhs(june.fundStart - june.moneyOut + june.moneyIn)
-  const august = othersMotnhs(july.fundStart - july.moneyOut + july.moneyIn)
-  const september = othersMotnhs(august.fundStart - august.moneyOut + august.moneyIn)
-  const octorber = othersMotnhs(september.fundStart - september.moneyOut + september.moneyIn)
-  const november = othersMotnhs(octorber.fundStart - octorber.moneyOut + octorber.moneyIn)
-  const december = othersMotnhs(november.fundStart - november.moneyOut + november.moneyIn)
+  const january = januaryMonth(remainingValue, sdlc);
+  const febuary = othersMotnhs(january.fundStart - january.moneyOut + january.moneyIn, sdlc)
+  const march = othersMotnhs(febuary.fundStart - febuary.moneyOut + febuary.moneyIn, sdlc)
+  const aprial = othersMotnhs(march.fundStart - march.moneyOut + march.moneyIn, sdlc)
+  const may = othersMotnhs(aprial.fundStart - aprial.moneyOut + aprial.moneyIn, sdlc)
+  const june = othersMotnhs(may.fundStart - may.moneyOut + may.moneyIn, sdlc)
+  const july = othersMotnhs(june.fundStart - june.moneyOut + june.moneyIn, sdlc)
+  const august = othersMotnhs(july.fundStart - july.moneyOut + july.moneyIn, sdlc)
+  const september = othersMotnhs(august.fundStart - august.moneyOut + august.moneyIn, sdlc)
+  const octorber = othersMotnhs(september.fundStart - september.moneyOut + september.moneyIn, sdlc)
+  const november = othersMotnhs(octorber.fundStart - octorber.moneyOut + octorber.moneyIn, sdlc)
+  const december = othersMotnhs(november.fundStart - november.moneyOut + november.moneyIn, sdlc)
 
   const monthsData = [january, febuary, march, aprial, may, june, july, august, september, octorber, november, december];
   finalMonth = (december.fundStart - december.moneyOut + december.moneyIn);
@@ -695,6 +1029,7 @@ const finalHandler = (handler, values) => {
   submitBtn.addEventListener('click', handler);
 }
 
+
 // first screen handler
 const firstScreenHandler = (handler) => {
   const html = firstScreenTemp();
@@ -716,8 +1051,6 @@ const firstScreenHandler = (handler) => {
   const inputs = document.querySelectorAll('.inputs-user');
   inputs?.forEach(handleInputsValues);
 }
-
-
 // second screen handler
 const secondScreenHandler = (handler, value) => {
   const html = secondScreenTemp();
@@ -727,8 +1060,8 @@ const secondScreenHandler = (handler, value) => {
   sprintValue = +value;
 
   // sdlc form for submiting to move next page
-  const sdlcForm = document.querySelector('.sdlc-form');
-  sdlcForm?.addEventListener('submit', (e) => {
+  const sdlcForm = document.querySelector('.sdlc-form-submit');
+  sdlcForm?.addEventListener('click', (e) => {
     e.preventDefault();
     secondScreenSubmitHandler(handler)
   });
@@ -736,34 +1069,42 @@ const secondScreenHandler = (handler, value) => {
   const inputs = document.querySelectorAll('.inputs-sdlc');
   inputs?.forEach(secondcreenInputHandler);
 
-  const investment = document.querySelector('#sprint-invest-total');
-  investment.innerHTML = sprintValue;
 }
+// third screen handler
+const thirdScreenHandler = (hadnler) => {
+  const html = thirdScreenTemp();
+  const parentEl = document.querySelector('.wrapper');
+  parentEl.insertAdjacentHTML('afterbegin', html);
 
-
-
+  thirdScreenAnimationHandler();
+}
 
 // to show different screens
 const modulesHandler = () => {
-   if (screen == 1) {
+  if (screen == 1) {
     wrapper.innerHTML = '';
     return firstScreenHandler(screenAdd)
   }
   else if (screen == 2) {
     wrapper.innerHTML = '';
-    return secondScreenHandler(screenAdd, 400000)
+    return secondScreenHandler(screenAdd, sprintsValue)
+    // return secondScreenHandler(screenAdd, 50)
+
   }
   else if (screen == 3) {
     wrapper.innerHTML = '';
-    return fourthScreenHandler(remainingValue, screenAdd);
-
+    return thirdScreenHandler(screenAdd);
   }
   else if (screen == 4) {
+    wrapper.innerHTML = '';
+    return fourthScreenHandler(remainingValue, screenAdd);
+  }
+  else if (screen == 5) {
     wrapper.innerHTML = '';
     const values = { finalMonth, initialInvestment, totalMoneyMade }
     return finalHandler(screenAdd, values)
   }
-  else if (screen == 5) {
+  else if (screen == 6) {
     wrapper.innerHTML = '';
     return wrapper.innerHTML = '<h1>5th screen here </h1>'
   }

@@ -5,6 +5,14 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: #212c42;
+  padding: 0.5rem;
+  min-height: 100vh;
+  color: #ececec;
+  font-family: "Source Sans Pro", "Ubuntu", sans-serif !important;
+}
+
 .header {
   text-align: center;
   padding: 0.2rem 0.5rem;
@@ -24,13 +32,19 @@ header p {
   display: flex;
   align-items: center;
   padding: 1rem 2rem;
+  position: relative;
+}
+.offical-header .image-container {
+  position: absolute;
+  left: 0%;
+  top: 10%;
+  min-width: 10rem;
 }
 .offical-header .image-container img {
   width: 100%;
   max-height: 65px;
 }
 .offical-header .header-content {
-  margin-left: -5rem;
   flex: 1;
   text-align: center;
 }
@@ -41,119 +55,24 @@ header p {
   color: #a3ea2a;
 }
 
-.thirdScreenWrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 1rem;
-  border-radius: 10px;
-  width: 70%;
-  margin: auto;
-  gap: 10px;
-  border: 1px solid white;
+@media screen and (max-width: 650px) {
+  .offical-header {
+    flex-direction: column;
+    padding: 1rem !important;
+  }
+  .image-container {
+    position: relative !important;
+  }
+  .image-container img {
+    max-height: 80px !important;
+  }
+  .header-content h1 {
+    font-size: 1.5rem !important;
+  }
+  .header-content p {
+    font-size: 0.8rem !important;
+  }
 }
-.thirdScreenWrapper form, .thirdScreenWrapper div {
-  flex: 0 0 50%;
-  display: flex;
-  flex-direction: column;
-  gap: 5px 0;
-}
-.thirdScreenWrapper form span, .thirdScreenWrapper div span {
-  display: flex;
-  flex-direction: row;
-}
-.thirdScreenWrapper form span input, .thirdScreenWrapper form span label, .thirdScreenWrapper form span p, .thirdScreenWrapper div span input, .thirdScreenWrapper div span label, .thirdScreenWrapper div span p {
-  flex: 0 0 50%;
-}
-.thirdScreenWrapper form span input, .thirdScreenWrapper form span p, .thirdScreenWrapper div span input, .thirdScreenWrapper div span p {
-  height: 2rem !important;
-}
-.thirdScreenWrapper form span input, .thirdScreenWrapper div span input {
-  color: white;
-}
-
-tbody, thead {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  background-color: red;
-  width: 100%;
-}
-
-body {
-  background-color: #212c42;
-  padding: 0.5rem;
-  min-height: 100vh;
-  color: #ececec;
-  font-family: "Source Sans Pro", "Ubuntu", sans-serif !important;
-}
-
-.wrapper {
-  border: 1px solid #ececec;
-  background-color: #212c42;
-  min-height: 95vh;
-  border-radius: 10px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-}
-
-.introduction {
-  width: 80%;
-}
-.introduction h1 {
-  color: #a3ea2a;
-  font-size: 1.75rem;
-  font-weight: 400;
-  text-decoration: underline;
-  margin-bottom: 1rem;
-}
-.introduction ul {
-  margin-left: 4rem;
-  list-style: disc;
-}
-.introduction ul li {
-  margin-top: 0.5rem;
-}
-
-.btn-container {
-  width: 100%;
-  text-align: center;
-  height: 5rem;
-  padding: 1rem;
-  margin-top: 1rem !important;
-}
-.btn-container button,
-.btn-container input[type=submit] {
-  cursor: pointer;
-  background-color: rgba(69, 78, 96, 0.5294117647);
-  width: 50%;
-  margin: auto;
-  padding: 0.7rem 0;
-  transition: 0.3s all ease-in-out;
-  border-radius: 10px;
-  font-weight: 600;
-  border: none;
-  color: #ececec;
-  font-size: 1.2rem;
-}
-.btn-container button:hover,
-.btn-container input[type=submit]:hover {
-  background-color: #212c42;
-  border: 1px solid #ececec;
-}
-.btn-container button:active,
-.btn-container input[type=submit]:active {
-  border: none;
-}
-
 .user-form-container {
   width: 60%;
   border-radius: 10px !important;
@@ -190,10 +109,9 @@ body {
   position: absolute;
   width: 100%;
   display: flex;
-  transition: 1s all;
 }
 .user-form-container form span .developer-container-input .user-btn-container:focus-within {
-  outline: 1px solid white;
+  outline: 1px solid white !important;
 }
 .user-form-container form span .developer-container-input .user-btn-container input:focus {
   outline: none !important;
@@ -251,16 +169,269 @@ body {
   background-color: rgba(69, 78, 96, 0.5294117647);
   color: white;
   text-align: center;
+  border: none;
+  outline: none;
 }
 .user-form-container form span p {
   text-align: center !important;
   width: 50%;
 }
 
-input {
+@media screen and (max-width: 1050px) {
+  .user-form-container {
+    width: 80%;
+  }
+}
+@media screen and (max-width: 765px) {
+  .user-form-container {
+    width: 95%;
+  }
+}
+@media screen and (max-width: 665px) {
+  .user-form-container span {
+    padding: 0.1rem;
+    justify-content: center;
+  }
+  .user-form-container span:nth-of-type(3), .user-form-container span:nth-of-type(4) {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+  .user-form-container span .developer-container-input {
+    width: 90% !important;
+  }
+}
+.secondScreenWrapper {
+  border-radius: 10px;
+  width: 100;
+  margin: auto;
+  gap: 10px;
+  width: 90%;
+  margin: auto;
+  margin-top: 1rem;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 50px;
+  justify-content: center;
+}
+.secondScreenWrapper .sdlc-form {
+  flex: 0 0 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.secondScreenWrapper .sdlc-form span {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  overflow: hidden;
+  padding: 0.5rem;
+  margin-bottom: 1.3rem;
+}
+.secondScreenWrapper .sdlc-form span:nth-of-type(8) {
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  text-align: center;
+  display: flex;
+  padding: 1rem 1.5rem;
+  background-color: rgba(69, 78, 96, 0.5294117647);
+}
+.secondScreenWrapper .sdlc-form span:nth-of-type(8) p {
+  width: 100%;
+}
+.secondScreenWrapper .sdlc-form span .sdlc-container-input {
+  width: 100%;
+  position: relative;
+  height: 100% !important;
+  padding: 1rem !important;
+  background-color: rgba(69, 78, 96, 0.5294117647);
+  color: white;
+  text-align: center;
+}
+.secondScreenWrapper .sdlc-form span .sdlc-container-input input {
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  top: 0%;
+  left: 0%;
+}
+.secondScreenWrapper .sdlc-form span .sdlc-container-input .sdlc-btn-container {
+  top: 0%;
+  left: 0%;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  display: flex;
+}
+.secondScreenWrapper .sdlc-form span .sdlc-container-input .sdlc-btn-container:focus-within {
+  outline: 1px solid white !important;
+}
+.secondScreenWrapper .sdlc-form span .sdlc-container-input .sdlc-btn-container input {
+  text-align: center;
+  background-color: rgba(69, 78, 96, 0.5294117647);
   border: none;
   outline: none;
-  background-color: #151c2b;
-  height: 100% !important;
+  color: #ececec;
+}
+.secondScreenWrapper .sdlc-form span .sdlc-container-input .sdlc-btn-container input:focus {
+  outline: none !important;
+  border: none;
+}
+.secondScreenWrapper .sdlc-form span .sdlc-container-input .sdlc-btn-container button {
+  background-color: rgba(69, 78, 96, 0.5294117647) !important;
+  color: white;
+  z-index: 40;
+  height: 100%;
+  font-weight: 600;
+  border: none;
+  outline: none;
+  top: 0%;
+  padding: 0 0.1rem;
+  cursor: pointer;
+  min-width: 2.5rem;
+  transition: 0.3s all ease-in-out;
+}
+.secondScreenWrapper .sdlc-form span .sdlc-container-input .sdlc-btn-container button:hover {
+  background-color: #212c42 !important;
+  outline: 1px solid #ececec;
+}
+.secondScreenWrapper .sdlc-form span .sdlc-container-input button:nth-of-type(1) {
+  margin-right: 0.3rem;
+}
+.secondScreenWrapper .sdlc-form span .sdlc-container-input button:nth-of-type(2) {
+  margin-right: 0.3rem;
+}
+.secondScreenWrapper .sdlc-form span .sdlc-container-input button:nth-of-type(4) {
+  margin-right: 0.3rem;
+}
+.secondScreenWrapper .sdlc-form span .sdlc-container-input button:nth-of-type(5) {
+  margin-right: 0.3rem;
+}
+.secondScreenWrapper .sdlc-form span label {
+  display: flex;
+  align-items: center;
+  margin-right: auto;
+}
+.secondScreenWrapper .sdlc-form span label img {
+  width: 35px;
+  height: 35px;
+  margin-right: 0.5rem;
+}
+.secondScreenWrapper .sdlc-form span label img:nth-of-type(2) {
+  width: 15rem;
+  height: 2rem;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.limts-stats {
+  width: 100%;
+}
+.limts-stats__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.limts-stats__heading {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 0 20px;
+}
+.limts-stats__heading div h1 {
+  font-size: 1rem;
+  font-weight: 800;
+}
+.limts-stats__content {
+  display: flex;
+  flex-direction: column;
+}
+.limts-stats__content div {
+  margin-top: 1.65rem;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 0 20px;
+}
+.limts-stats__content div p {
+  font-size: 1rem;
+  text-align: center;
+}
+
+.second-btn {
+  margin-top: 0% !important;
+  padding: 0%;
+}
+
+@media screen and (max-width: 1150px) {
+  .secondScreenWrapper {
+    width: 95%;
+  }
+}
+@media screen and (max-width: 1050px) {
+  .limts-stats {
+    margin-top: 0.5rem;
+  }
+  .secondScreenWrapper {
+    grid-template-columns: 1.2fr 1fr;
+  }
+  .secondScreenWrapper .sdlc-form span {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+.screen3-container {
+  width: 70%;
+}
+.screen3-container img {
+  width: 100%;
+}
+
+.wrapper {
+  border: 1px solid #ececec;
+  background-color: #212c42;
+  min-height: 95vh;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.btn-container {
+  width: 100%;
+  text-align: center;
+  height: 5rem;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+.btn-container button,
+.btn-container input[type=submit] {
+  cursor: pointer;
+  background-color: rgba(69, 78, 96, 0.5294117647);
   width: 50%;
+  margin: auto;
+  padding: 0.7rem 0;
+  transition: 0.3s all ease-in-out;
+  border-radius: 10px;
+  font-weight: 600;
+  border: none;
+  color: #ececec;
+  font-size: 1.2rem;
+}
+.btn-container button:hover,
+.btn-container input[type=submit]:hover {
+  background-color: #212c42;
+  border: 1px solid #ececec;
+}
+.btn-container button:active,
+.btn-container input[type=submit]:active {
+  border: none;
 }/*# sourceMappingURL=style.css.map */

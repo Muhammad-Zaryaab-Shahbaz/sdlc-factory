@@ -1,39 +1,9 @@
-.thirdScreenWrapper{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 1rem;
-    border-radius: 10px;
+.screen3-container{
     width: 70%;
-    margin: auto;
-    gap : 10px;
-    border: 1px solid white;
-    form,div{
-        flex:  0 0 50%;
-        display: flex;
-        flex-direction: column;
-        gap:  5px 0;
-        span {
-            display: flex;
-            flex-direction: row;
-            input,label,p{
-                flex: 0 0 50%;
-            }
-            input,p{
-                height: 2rem !important;
-            }
-            input{
-                color: white;
-            }
-            
-        }
+    // background-color: red;
+    // padding: 1rem 3rem 0 3rem;
+    // display: flex;
+    img{
+        width: 100%;
     }
-}
-
-tbody,thead{
-    display: flex;
-    flex-direction: column;
-    gap: 5px ;
-    background-color: red;
-    width: 100%;
 }
