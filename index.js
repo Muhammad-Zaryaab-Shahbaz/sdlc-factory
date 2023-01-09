@@ -211,13 +211,13 @@ const firstScreenTemp = () => {
               </label>
               <div class='developer-container-input'>
                 <div class='user-btn-container'>
-                  <button onClick='addDevFn(1)'>+1</button>
-                  <button onClick='addDevFn(5)'>+5</button>
-                  <button onClick='addDevFn(10)'>+10</button>
-                  <input type="text" value="" class="inputs-user develpers" name="devValue" id="develpers" autocomplete="off">
-                  <button onClick='minusDevFn(1)'>-1</button>
-                  <button onClick='minusDevFn(5)'>-5</button>
-                  <button onClick='minusDevFn(10)'>-10</button>
+                <button onClick='minusDevFn(10)'>-10</button>
+                <button onClick='minusDevFn(5)'>-5</button>
+                <button onClick='minusDevFn(1)'>-1</button>
+                <input type="text" value="" class="inputs-user develpers" name="devValue" id="develpers" autocomplete="off">
+                <button onClick='addDevFn(1)'>+1</button>
+                <button onClick='addDevFn(5)'>+5</button>
+                <button onClick='addDevFn(10)'>+10</button> 
                 </div>
               </div>
           </span>
@@ -228,13 +228,13 @@ const firstScreenTemp = () => {
           </label>
           <div class='developer-container-input'>
             <div class='user-btn-container'>
+            <button onClick='minusSprintFn(10)'>-10</button>
+            <button onClick='minusSprintFn(5)'>-5</button>
+            <button onClick='minusSprintFn(1)'>-1</button>
+              <input type="text" class="inputs-user sprints" value="" name="sprintsValue" id="sprints" autocomplete="off">
               <button onClick='addSprintFn(1)'>+1</button>
               <button onClick='addSprintFn(5)'>+5</button>
               <button onClick='addSprintFn(10)'>+10</button>
-              <input type="text" class="inputs-user sprints" value="" name="sprintsValue" id="sprints" autocomplete="off">
-              <button onClick='minusSprintFn(1)'>-1</button>
-              <button onClick='minusSprintFn(5)'>-5</button>
-              <button onClick='minusSprintFn(10)'>-10</button>
             </div>
           </div>
       </span>
@@ -382,6 +382,7 @@ const secondScreenTemp = () => {
   <div class="header-content">
     <h1>SDLC Factory Game</h1>
     <p>Allocate number of sprints</p>
+    <span>Remaining Sprints : <p id="sprint-remaining">Sprints</p></span>
   </div>
 </div>
 <div class="secondScreenWrapper">
@@ -393,13 +394,13 @@ const secondScreenTemp = () => {
       </label>
       <div class='sdlc-container-input'>
         <div class='sdlc-btn-container'>
+        <button onClick='sdlcButtonsMinus(10,"plaining")'>-10</button>
+        <button onClick='sdlcButtonsMinus(5,"plaining")'>-5</button>
+        <button onClick='sdlcButtonsMinus(1,"plaining")'>-1</button>
+          <input class="inputs-sdlc plaining" value="" name="plaining" id="plaining " autocomplete="off">
           <button onClick='sdlcButtonsAdd(1,"plaining")'>+1</button>
           <button onClick='sdlcButtonsAdd(5,"plaining")'>+5</button>
           <button onClick='sdlcButtonsAdd(10,"plaining")'>+10</button>
-          <input class="inputs-sdlc plaining" value="" name="plaining" id="plaining " autocomplete="off">
-          <button onClick='sdlcButtonsMinus(1,"plaining")'>-1</button>
-          <button onClick='sdlcButtonsMinus(5,"plaining")'>-5</button>
-          <button onClick='sdlcButtonsMinus(10,"plaining")'>-10</button>
         </div>
       </div>
     </span>
@@ -410,15 +411,15 @@ const secondScreenTemp = () => {
         <img src="./images/text-images/Define requitements.png" alt="requirement-text">
       </label>
       <div class='sdlc-container-input'>
-        <div class='sdlc-btn-container'>
+        <div class='sdlc-btn-container'> 
+        <button onClick='sdlcButtonsMinus(10,"definerequirements")'>-10</button>
+        <button onClick='sdlcButtonsMinus(5,"definerequirements")'>-5</button>
+        <button onClick='sdlcButtonsMinus(1,"definerequirements")'>-1</button>
+          <input class="inputs-sdlc definerequirements" name="definerequirements" id="definerequirements"
+            autocomplete="off">
           <button onClick='sdlcButtonsAdd(1,"definerequirements")'>+1</button>
           <button onClick='sdlcButtonsAdd(5,"definerequirements")'>+5</button>
           <button onClick='sdlcButtonsAdd(10,"definerequirements")'>+10</button>
-          <input class="inputs-sdlc definerequirements" name="definerequirements" id="definerequirements"
-            autocomplete="off">
-          <button onClick='sdlcButtonsMinus(1,"definerequirements")'>-1</button>
-          <button onClick='sdlcButtonsMinus(5,"definerequirements")'>-5</button>
-          <button onClick='sdlcButtonsMinus(10,"definerequirements")'>-10</button>
         </div>
       </div>
     </span>
@@ -430,14 +431,14 @@ const secondScreenTemp = () => {
       </label>
       <div class='sdlc-container-input'>
         <div class='sdlc-btn-container'>
+        <button onClick='sdlcButtonsMinus(10,"designprototyping")'>-10</button> 
+        <button onClick='sdlcButtonsMinus(5,"designprototyping")'>-5</button>
+        <button onClick='sdlcButtonsMinus(1,"designprototyping")'>-1</button>
+          <input class="inputs-sdlc designprototyping" name="designprototyping" id="designprototyping "
+            autocomplete="off">
           <button onClick='sdlcButtonsAdd(1,"designprototyping")'>+1</button>
           <button onClick='sdlcButtonsAdd(5,"designprototyping")'>+5</button>
           <button onClick='sdlcButtonsAdd(10,"designprototyping")'>+10</button>
-          <input class="inputs-sdlc designprototyping" name="designprototyping" id="designprototyping "
-            autocomplete="off">
-          <button onClick='sdlcButtonsMinus(1,"designprototyping")'>-1</button>
-          <button onClick='sdlcButtonsMinus(5,"designprototyping")'>-5</button>
-          <button onClick='sdlcButtonsMinus(10,"designprototyping")'>-10</button>
         </div>
       </div>
     </span>
@@ -448,14 +449,14 @@ const secondScreenTemp = () => {
       </label>
       <div class='sdlc-container-input'>
         <div class='sdlc-btn-container'>
+        <button onClick='sdlcButtonsMinus(10,"softwaredevelopment")'>-10</button>
+        <button onClick='sdlcButtonsMinus(5,"softwaredevelopment")'>-5</button>
+        <button onClick='sdlcButtonsMinus(1,"softwaredevelopment")'>-1</button>
+          <input class="inputs-sdlc softwaredevelopment" name="softwaredevelopment" id="softwaredevelopment "
+            autocomplete="off">
           <button onClick='sdlcButtonsAdd(1,"softwaredevelopment")'>+1</button>
           <button onClick='sdlcButtonsAdd(5,"softwaredevelopment")'>+5</button>
           <button onClick='sdlcButtonsAdd(10,"softwaredevelopment")'>+10</button>
-          <input class="inputs-sdlc softwaredevelopment" name="softwaredevelopment" id="softwaredevelopment "
-            autocomplete="off">
-          <button onClick='sdlcButtonsMinus(1,"softwaredevelopment")'>-1</button>
-          <button onClick='sdlcButtonsMinus(5,"softwaredevelopment")'>-5</button>
-          <button onClick='sdlcButtonsMinus(10,"softwaredevelopment")'>-10</button>
         </div>
       </div>
     </span>
@@ -466,13 +467,13 @@ const secondScreenTemp = () => {
       </label>
       <div class='sdlc-container-input'>
         <div class='sdlc-btn-container'>
+        <button onClick='sdlcButtonsMinus(10,"testing")'>-10</button>
+        <button onClick='sdlcButtonsMinus(5,"testing")'>-5</button>
+        <button onClick='sdlcButtonsMinus(1,"testing")'>-1</button>
+          <input class="inputs-sdlc testing" name="testing" id="testing " autocomplete="off">
           <button onClick='sdlcButtonsAdd(1,"testing")'>+1</button>
           <button onClick='sdlcButtonsAdd(5,"testing")'>+5</button>
           <button onClick='sdlcButtonsAdd(10,"testing")'>+10</button>
-          <input class="inputs-sdlc testing" name="testing" id="testing " autocomplete="off">
-          <button onClick='sdlcButtonsMinus(1,"testing")'>-1</button>
-          <button onClick='sdlcButtonsMinus(5,"testing")'>-5</button>
-          <button onClick='sdlcButtonsMinus(10,"testing")'>-10</button>
         </div>
       </div>
     </span>
@@ -483,13 +484,13 @@ const secondScreenTemp = () => {
       </label>
       <div class='sdlc-container-input'>
         <div class='sdlc-btn-container'>
+        <button onClick='sdlcButtonsMinus(10,"development")'>-10</button>
+         <button onClick='sdlcButtonsMinus(5,"development")'>-5</button>
+         <button onClick='sdlcButtonsMinus(1,"development")'>-1</button>
+         <input class="inputs-sdlc development" name="development" id="development " autocomplete="off">
           <button onClick='sdlcButtonsAdd(1,"development")'>+1</button>
           <button onClick='sdlcButtonsAdd(5,"development")'>+5</button>
           <button onClick='sdlcButtonsAdd(10,"development")'>+10</button>
-          <input class="inputs-sdlc development" name="development" id="development " autocomplete="off">
-          <button onClick='sdlcButtonsMinus(1,"development")'>-1</button>
-          <button onClick='sdlcButtonsMinus(5,"development")'>-5</button>
-          <button onClick='sdlcButtonsMinus(10,"development")'>-10</button>
         </div>
       </div>
     </span>
@@ -501,21 +502,17 @@ const secondScreenTemp = () => {
       </label>
       <div class='sdlc-container-input'>
         <div class='sdlc-btn-container'>
+       
+        <button onClick='sdlcButtonsMinus(10,"operationmaintaince")'>-10</button>
+        <button onClick='sdlcButtonsMinus(5,"operationmaintaince")'>-5</button>
+        <button onClick='sdlcButtonsMinus(1,"operationmaintaince")'>-1</button>
+          <input class="inputs-sdlc operationmaintaince" name="operationmaintaince" id="operationmaintaince "
+            autocomplete="off">
           <button onClick='sdlcButtonsAdd(1,"operationmaintaince")'>+1</button>
           <button onClick='sdlcButtonsAdd(5,"operationmaintaince")'>+5</button>
           <button onClick='sdlcButtonsAdd(10,"operationmaintaince")'>+10</button>
-          <input class="inputs-sdlc operationmaintaince" name="operationmaintaince" id="operationmaintaince "
-            autocomplete="off">
-          <button onClick='sdlcButtonsMinus(1,"operationmaintaince")'>-1</button>
-          <button onClick='sdlcButtonsMinus(5,"operationmaintaince")'>-5</button>
-          <button onClick='sdlcButtonsMinus(10,"operationmaintaince")'>-10</button>
         </div>
       </div>
-    </span>
-
-
-    <span>
-      <p id="sprint-remaining">Sprints</p>
     </span>
   </div>
   <div class="limts-stats">
@@ -895,7 +892,7 @@ const upperLowerLimitCalc = (sprintObject) => {
   <div><b>Rate of new bugs</b>  <p>${sdlc.rateOfNewBugs.lower.toFixed(0)}%</p> <p>${sdlc.rateOfNewBugs.upper.toFixed(0)}%</p> </div>
   <div><b>Cost to fix bugs</b>  <p>R.${sdlc.costToFixBugs.lower.toFixed(0)}</p> <p>R.${sdlc.costToFixBugs.upper.toFixed(0)}</p> </div>
   <div><b>Droid production rate</b>  <p>${sdlc.droidProductionRate.lower.toFixed(0)}</p> <p>${sdlc.droidProductionRate.upper.toFixed(0)}</p> </div>
-  <div><b>Percentage of defective droids</b>  <p>${sdlc.percentageOfDefectiveDroids.lower.toFixed(0)}&</p> <p>${sdlc.percentageOfDefectiveDroids.upper.toFixed(0)}%</p> </div>
+  <div><b>Percentage of defective droids</b>  <p>${sdlc.percentageOfDefectiveDroids.lower.toFixed(0)}%</p> <p>${sdlc.percentageOfDefectiveDroids.upper.toFixed(0)}%</p> </div>
   <div><b>Droid production cost</b>  <p>${sdlc.droidProductionCost.lower.toFixed(0)}</p> <p>${sdlc.droidProductionCost.upper.toFixed(0)}</p> </div>
   <div><b>Droid upsell percentage</b>  <p>${sdlc.droidUpSellPercentage.lower.toFixed(0)}%</p> <p>${sdlc.droidUpSellPercentage.upper.toFixed(0)}%</p> </div>
   <div><b>Droid sell cost</b>  <p>R.${sdlc.droidUpSellCost.lower.toFixed(0)}</p> <p>R.${sdlc.droidUpSellCost.upper.toFixed(0)}</p> </div>
@@ -912,25 +909,16 @@ const thirdScreenAnimationHandler = () => {
   const container = document.querySelector('.image-animation');
 
   if (init == 6) { init = 0 }
-  console.log(init)
-
   if (init == 0) {
-    console.log('first-image-block');
     container.src = `./images/screen3-ani/${animations[init]}`
-
     setTimeout(() => {
       init = init + 1;
       thirdScreenAnimationHandler()
       return
     }, 1100);
-
-    return
   }
   else if (init == 1) {
-    console.log('2nd-image-block');
-    
     container.src = `./images/screen3-ani/${animations[init]}`
-
     setTimeout(() => {
       init = init + 1;
       thirdScreenAnimationHandler()
@@ -938,10 +926,7 @@ const thirdScreenAnimationHandler = () => {
     }, 3404);
   }
   else if (init == 2) {
-    console.log('3rd-image-block');
-    
     container.src = `./images/screen3-ani/${animations[init]}`
-
     setTimeout(() => {
       init = init + 1;
       thirdScreenAnimationHandler()
@@ -949,10 +934,7 @@ const thirdScreenAnimationHandler = () => {
     }, 4000);
   }
   else if (init == 3) {
-    console.log('4th-image-block');
-    
     container.src = `./images/screen3-ani/${animations[init]}`
-
     setTimeout(() => {
       init = init + 1;
       thirdScreenAnimationHandler()
@@ -960,10 +942,7 @@ const thirdScreenAnimationHandler = () => {
     }, 3000);
   }
   else if (init == 4) {
-    console.log('5th-image-block');
-    
     container.src = `./images/screen3-ani/${animations[init]}`
-
     setTimeout(() => {
       init = init + 1;
       thirdScreenAnimationHandler()
@@ -971,10 +950,7 @@ const thirdScreenAnimationHandler = () => {
     }, 6000);
   }
   else if (init == 5) {
-    console.log('6th-image-block');
-    
     container.src = `./images/screen3-ani/${animations[init]}`
-
     setTimeout(() => {
       init = init + 1;
       thirdScreenAnimationHandler()

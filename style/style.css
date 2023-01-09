@@ -54,6 +54,12 @@ header p {
 .offical-header .header-content p {
   color: #a3ea2a;
 }
+.offical-header .header-content span {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
 
 @media screen and (max-width: 650px) {
   .offical-header {
@@ -434,4 +440,11 @@ header p {
 .btn-container button:active,
 .btn-container input[type=submit]:active {
   border: none;
+}
+
+@media screen and (max-width: 750px) {
+  .btn-container button,
+.btn-container input[type=submit] {
+    width: 80%;
+  }
 }/*# sourceMappingURL=style.css.map */

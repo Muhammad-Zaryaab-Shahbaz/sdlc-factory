@@ -70,3 +70,12 @@ body {
         }
     }
 }
+
+@media screen and (max-width:750px) {
+   .btn-container{
+    button,
+    input[type='submit'] {
+        width: 80%;
+    }
+   }
+}
