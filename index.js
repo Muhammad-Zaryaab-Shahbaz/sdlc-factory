@@ -11,36 +11,6 @@ let finalMonth, initialInvestment, totalMoneyMade;
 
 // calculating values
 function getRandomInt(min, max) { return Math.random() * (max - min + 1) + min };
-// const sdlc = {
-//   rateOfNewBugs: {
-//     lower: 0,
-//     upper: 5
-//   },
-//   costToFixBugs: {
-//     lower: 579.42,
-//     upper: 1000.00
-//   },
-//   droidProductionRate: {
-//     lower: 100,
-//     upper: 166
-//   },
-//   percentageOfDefectiveDroids: {
-//     lower: 0,
-//     upper: 5
-//   },
-//   droidProductionCost: {
-//     lower: 10000,
-//     upper: 13687
-//   },
-//   droidUpSellPercentage: {
-//     lower: 20,
-//     upper: 63
-//   },
-//   droidUpSellCost: {
-//     lower: 12000.00,
-//     upper: 22372.73
-//   },
-// }
 const januaryMonth = (fundStart, sdlc) => {
   console.log(sdlc);
   const obj = {
@@ -214,7 +184,7 @@ const firstScreenTemp = () => {
                 <button onClick='minusDevFn(10)'>-10</button>
                 <button onClick='minusDevFn(5)'>-5</button>
                 <button onClick='minusDevFn(1)'>-1</button>
-                <input type="text" value="" class="inputs-user develpers" name="devValue" id="develpers" autocomplete="off">
+                <input tabindex="1" type="text" value="" class="inputs-user develpers" name="devValue" id="develpers" autocomplete="off">
                 <button onClick='addDevFn(1)'>+1</button>
                 <button onClick='addDevFn(5)'>+5</button>
                 <button onClick='addDevFn(10)'>+10</button> 
@@ -231,7 +201,7 @@ const firstScreenTemp = () => {
             <button onClick='minusSprintFn(10)'>-10</button>
             <button onClick='minusSprintFn(5)'>-5</button>
             <button onClick='minusSprintFn(1)'>-1</button>
-              <input type="text" class="inputs-user sprints" value="" name="sprintsValue" id="sprints" autocomplete="off">
+              <input tabindex="2" type="text" class="inputs-user sprints" value="" name="sprintsValue" id="sprints" autocomplete="off">
               <button onClick='addSprintFn(1)'>+1</button>
               <button onClick='addSprintFn(5)'>+5</button>
               <button onClick='addSprintFn(10)'>+10</button>
@@ -297,6 +267,11 @@ const sdlcButtonsAdd = (value, target) => {
 
   const total = +(plaining + defineRequirements + designPrototyping + softwaredevelopment + testing + development + operationMaintenance)
   remainingDoc.innerHTML = +(sprintValue - total);
+
+  const iconsElements = document.querySelectorAll('.icon-images-game')
+  if(sprintValue < total) iconsElements.forEach(el => el.style.outline = '2px solid red')
+  else iconsElements.forEach(el => el.style.outline = '2px solid #a3ea2a')
+
   const sdlcInputs = document.querySelectorAll('.inputs-sdlc');
   sdlcInputs.forEach(el => {
     const val = (+el.value);
@@ -305,12 +280,21 @@ const sdlcButtonsAdd = (value, target) => {
   })
 
   if (plaining == 0 || defineRequirements == 0 || designPrototyping == 0 || softwaredevelopment == 0 || operationMaintenance == 0 || development == 0 || testing == 0) {
-    const element = document.querySelector('.limts-stats__content');
-    element.innerHTML = '';
+    const element = document.querySelector('.limts-stats__content');   
+    element.innerHTML = `
+    <div><b>Rate of new bugs</b>  <p></p> <p></p> </div>
+    <div><b>Cost to fix bugs</b>  <p></p> <p></p> </div>
+    <div><b>Droid production rate</b>  <p></p> <p></p> </div>
+    <div><b>Percentage of defective droids</b>  <p></p> <p></p> </div>
+    <div><b>Droid production cost</b>  <p></p> <p></p> </div>
+    <div><b>Droid upsell percentage</b>  <p></p> <p></p> </div>
+    <div><b>Droid sell cost</b>  <p></p> <p></p> </div>
+    `; 
     return
   } else {
     upperLowerLimitCalc({ plaining, defineRequirements, designPrototyping, softwaredevelopment, operationMaintenance, development, testing })
   };
+
 
 }
 const sdlcButtonsMinus = (value, target) => {
@@ -359,6 +343,11 @@ const sdlcButtonsMinus = (value, target) => {
 
   const total = +(plaining + defineRequirements + designPrototyping + softwaredevelopment + testing + development + operationMaintenance)
   remainingDoc.innerHTML = +(sprintValue - total);
+
+  const iconsElements = document.querySelectorAll('.icon-images-game')
+  if(sprintValue < total) iconsElements.forEach(el => el.style.outline = '2px solid red')
+  else iconsElements.forEach(el => el.style.outline = '2px solid #a3ea2a')
+
   const sdlcInputs = document.querySelectorAll('.inputs-sdlc');
   sdlcInputs.forEach(el => {
     const val = (+el.value);
@@ -367,11 +356,19 @@ const sdlcButtonsMinus = (value, target) => {
   })
   if (plaining == 0 || defineRequirements == 0 || designPrototyping == 0 || softwaredevelopment == 0 || operationMaintenance == 0 || development == 0 || testing == 0) {
     const element = document.querySelector('.limts-stats__content');
-    element.innerHTML = '';
+    element.innerHTML = `
+    <div><b>Rate of new bugs</b>  <p></p> <p></p> </div>
+    <div><b>Cost to fix bugs</b>  <p></p> <p></p> </div>
+    <div><b>Droid production rate</b>  <p></p> <p></p> </div>
+    <div><b>Percentage of defective droids</b>  <p></p> <p></p> </div>
+    <div><b>Droid production cost</b>  <p></p> <p></p> </div>
+    <div><b>Droid upsell percentage</b>  <p></p> <p></p> </div>
+    <div><b>Droid sell cost</b>  <p></p> <p></p> </div>
+    `; 
     return
   } else {
-    upperLowerLimitCalc({ plaining, defineRequirements, designPrototyping, softwaredevelopment, operationMaintenance, development, testing })
   };
+    upperLowerLimitCalc({ plaining, defineRequirements, designPrototyping, softwaredevelopment, operationMaintenance, development, testing })
 }
 const secondScreenTemp = () => {
   const html = `
@@ -382,14 +379,15 @@ const secondScreenTemp = () => {
   <div class="header-content">
     <h1>SDLC Factory Game</h1>
     <p>Allocate number of sprints</p>
-    <span>Remaining Sprints : <p id="sprint-remaining">Sprints</p></span>
   </div>
 </div>
 <div class="secondScreenWrapper">
+<span class='remaining-sprint-container'>Remaining Sprints : <p id="sprint-remaining">Sprints</p></span>
+
   <div class="sdlc-form">
     <span>
       <label for="plaining">
-        <img src="./images/sdlc-icons/Planning.png" alt="planing-icon">
+        <div><img class="icon-images-game" src="./images/sdlc-icons/Planning.png" alt="planing-icon"></div>
         <img src="./images/text-images/Planning.png" alt="planing-text">
       </label>
       <div class='sdlc-container-input'>
@@ -397,7 +395,7 @@ const secondScreenTemp = () => {
         <button onClick='sdlcButtonsMinus(10,"plaining")'>-10</button>
         <button onClick='sdlcButtonsMinus(5,"plaining")'>-5</button>
         <button onClick='sdlcButtonsMinus(1,"plaining")'>-1</button>
-          <input class="inputs-sdlc plaining" value="" name="plaining" id="plaining " autocomplete="off">
+          <input tabindex="1" class="inputs-sdlc plaining" value="" name="plaining" id="plaining " autocomplete="off">
           <button onClick='sdlcButtonsAdd(1,"plaining")'>+1</button>
           <button onClick='sdlcButtonsAdd(5,"plaining")'>+5</button>
           <button onClick='sdlcButtonsAdd(10,"plaining")'>+10</button>
@@ -407,7 +405,7 @@ const secondScreenTemp = () => {
     <span>
       <label for="definerequirements">
 
-        <img src="./images/sdlc-icons/Define and requirements.png" alt="define-requirements-icon">
+        <div><img class="icon-images-game" src="./images/sdlc-icons/Define and requirements.png" alt="define-requirements-icon"></div>
         <img src="./images/text-images/Define requitements.png" alt="requirement-text">
       </label>
       <div class='sdlc-container-input'>
@@ -415,7 +413,7 @@ const secondScreenTemp = () => {
         <button onClick='sdlcButtonsMinus(10,"definerequirements")'>-10</button>
         <button onClick='sdlcButtonsMinus(5,"definerequirements")'>-5</button>
         <button onClick='sdlcButtonsMinus(1,"definerequirements")'>-1</button>
-          <input class="inputs-sdlc definerequirements" name="definerequirements" id="definerequirements"
+          <input tabindex="2" class="inputs-sdlc definerequirements" name="definerequirements" id="definerequirements"
             autocomplete="off">
           <button onClick='sdlcButtonsAdd(1,"definerequirements")'>+1</button>
           <button onClick='sdlcButtonsAdd(5,"definerequirements")'>+5</button>
@@ -426,7 +424,7 @@ const secondScreenTemp = () => {
     <span>
       <label for="designprototyping">
 
-        <img src="./images/sdlc-icons/Design and prototyping.png" alt="design-prototyping-icon">
+        <div><img class="icon-images-game" src="./images/sdlc-icons/Design and prototyping.png" alt="design-prototyping-icon"></div>
         <img src="./images/text-images/Design and protoyping.png" alt="image-text">
       </label>
       <div class='sdlc-container-input'>
@@ -434,7 +432,7 @@ const secondScreenTemp = () => {
         <button onClick='sdlcButtonsMinus(10,"designprototyping")'>-10</button> 
         <button onClick='sdlcButtonsMinus(5,"designprototyping")'>-5</button>
         <button onClick='sdlcButtonsMinus(1,"designprototyping")'>-1</button>
-          <input class="inputs-sdlc designprototyping" name="designprototyping" id="designprototyping "
+          <input tabindex="3" class="inputs-sdlc designprototyping" name="designprototyping" id="designprototyping "
             autocomplete="off">
           <button onClick='sdlcButtonsAdd(1,"designprototyping")'>+1</button>
           <button onClick='sdlcButtonsAdd(5,"designprototyping")'>+5</button>
@@ -444,7 +442,7 @@ const secondScreenTemp = () => {
     </span>
     <span>
       <label for="softwaredevelopment">
-        <img src="./images/sdlc-icons/Software developments.png" alt="sd-icon">
+        <div><img class="icon-images-game" src="./images/sdlc-icons/Software developments.png" alt="sd-icon"></div>
         <img src="./images/text-images/Software developments.png" alt="image-text">
       </label>
       <div class='sdlc-container-input'>
@@ -452,7 +450,7 @@ const secondScreenTemp = () => {
         <button onClick='sdlcButtonsMinus(10,"softwaredevelopment")'>-10</button>
         <button onClick='sdlcButtonsMinus(5,"softwaredevelopment")'>-5</button>
         <button onClick='sdlcButtonsMinus(1,"softwaredevelopment")'>-1</button>
-          <input class="inputs-sdlc softwaredevelopment" name="softwaredevelopment" id="softwaredevelopment "
+          <input tabindex="4" class="inputs-sdlc softwaredevelopment" name="softwaredevelopment" id="softwaredevelopment "
             autocomplete="off">
           <button onClick='sdlcButtonsAdd(1,"softwaredevelopment")'>+1</button>
           <button onClick='sdlcButtonsAdd(5,"softwaredevelopment")'>+5</button>
@@ -462,7 +460,7 @@ const secondScreenTemp = () => {
     </span>
     <span>
       <label for="testing">
-        <img src="./images/sdlc-icons/Testing.png" alt="testing-icon">
+        <div><img class="icon-images-game" src="./images/sdlc-icons/Testing.png" alt="testing-icon"></div>
         <img src="./images/text-images/Testing.png" alt="image-text">
       </label>
       <div class='sdlc-container-input'>
@@ -470,7 +468,7 @@ const secondScreenTemp = () => {
         <button onClick='sdlcButtonsMinus(10,"testing")'>-10</button>
         <button onClick='sdlcButtonsMinus(5,"testing")'>-5</button>
         <button onClick='sdlcButtonsMinus(1,"testing")'>-1</button>
-          <input class="inputs-sdlc testing" name="testing" id="testing " autocomplete="off">
+          <input tabindex="5" class="inputs-sdlc testing" name="testing" id="testing " autocomplete="off">
           <button onClick='sdlcButtonsAdd(1,"testing")'>+1</button>
           <button onClick='sdlcButtonsAdd(5,"testing")'>+5</button>
           <button onClick='sdlcButtonsAdd(10,"testing")'>+10</button>
@@ -479,7 +477,7 @@ const secondScreenTemp = () => {
     </span>
     <span>
       <label for="development">
-        <img src="./images/sdlc-icons/Deployment.png" alt="development-icon">
+        <div><img class="icon-images-game" src="./images/sdlc-icons/Deployment.png" alt="development-icon"></div>
         <img src="./images/text-images/Deployment.png" alt="image-text">
       </label>
       <div class='sdlc-container-input'>
@@ -487,7 +485,7 @@ const secondScreenTemp = () => {
         <button onClick='sdlcButtonsMinus(10,"development")'>-10</button>
          <button onClick='sdlcButtonsMinus(5,"development")'>-5</button>
          <button onClick='sdlcButtonsMinus(1,"development")'>-1</button>
-         <input class="inputs-sdlc development" name="development" id="development " autocomplete="off">
+         <input tabindex="6" class="inputs-sdlc development" name="development" id="development " autocomplete="off">
           <button onClick='sdlcButtonsAdd(1,"development")'>+1</button>
           <button onClick='sdlcButtonsAdd(5,"development")'>+5</button>
           <button onClick='sdlcButtonsAdd(10,"development")'>+10</button>
@@ -497,7 +495,7 @@ const secondScreenTemp = () => {
 
     <span>
       <label for="operationmaintaince">
-        <img src="./images/sdlc-icons/Operations and maintenance.png" alt="maintaince-icon">
+        <div><img class="icon-images-game" src="./images/sdlc-icons/Operations and maintenance.png" alt="maintaince-icon"></div>
         <img src="./images/text-images/Operations and maintenance.png" alt="image-text">
       </label>
       <div class='sdlc-container-input'>
@@ -506,7 +504,7 @@ const secondScreenTemp = () => {
         <button onClick='sdlcButtonsMinus(10,"operationmaintaince")'>-10</button>
         <button onClick='sdlcButtonsMinus(5,"operationmaintaince")'>-5</button>
         <button onClick='sdlcButtonsMinus(1,"operationmaintaince")'>-1</button>
-          <input class="inputs-sdlc operationmaintaince" name="operationmaintaince" id="operationmaintaince "
+          <input tabindex="7" class="inputs-sdlc operationmaintaince" name="operationmaintaince" id="operationmaintaince "
             autocomplete="off">
           <button onClick='sdlcButtonsAdd(1,"operationmaintaince")'>+1</button>
           <button onClick='sdlcButtonsAdd(5,"operationmaintaince")'>+5</button>
@@ -528,14 +526,20 @@ const secondScreenTemp = () => {
           <h1>Upper Limit</h1>
         </div>
       </div>
-      <div class="limts-stats__content">
-   
+       <div class="limts-stats__content">
+      <div><b>Rate of new bugs</b>  <p></p> <p></p> </div>
+      <div><b>Cost to fix bugs</b>  <p></p> <p></p> </div>
+      <div><b>Droid production rate</b>  <p></p> <p></p> </div>
+      <div><b>Percentage of defective droids</b>  <p></p> <p></p> </div>
+      <div><b>Droid production cost</b>  <p></p> <p></p> </div>
+      <div><b>Droid upsell percentage</b>  <p></p> <p></p> </div>
+      <div><b>Droid sell cost</b>  <p></p> <p></p> </div>
       </div>
 
     </div>
   </div>
 </div>
-<div class="btn-container second-btn"><input class="sdlc-form-submit" type="submit" value="Start Game"></div>
+<div class="btn-container second-btn"><input  class="sdlc-form-submit" type="submit" value="Start Game"></div>
   `
 
   return html;
@@ -758,6 +762,11 @@ const secondcreenInputHandler = (el) => {
     if (e.target.name == 'operationmaintaince') operationMaintenance = (+e.target.value);
 
     const total = +(plaining + defineRequirements + designPrototyping + softwaredevelopment + testing + development + operationMaintenance)
+
+    const iconsElements = document.querySelectorAll('.icon-images-game')
+    if(sprintValue < total) iconsElements.forEach(el => el.style.outline = '2px solid red')
+    else iconsElements.forEach(el => el.style.outline = '2px solid #a3ea2a')
+
     remainingDoc.innerHTML = +(sprintValue - total);
     if (plaining == 0 || defineRequirements == 0 || designPrototyping == 0 || softwaredevelopment == 0 || operationMaintenance == 0 || development == 0 || testing == 0) return;
     upperLowerLimitCalc({ plaining, defineRequirements, designPrototyping, softwaredevelopment, operationMaintenance, development, testing })
@@ -787,7 +796,7 @@ const upperLowerLimitCalc = (sprintObject) => {
   let phases = {
     rateOfNewBugs: {
       baseLine: 5,
-      adjustmentPercentage: rate < 0 ? Math.floor(rate) : Math.ceil(rate),
+      adjustmentPercentage: rate ,
       lower: function () {
         if (this.baseLine / 100 + this.adjustmentPercentage / 100 > 0) {
           return this.baseLine / 100 + this.adjustmentPercentage / 100;
@@ -799,19 +808,19 @@ const upperLowerLimitCalc = (sprintObject) => {
     },
     costToFixBugs: {
       baseLine: 1000,
-      adjustmentPercentage: cost < 0 ? Math.floor(cost) : Math.ceil(cost),
+      adjustmentPercentage: cost ,
       lower: function () { return ((this.baseLine * (-1 * this.adjustmentPercentage / 100))) },
       upper: function () { return this.baseLine }
     },
     droidProductionRate: {
       baseLine: 100,
-      adjustmentPercentage: droidpr < 0 ? Math.floor(droidpr) : Math.ceil(droidpr),
+      adjustmentPercentage: droidpr ,
       lower: function () { return (this.baseLine) },
       upper: function () { return this.baseLine * (this.adjustmentPercentage / 100) + this.baseLine }
     },
     percentageOfDefectiveDroids: {
       baseLine: 5,
-      adjustmentPercentage: percentageodd < 0 ? Math.floor(percentageodd) : Math.ceil(percentageodd),
+      adjustmentPercentage: percentageodd ,
       lower: function () {
         if (this.baseLine / 100 + this.adjustmentPercentage / 100 > 0) {
           return this.baseLine / 100 + this.adjustmentPercentage / 100;
@@ -823,7 +832,7 @@ const upperLowerLimitCalc = (sprintObject) => {
     },
     droidProductionCost: {
       baseLine: 10000,
-      adjustmentPercentage: droidpc < 0 ? Math.floor(droidpc) : Math.ceil(droidpc),
+      adjustmentPercentage: droidpc ,
       lower: function () { return (this.baseLine) },
       upper: function () { return this.baseLine * (this.adjustmentPercentage / 100) + this.baseLine }
     },
@@ -886,7 +895,16 @@ const upperLowerLimitCalc = (sprintObject) => {
   }
 
   const element = document.querySelector('.limts-stats__content');
-  element.innerHTML = '';
+  const html2 = `
+  <div><b>Rate of new bugs</b>  <p></p> <p></p> </div>
+  <div><b>Cost to fix bugs</b>  <p></p> <p></p> </div>
+  <div><b>Droid production rate</b>  <p></p> <p></p> </div>
+  <div><b>Percentage of defective droids</b>  <p></p> <p></p> </div>
+  <div><b>Droid production cost</b>  <p></p> <p></p> </div>
+  <div><b>Droid upsell percentage</b>  <p></p> <p></p> </div>
+  <div><b>Droid sell cost</b>  <p></p> <p></p> </div>
+  `
+  element.innerHTML = html2;
 
   const html = `
   <div><b>Rate of new bugs</b>  <p>${sdlc.rateOfNewBugs.lower.toFixed(0)}%</p> <p>${sdlc.rateOfNewBugs.upper.toFixed(0)}%</p> </div>
@@ -898,8 +916,6 @@ const upperLowerLimitCalc = (sprintObject) => {
   <div><b>Droid sell cost</b>  <p>R.${sdlc.droidUpSellCost.lower.toFixed(0)}</p> <p>R.${sdlc.droidUpSellCost.upper.toFixed(0)}</p> </div>
   `
   element.innerHTML = html
-
-
 }
 
 // 3rd screen logic
@@ -1034,6 +1050,8 @@ const secondScreenHandler = (handler, value) => {
   parentEl.insertAdjacentHTML('afterbegin', html);
 
   sprintValue = +value;
+  const remainingDoc = document.querySelector('#sprint-remaining');
+  remainingDoc.innerHTML = value;
 
   // sdlc form for submiting to move next page
   const sdlcForm = document.querySelector('.sdlc-form-submit');
@@ -1064,7 +1082,7 @@ const modulesHandler = () => {
   else if (screen == 2) {
     wrapper.innerHTML = '';
     return secondScreenHandler(screenAdd, sprintsValue)
-    // return secondScreenHandler(screenAdd, 50)
+    // return secondScreenHandler(screenAdd, 10)
 
   }
   else if (screen == 3) {
