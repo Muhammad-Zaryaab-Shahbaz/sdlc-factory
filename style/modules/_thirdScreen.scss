@@ -1,10 +1,50 @@
-.screen3-container{
+.content-screenthree {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.screen3-container {
     width: 70%;
-    // background-color: red;
-    // padding: 1rem 3rem 0 3rem;
-    // display: flex;
     padding: 4rem;
-    img{
+
+    img {
         width: 100%;
+    }
+}
+
+.table-result {
+    width: 80%;
+    margin: 3rem auto;
+
+    table {
+        width: 100%;
+        border-radius: 6px;
+        overflow: hidden;
+
+        thead {
+
+            background-color: #151c2b;
+
+            tr {
+                th {
+                    padding: 1rem .3rem !important;
+
+                    text-align: center;
+                }
+            }
+        }
+
+        tbody {
+            tr {
+                background-color: #454e6087 !important;
+                text-align: center;
+
+                td {
+                    padding: .7rem 0;
+                }
+            }
+        }
     }
 }

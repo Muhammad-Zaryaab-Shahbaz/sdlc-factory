@@ -1,6 +1,35 @@
 let screen = 1;
 let sdlc;
-
+//  sdlc = {
+//   rateOfNewBugs: {
+//     lower: 0,
+//     upper: 5
+//   },
+//   costToFixBugs: {
+//     lower: 579.42,
+//     upper: 1000.00
+//   },
+//   droidProductionRate: {
+//     lower: 100,
+//     upper: 166
+//   },
+//   percentageOfDefectiveDroids: {
+//     lower: 0,
+//     upper: 5
+//   },
+//   droidProductionCost: {
+//     lower: 10000,
+//     upper: 13687
+//   },
+//   droidUpSellPercentage: {
+//     lower: 20,
+//     upper: 63
+//   },
+//   droidUpSellCost: {
+//     lower: 12000.00,
+//     upper: 22372.73
+//   },
+// }
 const screenAdd = () => {
   screen = screen + 1;
   modulesHandler()
@@ -12,7 +41,6 @@ let finalMonth, initialInvestment, totalMoneyMade;
 // calculating values
 function getRandomInt(min, max) { return Math.random() * (max - min + 1) + min };
 const januaryMonth = (fundStart, sdlc) => {
-  console.log(sdlc);
   const obj = {
     fundStart: fundStart,
     moneyOut: function () { return ((this.droidProduced() * this.droidProductionCost()) + (this.numberOfBugs() * this.bugFixCost())) },
@@ -546,6 +574,20 @@ const secondScreenTemp = () => {
 }
 
 // 3rd screen temp 
+const listMonths = (month, monthName) => {
+  const html = `
+  <tr >
+      <td> ${monthName}</td>
+      <td>${month.fundStart.toFixed(2)}</td>
+      <td>${month.moneyOut.toFixed(2)}</td>
+      <td>${month.moneyIn.toFixed(2)}</td>
+      <td>${Math.round(month.droidProduced)}</td>
+      <td>${month.defectivePercentage.toFixed(2)}%</td>
+      <td>${Math.round(month.defectiveCount)}</td>
+</tr>
+  `
+  return html
+}
 const thirdScreenTemp = () => {
   const html = ` 
   <div class="header offical-header">
@@ -557,130 +599,78 @@ const thirdScreenTemp = () => {
       <p>Factory production line. </p>
   </div>
 </div>
-  <div class="content">
+  <div class="content-screenthree">
       <div class="screen3-container">
         <img src="./images/screen3-ani/step-1.gif" alt="animations" class="image-animation">
       </div>
+      <div class='table-result'>
+     <table cellspacing="0">
+
+    <thead >
+    <tr>
+        <th scope="col" > Project Run </th>
+        <th scope="col"> Funds at start of month </th>
+        <th scope="col"> Money Out </th>
+        <th scope="col"> Money In </th>
+        <th scope="col"> Droid Produced </th>
+        <th scope="col"> Defective Percentage</th>
+        <th scope="col"> Defective Count </th>
+
+    </tr>
+</thead>
+     <tbody class="table-result-body">
+    
+     </tbody>
+     </table>
+     <div class="btn-container"><button class="next-month">Next month</button></div>
+      </div>
+      
   </div>
  
   `
   return html
 
 }
+
 // 4rd screen temp and inputs handlers
-const finalResultTemp = (values) => {
-  const html = `
-  <div class="bg-white w-1/3 p-4 gap-12 flex-col flex items-center">
-    <div class="w-full" >
-        <span class="flex  items-center w-full p-4 border-b">
-            <h1 class="mr-auto">Final</h1>
-            <b>${values.finalMonth.toFixed(2)}</b>
-        </span>
-        <span class="flex items-center w-full p-4 border-b">
-            <h1 class="flex-1">Initial Investment</h1>
-            <b>${values.initialInvestment.toFixed(2)}</b>
-        </span>
-        <span class="flex items-center w-full p-4 border-b">
-            <h1 class="flex-1">Total Money Made</h1>
-            <b>${values.totalMoneyMade.toFixed(2)}</b>
-        </span>
+const fourthScreenTemp = (values) => {
+  const html = ` 
+    <div class="header offical-header">
+    <div class="image-container">
+        <img src="https://assets.tryhackme.com/img/logo/tryhackme_logo_full.svg" alt="image-logo">
     </div>
-    <button class="final-submit bg-red-100 px-4 rounded py-1">Submit</button>
-</div> 
-  `
-  return html;
-}
-const listMonths = (month, monthName) => {
-  const html = `
-  <tr class="bg-white border-b">
-      <td class="text-sm text-gray-900 font-light px-2 py-2 whitespace-nowrap">
-          ${monthName}
-      </td>
-      <td class="text-sm text-gray-900 font-light px-2 py-2 whitespace-nowrap">
-      ${month.fundStart.toFixed(2)}
-      </td>
-      <td class="text-sm text-gray-900 font-light px-2 py-2 whitespace-nowrap">
-      ${month.moneyOut.toFixed(2)}
-      </td>
-      <td class="text-sm text-gray-900 font-light px-2 py-2 whitespace-nowrap">
-      ${month.moneyIn.toFixed(2)}
-      </td>
-      <td class="text-sm text-gray-900 font-light px-2 py-2 whitespace-nowrap">
-      ${Math.round(month.droidProduced)}
-      </td>
-      <td class="text-sm text-gray-900 font-light px-2 py-2 whitespace-nowrap">
-      ${month.defectivePercentage.toFixed(2)}%
-      </td>
-      <td class="text-sm text-gray-900 font-light px-2 py-2 whitespace-nowrap">
-      ${Math.round(month.defectiveCount)}
-  </td>
-</tr>
-  `
-  return html
-}
-const monthTemp = (month) => {
-  const html = `
-  <div class="flex flex-col ">
-  <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-      <div class=" py-2 inline-image-block min-w-full sm:px-2 lg:px-8">
-          <div class="overflow-hidden ">
-              <table class="min-w-full">
-                  <thead class="border-b bg-red-100">
-                      <tr>
-                          <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-4 text-left">
-                              Project Run
-                          </th>
-                          <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-4 text-left">
-                              Funds at start of month
-                          </th>
-                          <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-4 text-left">
-                              Money Out
-                          </th>
-                          <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-4 text-left">
-                              Money In
-                          </th>
-                          <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-4 text-left">
-                              Droid Produced
-                          </th>
-                          <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-4 text-left">
-                              Defective Percentage
-                          </th>;
-                          <th scope="col" class="text-sm font-medium text-gray-900 px-2 py-4 text-left">
-                              Defective Count
-                          </th>
-
-                      </tr>
-                  </thead>
-                  <tbody>
-                  ${listMonths(month[0], 'January')}
-                  ${listMonths(month[1], 'Febuary')}
-                  ${listMonths(month[2], 'March')}
-                  ${listMonths(month[3], 'Aprial')}
-                  ${listMonths(month[4], 'May')}
-                  ${listMonths(month[5], 'June')}
-                  ${listMonths(month[6], 'July')}
-                  ${listMonths(month[7], 'August')}
-                  ${listMonths(month[8], 'September')}
-                  ${listMonths(month[9], 'October')}
-                  ${listMonths(month[10], 'November')}
-                  ${listMonths(month[11], 'December')}
-
-
-
-
-
-
-                  </tbody>
-              </table>
-              <div class='bg-red-100 text-center p-2'><button class="monthSubmit bg-white  py-1 px-4 red-100">Submit</button></div>
-          </div>
-      </div>
+    <div class="header-content">
+        <h1>SDLC Factory Game</h1>
+        <p>Factory production line. </p>
+    </div>
   </div>
-</div>
-  `
+  <div class="content">
+    
+    <div class="last-result">
+    <span>
+        <h1 class="mr-auto">Final</h1>
+        <b>${values.finalMonth.toFixed(2)}</b>
+    </span>
+    <span>
+        <h1 class="flex-1">Initial Investment</h1>
+        <b>${values.initialInvestment.toFixed(2)}</b>
+    </span>
+    <span>
+        <h1 class="flex-1">Total Money Made</h1>
+        <b>${values.totalMoneyMade.toFixed(2)}</b>
+    </span>
+    </div>
 
+</div>
+        <div class="btn-container"><button class="next-month">Next month</button></div>
+        
+    </div>
+   
+    `
   return html;
 }
+
+
 
 
 // 1st screen logic 
@@ -920,6 +910,7 @@ const upperLowerLimitCalc = (sprintObject) => {
 
 // 3rd screen logic
 let init = 0;
+let checkShowMonth = 0;
 const thirdScreenAnimationHandler = () => {
   const animations = ['step-1.gif', 'step-2.gif', 'step-3.gif', 'step-4.gif', 'step-5.gif', 'step-6.gif']
   const container = document.querySelector('.image-animation');
@@ -975,9 +966,7 @@ const thirdScreenAnimationHandler = () => {
   }
 
 }
-// 4th screen logic
-const fourthScreenHandler = (remainingValue, handler) => {
-  // const monthsObject = months(remainingValue);
+const thirdScreenMonthsHandler = (remainingValue,handler)=>{
   const january = januaryMonth(remainingValue, sdlc);
   const febuary = othersMotnhs(january.fundStart - january.moneyOut + january.moneyIn, sdlc)
   const march = othersMotnhs(febuary.fundStart - febuary.moneyOut + febuary.moneyIn, sdlc)
@@ -991,35 +980,42 @@ const fourthScreenHandler = (remainingValue, handler) => {
   const november = othersMotnhs(octorber.fundStart - octorber.moneyOut + octorber.moneyIn, sdlc)
   const december = othersMotnhs(november.fundStart - november.moneyOut + november.moneyIn, sdlc)
 
-  const monthsData = [january, febuary, march, aprial, may, june, july, august, september, octorber, november, december];
+  const monthsData = [{month:january,str:'January'}, {str:'Febuary',month:febuary}, {month:march,str:'March'},
+  {str:'Aprial',month:aprial}, {month:may,str:'May'}, {month:june,str:'June'}, {month: july,str:'July'},
+  {month:august,str:'August'}, {month:september,str:'September'}, {month:octorber,str:'Octorber'},
+  {month:november,str:'November'}, {month:december,str:'December'}];
+
   finalMonth = (december.fundStart - december.moneyOut + december.moneyIn);
   initialInvestment = remainingValue;
   totalMoneyMade = finalMonth - initialInvestment;
 
+   const tableBody = document.querySelector('.table-result-body')
+  tableBody.innerHTML = listMonths(monthsData[0].month,'january')
+  const btn = document.querySelector('.next-month');
 
-  const html = monthTemp(monthsData);
-  const parentEl = document.querySelector('.wrapper');
-  parentEl.insertAdjacentHTML('afterbegin', html);
+  btn.addEventListener('click',()=>{
+  checkShowMonth = checkShowMonth + 1;
 
-  const submitMonthBtn = document.querySelector('.monthSubmit');
-  submitMonthBtn.addEventListener('click', handler);
-};
+    if(checkShowMonth ===11){
+      btn.innerHTML = "submit now"
+    }
+    if(checkShowMonth ===12 || checkShowMonth > 12) {
+      handler()
+      return
+    }
+    else{
+      tableBody.innerHTML = listMonths(monthsData[checkShowMonth].month,monthsData[checkShowMonth].str)
+    }
+  })
 
+  // ${listMonths(month[0], 'January')}
 
+ 
+  console.log(btn);
 
-// total result module 
-const finalTemplatesGen = (values) => {
-
-  const html = finalResultTemp(values);
-
-  const parentEl = document.querySelector('.body');
-  parentEl.insertAdjacentHTML('afterbegin', html);
 }
-const finalHandler = (handler, values) => {
-  finalTemplatesGen(values)
-  const submitBtn = document.querySelector('.final-submit');
-  submitBtn.addEventListener('click', handler);
-}
+
+
 
 
 // first screen handler
@@ -1064,14 +1060,31 @@ const secondScreenHandler = (handler, value) => {
   inputs?.forEach(secondcreenInputHandler);
 
 }
+
+
 // third screen handler
-const thirdScreenHandler = (hadnler) => {
+const thirdScreenHandler = (remainingValue,hadnler) => {
+
   const html = thirdScreenTemp();
   const parentEl = document.querySelector('.wrapper');
   parentEl.insertAdjacentHTML('afterbegin', html);
 
   thirdScreenAnimationHandler();
+  thirdScreenMonthsHandler(remainingValue,hadnler)
 }
+
+// fourth screen handler
+const fourthScreenHandler = (handler, values) => {
+  const html = fourthScreenTemp(values);
+  const parentEl = document.querySelector('.wrapper');
+  parentEl.insertAdjacentHTML('afterbegin', html);
+
+  const submitBtn = document.querySelector('.final-submit');
+  submitBtn.addEventListener('click', handler);
+}
+
+
+
 
 // to show different screens
 const modulesHandler = () => {
@@ -1082,26 +1095,18 @@ const modulesHandler = () => {
   else if (screen == 2) {
     wrapper.innerHTML = '';
     return secondScreenHandler(screenAdd, sprintsValue)
-    // return secondScreenHandler(screenAdd, 10)
-
   }
   else if (screen == 3) {
     wrapper.innerHTML = '';
-    return thirdScreenHandler(screenAdd);
+    return thirdScreenHandler(remainingValue,screenAdd);
   }
+
   else if (screen == 4) {
     wrapper.innerHTML = '';
-    return fourthScreenHandler(remainingValue, screenAdd);
-  }
-  else if (screen == 5) {
-    wrapper.innerHTML = '';
     const values = { finalMonth, initialInvestment, totalMoneyMade }
-    return finalHandler(screenAdd, values)
+    return fourthScreenHandler(screenAdd, values)
   }
-  else if (screen == 6) {
-    wrapper.innerHTML = '';
-    return wrapper.innerHTML = '<h1>5th screen here </h1>'
-  }
+  return;
 }
 
 modulesHandler()

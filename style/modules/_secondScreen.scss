@@ -25,10 +25,11 @@
         span {
             display: grid;
             grid-template-columns: 1fr 1fr;
+            align-items: center;
             gap: 50px;
             overflow: hidden;
             padding: .5rem;
-            margin-bottom: 1.3rem;
+            // margin-bottom: 1.3rem;
 
             &:nth-of-type(8) {
                 position: absolute;

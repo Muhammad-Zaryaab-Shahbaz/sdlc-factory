@@ -225,10 +225,10 @@ header p {
 .secondScreenWrapper .sdlc-form span {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  align-items: center;
   gap: 50px;
   overflow: hidden;
   padding: 0.5rem;
-  margin-bottom: 1.3rem;
 }
 .secondScreenWrapper .sdlc-form span:nth-of-type(8) {
   position: absolute;
@@ -397,12 +397,43 @@ header p {
     gap: 10px;
   }
 }
+.content-screenthree {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .screen3-container {
   width: 70%;
   padding: 4rem;
 }
 .screen3-container img {
   width: 100%;
+}
+
+.table-result {
+  width: 80%;
+  margin: 3rem auto;
+}
+.table-result table {
+  width: 100%;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.table-result table thead {
+  background-color: #151c2b;
+}
+.table-result table thead tr th {
+  padding: 1rem 0.3rem !important;
+  text-align: center;
+}
+.table-result table tbody tr {
+  background-color: rgba(69, 78, 96, 0.5294117647) !important;
+  text-align: center;
+}
+.table-result table tbody tr td {
+  padding: 0.7rem 0;
 }
 
 .wrapper {
