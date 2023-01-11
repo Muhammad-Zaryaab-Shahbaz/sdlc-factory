@@ -1,3 +1,9 @@
+.firstScreenWarning{
+    text-align: center;
+    color: red;
+    font-size: 1.2rem;
+    min-height: 1.5rem;
+}
 .user-form-container {
     width: 60%;
     border-radius: 10px !important;
@@ -124,6 +130,50 @@
         }
     }
 }
+
+
+
+
+// typing animation
+$slider-name: typing-slider;
+$typing-duration: 1s;
+
+@keyframes typing {
+  from {
+    width: 100%;
+  }
+  90%,
+  to {
+    width: 0;
+  }
+}
+
+.#{$slider-name} {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.#{$slider-name} p {
+  position: relative;
+  display: inline;
+  animation: slide $typing-duration ;
+}
+
+.#{$slider-name} p::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #212c42;
+  animation: typing $typing-duration 1, cursor $typing-duration 1;
+}
+
+
+
+
+
+
 
 @media screen and (max-width:1050px) {
     .user-form-container{

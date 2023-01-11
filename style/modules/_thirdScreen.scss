@@ -6,8 +6,8 @@
 }
 
 .screen3-container {
-    width: 70%;
-    padding: 4rem;
+    width: 50%;
+    padding: 2rem 4rem 0 4rem;
 
     img {
         width: 100%;
@@ -16,7 +16,7 @@
 
 .table-result {
     width: 80%;
-    margin: 3rem auto;
+    margin: 1rem auto 3rem auto;
 
     table {
         width: 100%;
@@ -29,7 +29,7 @@
 
             tr {
                 th {
-                    padding: 1rem .3rem !important;
+                    padding: 1rem .3rem ;
 
                     text-align: center;
                 }
@@ -43,8 +43,46 @@
 
                 td {
                     padding: .7rem 0;
+                    text-transform: capitalize;
                 }
             }
         }
+    }
+}
+@media screen and (max-width:1150px) {
+    .screen3-container{
+        width: 70%;
+    }
+}
+@media screen and (max-width:1050px) {
+    .table-result{
+        width: 95%;
+    }
+    .table-result table thead tr th{
+        padding: .8rem .1rem;
+        font-size: .8rem;
+    }
+}
+@media screen and (max-width:790px) {
+    .table-result table tbody tr td{font-size: .7rem;}
+}
+
+@media screen and (max-width:650px) {
+    .screen3-container{
+        width: 100%;
+    }
+    .table-result{
+        width: 98%;
+        overflow: auto;
+        table{
+            width: 35rem;
+            margin: auto;
+            min-width: 35rem !important;
+        }
+    }
+    .table-result table tbody tr td{font-size: .5rem;}
+    .table-result table thead tr th{
+        padding: .3rem .1rem;
+        font-size: .6rem;
     }
 }

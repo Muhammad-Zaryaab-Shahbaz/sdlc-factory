@@ -231,3 +231,31 @@
         }
     }
 }
+
+@media screen and (max-width:769px) {
+    .secondScreenWrapper {
+        gap: 5px;
+    }
+    .remaining-sprint-container{
+        top: 3%;
+    }
+    .limts-stats__content div p{
+        text-align: start;
+    }
+}
+@media screen and (max-width:749px) {
+    .secondScreenWrapper {
+        grid-template-columns: 1fr;
+    }
+    .secondScreenWrapper .sdlc-form span {
+        margin-bottom: 1rem;
+    }
+    .limts-stats{
+        margin: 2rem 0;
+    }
+}
+@media screen and (max-width:559px) {
+    .remaining-sprint-container{
+        top: 2%;
+    }
+}
