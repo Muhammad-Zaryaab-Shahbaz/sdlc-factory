@@ -1,5 +1,7 @@
 const wrapper = document.querySelector('.wrapper');
-let finalMonth, initialInvestment, totalMoneyMade;
+let finalMonth, totalMoneyMade = 4;
+let initialInvestment = 1000000;
+
 let screen = 1;
 let sdlc;
 
@@ -638,48 +640,6 @@ const thirdScreenTemp = () => {
 
 }
 // 4rd screen temp and inputs handlers
-const alertMsg = (msg,alert,htmlStat)=>{
-  // console.log(htmlStat);
-  const html = `
-  <div class="model-container" >
-  <div class="model">
-      <div class="flag">
-          <h2>${alert?alert : 'flag'}</h2>
-          ${alert? '<i class="fa-solid fa-triangle-exclamation"></i>':''}
-          <p class="model-close">☓</p>
-      </div>
-      <div class="flag-model-tag">
-          <h2>THM { ${msg} }</h2>
-      </div>
-  </div>
-</div>
-  `
-
-  const body = document.querySelector('.body');
-  body.insertAdjacentHTML('afterbegin',html);
-  const closeBtn = document.querySelector('.model-close');
-  closeBtn.addEventListener('click',()=>{ document.querySelector('.model-container').remove() })
-}
-const fourthScreenWrapper = (alert,content)=>{
-  const html1 = ` 
-  ${alert?alert:''}
-  <div class="header offical-header">
-  <div class="image-container">
-      <img src="https://assets.tryhackme.com/img/logo/tryhackme_logo_full.svg" alt="image-logo">
-  </div>
-  <div class="header-content">
-      <h1>SDLC Factory Game</h1>
-      <p>Factory annually revenue</p>
-  </div>
-</div>
-
-<div class="content-screen-result">  
- ${content?content:''}
-</div>
- 
-  `
-  return html1;
-}
 var currentDate = new Date();
 var dateString = currentDate.toLocaleString('en-US', { 
   hour: 'numeric',
@@ -689,48 +649,56 @@ var dateString = currentDate.toLocaleString('en-US', {
   year: 'numeric'
 });
 function refreshPage() {window.location.reload()  }
-const fourthScreenTemp = (values,check) => {
+const fourthScreenTemp = (values) => {
   const finalMonth = (+values.finalMonth.toFixed(2)).toLocaleString()
   const initialInvestment = (+values.initialInvestment.toFixed(2)).toLocaleString()
   const totalMoneyMade = (+values.totalMoneyMade.toFixed(2)).toLocaleString()
   let html;
-  
 
-  const alert = `
-  <div class="model-container" >
-  <div class="model">
-      <div class="flag">
-          <h2>Flag</h2>
-          <p class="model-close">☓</p>
-      </div>
-      <div class="flag-model-tag">
-          <h2>THM {Ruler.of.the.SDLC.Droids }</h2>
-      </div>
+  const html1 = `
+
+  <div class="header offical-header">
+  <div class="image-container">
+      <img src="https://assets.tryhackme.com/img/logo/tryhackme_logo_full.svg" alt="image-logo">
+  </div>
+  <div class="header-content">
+      <h1>SDLC Factory Game</h1>
+      <p>Factory annually revenue</p>
   </div>
 </div>
-  `
-  const html1 = ` 
-  <div class="last-result">
-  <img src="https://assets.tryhackme.com/img/logo/tryhackme_logo_full.svg" alt="image-logo">
-  <h1>Certificate of Participation</h1>
-  <h2>SDLC FACTORY GAME</h2>
-  <p>You have successfully completed the challange of SDLC Factory Game</p>
-  <small class="date">${dateString.split(',')[1]}, ${dateString.split(',')[0]}</small>
-  <div class="last-result__stats">
-      <span>
-      <h1 >Final</h1>
-      <b>${finalMonth}</b>
+<div class="model-container" >
+<div class="model">
+    <div class="flag">
+        <h2>Flag : </h2>
+    </div>
+    <div class="flag-model-tag">
+        <h2>THM {Ruler.of.the.SDLC.Droids }</h2>
+    </div>
+</div>
+</div>
+<div class="content-screen-result">  
+<div class="last-result">
+<img src="https://assets.tryhackme.com/img/logo/tryhackme_logo_full.svg" alt="image-logo">
+<h1>Certificate of Participation</h1>
+<h2>SDLC FACTORY GAME</h2>
+<p>You have successfully completed the challange of SDLC Factory Game</p>
+<small class="date">${dateString.split(',')[1]}, ${dateString.split(',')[0]}</small>
+<div class="last-result__stats">
+    <span>
+    <h1 >Final</h1>
+    <b>${finalMonth}</b>
+  </span>
+    <span>
+      <h1 >Initial Investment</h1>
+      <b>${initialInvestment}</b>
     </span>
-      <span>
-        <h1 >Initial Investment</h1>
-        <b>${initialInvestment}</b>
-      </span>
-      <span>
-        <h1 >Total Money Made</h1>
-        <b>${totalMoneyMade}</b>
-      </span>
-  </div>
-  </div>
+    <span>
+      <h1 >Total Money Made</h1>
+      <b>${totalMoneyMade}</b>
+    </span>
+</div>
+</div>
+</div>
   `
   const html2 = `  
 
@@ -767,10 +735,9 @@ const fourthScreenTemp = (values,check) => {
 </div>
 
   `
-
-  if((values.initialInvestment * 2) < values.totalMoneyMade) html = check? fourthScreenWrapper(alert,false):fourthScreenWrapper(false,html1);
+ 
+  if((values.initialInvestment * 2) < values.totalMoneyMade) html = html1;
   else html = html2;
-
   return html;
 }
 
@@ -1098,7 +1065,6 @@ const thirdScreenMonthsHandler = (remainingValue,handler)=>{
   {month:november,str:'November'}, {month:december,str:'December'}];
 
   finalMonth = (december.fundStart - december.moneyOut + december.moneyIn);
-  initialInvestment = remainingValue;
   totalMoneyMade = finalMonth - initialInvestment;
 
    const tableBody = document.querySelector('.table-result-body')
@@ -1183,7 +1149,7 @@ const thirdScreenHandler = (remainingValue,hadnler) => {
 }
 // fourth screen handler
 const fourthScreenHandler = (handler, values) => {
-  let html = fourthScreenTemp(values,true);
+  let html = fourthScreenTemp(values);
   let parentEl = document.querySelector('.wrapper');
   parentEl.insertAdjacentHTML('afterbegin', html);
 
@@ -1222,8 +1188,6 @@ const modulesHandler = () => {
   else if (screen == 4) {
     wrapper.innerHTML = '';
     const values = { finalMonth, initialInvestment, totalMoneyMade }
-    // const values = { finalMonth:8275813.734, initialInvestment:100000.00, totalMoneyMade:8175813.7345 }
-
     return fourthScreenHandler(screenAdd, values)
   }
   return;
