@@ -4,6 +4,36 @@ let initialInvestment = 1000000;
 
 let screen = 1;
 let sdlc;
+// const sdlc = {
+//   rateOfNewBugs: {
+//     lower: 0,
+//     upper: 5
+//   },
+//   costToFixBugs: {
+//     lower: 579.42,
+//     upper: 1000.00
+//   },
+//   droidProductionRate: {
+//     lower: 100,
+//     upper: 166
+//   },
+//   percentageOfDefectiveDroids: {
+//     lower: 0,
+//     upper: 5
+//   },
+//   droidProductionCost: {
+//     lower: 10000,
+//     upper: 13687
+//   },
+//   droidUpSellPercentage: {
+//     lower: 20,
+//     upper: 63
+//   },
+//   droidUpSellCost: {
+//     lower: 12000.00,
+//     upper: 22372.73
+//   },
+// }
 
 const screenAdd = () => {
   screen = screen + 1;
@@ -81,7 +111,10 @@ const othersMotnhs = (fundStart, sdlc) => {
 
 }
 
-
+// total budget
+const totalBudget = 1000000;
+// cost per developer
+const costPerDev = 3000;
 
 // templates for differnet pages
 // 1st screen temp and inputs handlers
@@ -91,23 +124,23 @@ const addDevFn = (add) => {
   const remainingDoc = document.querySelector('#budget-remaining');
   const inputsValidationContainer = document.querySelectorAll('.user-btn-container')
   inputsValidationContainer[0].style.outline = 'none'
-  
+
   devValue = (+prevValue) + (+add)
   develpers.value = devValue;
   if (devValue == 0 || sprintsValue == 0) {
     remainingDoc.innerHTML = '';
-    
+
   }
 
-  remainingDoc.innerHTML = totalRemainBudget(devValue, sprintsValue);
+  remainingDoc.innerHTML = `$${totalRemainBudget(devValue, sprintsValue).toLocaleString()}`;
   remainingValue = totalRemainBudget(devValue, sprintsValue);
 
   const warningContainer = document.getElementById('warning-massage');
-  if(remainingValue < 0) {
-    if(warningContainer.innerHTML !=="") return;
-    warningContainer.innerHTML=`<small class="typing-slider" ><p>Your budget is less than Zero</p></small>`
-  }else{
-    warningContainer.innerHTML=''
+  if (remainingValue < 0) {
+    if (warningContainer.innerHTML !== "") return;
+    warningContainer.innerHTML = `<small class="typing-slider" ><p>Your budget is less than Zero</p></small>`
+  } else {
+    warningContainer.innerHTML = ''
   }
   if (devValue == 0 || sprintsValue == 0) {
     remainingDoc.innerHTML = '';
@@ -126,15 +159,15 @@ const minusDevFn = (minus) => {
     remainingDoc.innerHTML = '';
   }
 
-  remainingDoc.innerHTML = totalRemainBudget(devValue, sprintsValue);
+  remainingDoc.innerHTML = `$${totalRemainBudget(devValue, sprintsValue).toLocaleString()}`;
   remainingValue = totalRemainBudget(devValue, sprintsValue);
 
   const warningContainer = document.getElementById('warning-massage');
-  if(remainingValue < 0) {
-    if(warningContainer.innerHTML !=="") return;
-    warningContainer.innerHTML=`<small class="typing-slider" ><p>Your budget is less than Zero</p></small>`
-  }else{
-    warningContainer.innerHTML=''
+  if (remainingValue < 0) {
+    if (warningContainer.innerHTML !== "") return;
+    warningContainer.innerHTML = `<small class="typing-slider" ><p>Your budget is less than Zero</p></small>`
+  } else {
+    warningContainer.innerHTML = ''
   }
   if (devValue == 0 || sprintsValue == 0) {
     remainingDoc.innerHTML = '';
@@ -155,15 +188,15 @@ const addSprintFn = (add) => {
     remainingDoc.innerHTML = '';
   }
 
-  remainingDoc.innerHTML = totalRemainBudget(devValue, sprintsValue);
+  remainingDoc.innerHTML = `$${totalRemainBudget(devValue, sprintsValue).toLocaleString()}`;
   remainingValue = totalRemainBudget(devValue, sprintsValue);
 
   const warningContainer = document.getElementById('warning-massage');
-  if(remainingValue < 0) {
-    if(warningContainer.innerHTML !=="") return;
-    warningContainer.innerHTML=`<small class="typing-slider" ><p>Your budget is less than Zero</p></small>`
-  }else{
-    warningContainer.innerHTML=''
+  if (remainingValue < 0) {
+    if (warningContainer.innerHTML !== "") return;
+    warningContainer.innerHTML = `<small class="typing-slider" ><p>Your budget is less than Zero</p></small>`
+  } else {
+    warningContainer.innerHTML = ''
   }
   if (devValue == 0 || sprintsValue == 0) {
     remainingDoc.innerHTML = '';
@@ -182,15 +215,15 @@ const minusSprintFn = (minus) => {
     remainingDoc.innerHTML = '';
   }
 
-  remainingDoc.innerHTML = totalRemainBudget(devValue, sprintsValue);
+  remainingDoc.innerHTML = `$${totalRemainBudget(devValue, sprintsValue).toLocaleString()}`;
   remainingValue = totalRemainBudget(devValue, sprintsValue);
 
   const warningContainer = document.getElementById('warning-massage');
-  if(remainingValue < 0 ) {
-    if(warningContainer.innerHTML !=="") return;
-    warningContainer.innerHTML=`<small class="typing-slider" ><p>Your budget is less than Zero</p></small>`
-  }else{
-    warningContainer.innerHTML=''
+  if (remainingValue < 0) {
+    if (warningContainer.innerHTML !== "") return;
+    warningContainer.innerHTML = `<small class="typing-slider" ><p>Your budget is less than Zero</p></small>`
+  } else {
+    warningContainer.innerHTML = ''
   }
   if (devValue == 0 || sprintsValue == 0) {
     remainingDoc.innerHTML = '';
@@ -214,16 +247,16 @@ const firstScreenTemp = () => {
           <span >
               <label for="price-total">
               <i class="fa-solid fa-sack-dollar"></i>
-              Total Budget :
+              Total Budget:
               </label>
-              <p type="text"  id="price-total">R1,000,000</p>
+              <p type="text"  id="price-total">$${totalBudget.toLocaleString()}</p>
           </span>
           <span >
               <label for="price-dev">
               <i class="fa-solid fa-arrow-up-wide-short"></i>
               Cost of developer per sprint :
               </label>
-              <p type="text"  id="price-dev">3,000</p>
+              <p type="text" id="price-dev">$${costPerDev.toLocaleString()}</p>
           </span>
           <span >
               <label for="develpers">
@@ -235,7 +268,7 @@ const firstScreenTemp = () => {
                 <button onClick='minusDevFn(10)'>-10</button>
                 <button onClick='minusDevFn(5)'>-5</button>
                 <button onClick='minusDevFn(1)'>-1</button>
-                <input tabindex="1" type="text" value="" class="inputs-user develpers" name="devValue" id="develpers" autocomplete="off">
+                <input tabindex="1" autofocus type="text" value="" class="inputs-user develpers" name="devValue" id="develpers" autocomplete="off">
                 <button onClick='addDevFn(1)'>+1</button>
                 <button onClick='addDevFn(5)'>+5</button>
                 <button onClick='addDevFn(10)'>+10</button> 
@@ -264,7 +297,7 @@ const firstScreenTemp = () => {
               <i class="fa-solid fa-money-bill"></i>
               Budget Remaining :
               </label>
-              <p id="budget-remaining"></p>
+              <p id="budget-remaining">$${totalBudget.toLocaleString()}</p>
           </span>
           
           <div class="btn-container"><input type="submit" value="Next" class="submit-first"></div>
@@ -279,14 +312,20 @@ const firstScreenTemp = () => {
 }
 
 // 2nd screen temp and inputs handlers
-const goHome = ()=>{
-  remainingValue =0;
+const goHome = () => {
+  // remainingValue =0;
   screenMinus()
 
   const dev = document.querySelector('.develpers');
   const sprints = document.querySelector('.sprints');
+  const remainingDoc = document.querySelector('#budget-remaining');
+
   dev.value = devValue;
-  sprints.value= sprintValue;
+  sprints.value = sprintsValue;
+
+  remainingDoc.innerHTML = `$${totalRemainBudget(devValue, sprintsValue).toLocaleString()}`;
+
+  console.log(devValue, sprintsValue, remainingValue);
 
 }
 const sdlcButtonsAdd = (value, target) => {
@@ -328,11 +367,11 @@ const sdlcButtonsAdd = (value, target) => {
   }
 
   const total = +(plaining + defineRequirements + designPrototyping + softwaredevelopment + testing + development + operationMaintenance)
-  remainingDoc.innerHTML = +(sprintValue - total);
+  remainingDoc.innerHTML = +(sprintsValue - total);
 
   const iconsElements = document.querySelectorAll('.icon-images-game')
-  if(sprintValue < total) iconsElements.forEach(el => el.style.outline = '2px solid red')
-  else iconsElements.forEach(el => el.style.outline = '2px solid #a3ea2a')
+  if (sprintsValue < total) iconsElements.forEach(el => el.style.border = '2px solid red')
+  else iconsElements.forEach(el => el.style.border = '2px solid #a3ea2a')
 
   const sdlcInputs = document.querySelectorAll('.inputs-sdlc');
   sdlcInputs.forEach(el => {
@@ -340,7 +379,7 @@ const sdlcButtonsAdd = (value, target) => {
     if (!val || val == 0) return;
     else el.parentElement.style.outline = 'none'
   })
-    upperLowerLimitCalc({ plaining, defineRequirements, designPrototyping, softwaredevelopment, operationMaintenance, development, testing },sprintValue);
+  upperLowerLimitCalc({ plaining, defineRequirements, designPrototyping, softwaredevelopment, operationMaintenance, development, testing }, sprintsValue);
 
 }
 const sdlcButtonsMinus = (value, target) => {
@@ -388,11 +427,11 @@ const sdlcButtonsMinus = (value, target) => {
   }
 
   const total = +(plaining + defineRequirements + designPrototyping + softwaredevelopment + testing + development + operationMaintenance)
-  remainingDoc.innerHTML = +(sprintValue - total);
+  remainingDoc.innerHTML = +(sprintsValue - total);
 
   const iconsElements = document.querySelectorAll('.icon-images-game')
-  if(sprintValue < total) iconsElements.forEach(el => el.style.outline = '2px solid red')
-  else iconsElements.forEach(el => el.style.outline = '2px solid #a3ea2a')
+  if (sprintsValue < total) iconsElements.forEach(el => el.style.border = '2px solid red')
+  else iconsElements.forEach(el => el.style.border = '2px solid #a3ea2a')
 
   const sdlcInputs = document.querySelectorAll('.inputs-sdlc');
   sdlcInputs.forEach(el => {
@@ -400,9 +439,10 @@ const sdlcButtonsMinus = (value, target) => {
     if (!val || val == 0) return;
     else el.parentElement.style.outline = 'none'
   })
- 
-    upperLowerLimitCalc({ plaining, defineRequirements, designPrototyping, softwaredevelopment, operationMaintenance, development, testing },sprintValue)
+
+  upperLowerLimitCalc({ plaining, defineRequirements, designPrototyping, softwaredevelopment, operationMaintenance, development, testing }, sprintsValue)
 }
+
 const secondScreenTemp = () => {
   const html = `
   <div class="header offical-header">
@@ -424,7 +464,7 @@ const secondScreenTemp = () => {
     <span>
       <label for="plaining">
         <div><img class="icon-images-game" src="./images/sdlc-icons/Planning.png" alt="planing-icon"></div>
-        <img src="./images/text-images/Planning.png" alt="planing-text">
+        <h2>Planning</h2>
       </label>
       <div class='sdlc-container-input'>
         <div class='sdlc-btn-container'>
@@ -442,7 +482,7 @@ const secondScreenTemp = () => {
       <label for="definerequirements">
 
         <div><img class="icon-images-game" src="./images/sdlc-icons/Define and requirements.png" alt="define-requirements-icon"></div>
-        <img src="./images/text-images/Define requitements.png" alt="requirement-text">
+        <h2>Define Requirements</h2>
       </label>
       <div class='sdlc-container-input'>
         <div class='sdlc-btn-container'> 
@@ -461,7 +501,7 @@ const secondScreenTemp = () => {
       <label for="designprototyping">
 
         <div><img class="icon-images-game" src="./images/sdlc-icons/Design and prototyping.png" alt="design-prototyping-icon"></div>
-        <img src="./images/text-images/Design and protoyping.png" alt="image-text">
+        <h2>Design and Prototyping</h2>
       </label>
       <div class='sdlc-container-input'>
         <div class='sdlc-btn-container'>
@@ -479,7 +519,7 @@ const secondScreenTemp = () => {
     <span>
       <label for="softwaredevelopment">
         <div><img class="icon-images-game" src="./images/sdlc-icons/Software developments.png" alt="sd-icon"></div>
-        <img src="./images/text-images/Software developments.png" alt="image-text">
+        <h2>Software Development</h2>
       </label>
       <div class='sdlc-container-input'>
         <div class='sdlc-btn-container'>
@@ -497,7 +537,7 @@ const secondScreenTemp = () => {
     <span>
       <label for="testing">
         <div><img class="icon-images-game" src="./images/sdlc-icons/Testing.png" alt="testing-icon"></div>
-        <img src="./images/text-images/Testing.png" alt="image-text">
+        <h2>Testing</h2>
       </label>
       <div class='sdlc-container-input'>
         <div class='sdlc-btn-container'>
@@ -514,7 +554,7 @@ const secondScreenTemp = () => {
     <span>
       <label for="development">
         <div><img class="icon-images-game" src="./images/sdlc-icons/Deployment.png" alt="development-icon"></div>
-        <img src="./images/text-images/Deployment.png" alt="image-text">
+        <h2>Deployment</h2>
       </label>
       <div class='sdlc-container-input'>
         <div class='sdlc-btn-container'>
@@ -532,7 +572,7 @@ const secondScreenTemp = () => {
     <span>
       <label for="operationmaintaince">
         <div><img class="icon-images-game" src="./images/sdlc-icons/Operations and maintenance.png" alt="maintaince-icon"></div>
-        <img src="./images/text-images/Operations and maintenance.png" alt="image-text">
+        <h2>Operations and Maintenance</h2>
       </label>
       <div class='sdlc-container-input'>
         <div class='sdlc-btn-container'>
@@ -562,15 +602,49 @@ const secondScreenTemp = () => {
           <h1>Upper Limit</h1>
         </div>
       </div>
-       <div class="limts-stats__content">
-      <div><b>Rate of new bugs</b>  <p></p> <p></p> </div>
-      <div><b>Cost to fix bugs</b>  <p></p> <p></p> </div>
-      <div><b>Droid production rate</b>  <p></p> <p></p> </div>
-      <div><b>Percentage of defective droids</b>  <p></p> <p></p> </div>
-      <div><b>Droid production cost</b>  <p></p> <p></p> </div>
-      <div><b>Droid upsell percentage</b>  <p></p> <p></p> </div>
-      <div><b>Droid sell cost</b>  <p></p> <p></p> </div>
+      <div class="limts-stats__content">
+      <div id="limits-01">
+        <b>Rate of new bugs</b>
+        <p class="">0%</p>
+        <p class="">5%</p>
       </div>
+
+      <div id="limits-02">
+        <b>Cost to fix bugs</b>
+        <p class="">$0</p>
+        <p class="">$1000</p>
+      </div>
+
+      <div id="limits-03">
+        <b>Droid production rate</b>
+        <p class="">100</p>
+        <p class="">100</p>
+      </div>
+
+      <div id="limits-04">
+        <b>Percentage of defective droids</b>
+        <p class="">0%</p>
+        <p class="">5%</p>
+      </div>
+
+      <div id="limits-05">
+        <b>Droid production cost</b>
+        <p class="">$10000</p>
+        <p class="">$10000</p>
+      </div>
+
+      <div id="limits-06">
+        <b>Droid upsell percentage</b>
+        <p class="">20%</p>
+        <p class="">20%</p>
+      </div>
+
+      <div id="limits-07">
+        <b>Droid sell cost</b>
+        <p class="">$12000</p>
+        <p class="">$12000</p>
+      </div>
+    </div>
 
     </div>
   </div>
@@ -586,9 +660,9 @@ const listMonths = (month, monthName) => {
   const html = `
   <tr >
       <td> ${monthName}</td>
-      <td>${month.fundStart.toFixed(2)}</td>
-      <td>${month.moneyOut.toFixed(2)}</td>
-      <td>${month.moneyIn.toFixed(2)}</td>
+      <td>$${month.fundStart.toFixed(2)}</td>
+      <td>$${month.moneyOut.toFixed(2)}</td>
+      <td>$${month.moneyIn.toFixed(2)}</td>
       <td>${Math.round(month.droidProduced)}</td>
       <td>${month.defectivePercentage.toFixed(2)}%</td>
       <td>${Math.round(month.defectiveCount)}</td>
@@ -641,14 +715,14 @@ const thirdScreenTemp = () => {
 }
 // 4rd screen temp and inputs handlers
 var currentDate = new Date();
-var dateString = currentDate.toLocaleString('en-US', { 
+var dateString = currentDate.toLocaleString('en-US', {
   hour: 'numeric',
   minute: 'numeric',
   day: '2-digit',
   month: '2-digit',
   year: 'numeric'
 });
-function refreshPage() {window.location.reload()  }
+function refreshPage() { window.location.reload() }
 const fourthScreenTemp = (values) => {
   const finalMonth = (+values.finalMonth.toFixed(2)).toLocaleString()
   const initialInvestment = (+values.initialInvestment.toFixed(2)).toLocaleString()
@@ -686,15 +760,15 @@ const fourthScreenTemp = (values) => {
 <div class="last-result__stats">
     <span>
     <h1 >Final</h1>
-    <b>${finalMonth}</b>
+    <b>$${finalMonth}</b>
   </span>
     <span>
       <h1 >Initial Investment</h1>
-      <b>${initialInvestment}</b>
+      <b>$${initialInvestment}</b>
     </span>
     <span>
       <h1 >Total Money Made</h1>
-      <b>${totalMoneyMade}</b>
+      <b>$${totalMoneyMade}</b>
     </span>
 </div>
 </div>
@@ -735,27 +809,18 @@ const fourthScreenTemp = (values) => {
 </div>
 
   `
- 
-  if((values.initialInvestment * 2) < values.totalMoneyMade) html = html1;
+
+  if ((values.initialInvestment * 2) < values.totalMoneyMade) html = html1;
   else html = html2;
   return html;
 }
-
-
-
 
 // 1st screen logic 
 let devValue = 0;
 let sprintsValue = 0;
 let remainingValue = 0;
-const userCalc = {
-  totalBudget: 1000000,
-  costPerDev: 3000
-}
 const totalRemainBudget = (noOfDev, noOfSprints) => {
-  const budget = userCalc.totalBudget;
-  const cost = userCalc.costPerDev;
-  return (budget - cost * noOfDev * noOfSprints)
+  return (totalBudget - (costPerDev * noOfDev * noOfSprints))
 }
 const handleInputsValues = (el) => {
   const remainingDoc = document.querySelector('#budget-remaining');
@@ -777,15 +842,15 @@ const handleInputsValues = (el) => {
       remainingDoc.innerHTML = '';
       return
     }
-    remainingDoc.innerHTML = totalRemainBudget(devValue, sprintsValue);
-    remainingValue = totalRemainBudget(devValue, sprintsValue);
+    remainingDoc.innerHTML = `$${totalRemainBudget(devValue, sprintsValue).toLocaleString()}`;
+
 
     const warningContainer = document.getElementById('warning-massage');
-    if(remainingValue < 0) {
-    if(warningContainer.innerHTML !=="") return;
-      warningContainer.innerHTML=`<small class="typing-slider" ><p>Your budget is less than Zero</p></small>`
-    }else{
-      warningContainer.innerHTML=''
+    if (remainingValue < 0) {
+      if (warningContainer.innerHTML !== "") return;
+      warningContainer.innerHTML = `<small class="typing-slider" ><p>Your budget is less than Zero</p></small>`
+    } else {
+      warningContainer.innerHTML = ''
     }
   })
 }
@@ -810,7 +875,6 @@ let softwaredevelopment = 0;
 let testing = 0;
 let operationMaintenance = 0;
 let development = 0;
-let sprintValue = 0
 
 const secondcreenInputHandler = (el) => {
   const remainingDoc = document.querySelector('#sprint-remaining');
@@ -833,11 +897,11 @@ const secondcreenInputHandler = (el) => {
     const total = +(plaining + defineRequirements + designPrototyping + softwaredevelopment + testing + development + operationMaintenance)
 
     const iconsElements = document.querySelectorAll('.icon-images-game')
-    if(sprintValue < total) iconsElements.forEach(el => el.style.outline = '2px solid red')
-    else iconsElements.forEach(el => el.style.outline = '2px solid #a3ea2a')
+    if (sprintsValue < total) iconsElements.forEach(el => el.style.border = '2px solid red')
+    else iconsElements.forEach(el => el.style.border = '2px solid #a3ea2a')
 
-    remainingDoc.innerHTML = +(sprintValue - total);
-    upperLowerLimitCalc({ plaining, defineRequirements, designPrototyping, softwaredevelopment, operationMaintenance, development, testing },sprintValue)
+    remainingDoc.innerHTML = +(sprintsValue - total);
+    upperLowerLimitCalc({ plaining, defineRequirements, designPrototyping, softwaredevelopment, operationMaintenance, development, testing }, sprintsValue)
 
   })
 
@@ -850,11 +914,87 @@ const secondScreenSubmitHandler = (handler) => {
   })
   if (plaining == 0 || defineRequirements == 0 || designPrototyping == 0 || softwaredevelopment == 0 || operationMaintenance == 0 || development == 0 || testing == 0) return;
   const total = plaining + defineRequirements + designPrototyping + softwaredevelopment + operationMaintenance + development + testing;
-  if (total > sprintValue) return;
+  if (total > sprintsValue) return;
   handler()
 }
-const upperLowerLimitCalc = (sprintObject,sprint) => {
-  const potencyFactor = ((+sprint * (Math.pow(1.5 ,-1*devValue)) * devValue)/100 *100);
+
+const animationLimits = (limits, option) => {
+  limits.innerHTML = option;
+  const Elements = Array.from(limits.children);
+  Elements[1].classList.add('handleAnimate')
+  Elements[2].classList.add('handleAnimate')
+  limits.style.background = '#151c2b';
+  limits.style.outline = '1px solid white'
+}
+const upperLowerLimitTemplates = (sdlc, element) => {
+  const limits01 = document.getElementById('limits-01');
+  const limits02 = document.getElementById('limits-02');
+  const limits03 = document.getElementById('limits-03');
+  const limits04 = document.getElementById('limits-04');
+  const limits05 = document.getElementById('limits-05');
+  const limits06 = document.getElementById('limits-06');
+  const limits07 = document.getElementById('limits-07');
+
+  const option01 = `
+  <b>Rate of new bugs</b> 
+  <p class="">${sdlc.rateOfNewBugs.lower.toFixed(0)}%</p> 
+  <p class="">${sdlc.rateOfNewBugs.upper.toFixed(0)}%</p> 
+  `
+  const option02 = `
+  <b>Cost to fix bugs</b>  
+  <p class="">$${sdlc.costToFixBugs.lower.toFixed(0)}</p> 
+  <p class="">$${sdlc.costToFixBugs.upper.toFixed(0)}</p> 
+  `
+  const option03 = `
+  <b>Droid production rate</b>  
+  <p class="">${sdlc.droidProductionRate.lower.toFixed(0)}</p> 
+  <p class="">${sdlc.droidProductionRate.upper.toFixed(0)}</p> 
+  `
+  const option04 = `
+  <b>Percentage of defective droids</b>  
+  <p class="">${sdlc.percentageOfDefectiveDroids.lower.toFixed(0)}%</p> 
+  <p class="">${sdlc.percentageOfDefectiveDroids.upper.toFixed(0)}%</p>
+  `
+  const option05 = `
+  <b>Droid production cost</b>  
+  <p class="">$${sdlc.droidProductionCost.lower.toFixed(0)}</p> 
+  <p class="">$${sdlc.droidProductionCost.upper.toFixed(0)}</p>
+  `
+  const option06 = `
+  <b>Droid upsell percentage</b>  
+  <p class="">${sdlc.droidUpSellPercentage.lower.toFixed(0)}%</p> 
+  <p class="">${sdlc.droidUpSellPercentage.upper.toFixed(0)}%</p> 
+  `
+  const option07 = `
+  <b>Droid sell cost</b>  
+  <p class="">$${sdlc.droidUpSellCost.lower.toFixed(0)}</p> 
+  <p class="">$${sdlc.droidUpSellCost.upper.toFixed(0)}</p> 
+  `
+
+  if (option01.replace(/\s/g, '') !== limits01.innerHTML.toString().replace(/\s/g, '')) animationLimits(limits01, option01)
+  if (option02.replace(/\s/g, '') !== limits02.innerHTML.toString().replace(/\s/g, '')) animationLimits(limits02, option02)
+  if (option03.replace(/\s/g, '') !== limits03.innerHTML.toString().replace(/\s/g, '')) animationLimits(limits03, option03)
+  if (option04.replace(/\s/g, '') !== limits04.innerHTML.toString().replace(/\s/g, '')) animationLimits(limits04, option04)
+  if (option05.replace(/\s/g, '') !== limits05.innerHTML.toString().replace(/\s/g, '')) animationLimits(limits05, option05)
+  if (option06.replace(/\s/g, '') !== limits06.innerHTML.toString().replace(/\s/g, '')) animationLimits(limits06, option06)
+  if (option07.replace(/\s/g, '') !== limits07.innerHTML.toString().replace(/\s/g, '')) animationLimits(limits07, option07)
+
+
+
+  const newElements = Array.from(element.children)
+  setTimeout(() => {
+    newElements.forEach(el => {
+      el.style.background = 'transparent';
+      el.style.outline = 'none';
+      const Elements = Array.from(el.children)
+      Elements[1].classList.remove('handleAnimate')
+      Elements[2].classList.remove('handleAnimate')
+    })
+
+  }, 1000)
+}
+const upperLowerLimitCalc = (sprintObject, sprint) => {
+  const potencyFactor = ((+sprint * (Math.pow(1.5, -1 * devValue)) * devValue) / 100 * 100);
   const rate = ((sprintObject.plaining * (-1 / 100) + sprintObject.defineRequirements * (0 / 100) + sprintObject.designPrototyping * (-5 / 100) + sprintObject.softwaredevelopment * (-5 / 100) + sprintObject.testing * (-10 / 100) + sprintObject.development * (2 / 100) + sprintObject.operationMaintenance * (-5 / 100)) * (potencyFactor / 100)) * 100;
   const cost = ((sprintObject.plaining * (-1 / 100) + sprintObject.defineRequirements * (0 / 100) + sprintObject.designPrototyping * (-5 / 100) + sprintObject.softwaredevelopment * (-5 / 100) + sprintObject.testing * (-10 / 100) + sprintObject.development * (2 / 100) + sprintObject.operationMaintenance * (-5 / 100)) * (potencyFactor / 100)) * 100;
   const droidpr = ((sprintObject.plaining * (2 / 100) + sprintObject.defineRequirements * (4 / 100) + sprintObject.designPrototyping * (5 / 100) + sprintObject.softwaredevelopment * (10 / 100) + sprintObject.testing * (2 / 100) + sprintObject.development * (5 / 100) + sprintObject.operationMaintenance * (5 / 100)) * (potencyFactor / 100)) * 100;
@@ -865,7 +1005,7 @@ const upperLowerLimitCalc = (sprintObject,sprint) => {
   let phases = {
     rateOfNewBugs: {
       baseLine: 5,
-      adjustmentPercentage: rate ,
+      adjustmentPercentage: rate,
       lower: function () {
         if (this.baseLine / 100 + this.adjustmentPercentage / 100 > 0) {
           return this.baseLine / 100 + this.adjustmentPercentage / 100;
@@ -877,19 +1017,19 @@ const upperLowerLimitCalc = (sprintObject,sprint) => {
     },
     costToFixBugs: {
       baseLine: 1000,
-      adjustmentPercentage: cost ,
+      adjustmentPercentage: cost,
       lower: function () { return ((this.baseLine * (-1 * this.adjustmentPercentage / 100))) },
       upper: function () { return this.baseLine }
     },
     droidProductionRate: {
       baseLine: 100,
-      adjustmentPercentage: droidpr ,
+      adjustmentPercentage: droidpr,
       lower: function () { return (this.baseLine) },
       upper: function () { return this.baseLine * (this.adjustmentPercentage / 100) + this.baseLine }
     },
     percentageOfDefectiveDroids: {
       baseLine: 5,
-      adjustmentPercentage: percentageodd ,
+      adjustmentPercentage: percentageodd,
       lower: function () {
         if (this.baseLine / 100 + this.adjustmentPercentage / 100 > 0) {
           return this.baseLine / 100 + this.adjustmentPercentage / 100;
@@ -901,7 +1041,7 @@ const upperLowerLimitCalc = (sprintObject,sprint) => {
     },
     droidProductionCost: {
       baseLine: 10000,
-      adjustmentPercentage: droidpc ,
+      adjustmentPercentage: droidpc,
       lower: function () { return (this.baseLine) },
       upper: function () { return this.baseLine * (this.adjustmentPercentage / 100) + this.baseLine }
     },
@@ -964,27 +1104,8 @@ const upperLowerLimitCalc = (sprintObject,sprint) => {
   }
 
   const element = document.querySelector('.limts-stats__content');
-  const html2 = `
-  <div><b>Rate of new bugs</b>  <p></p> <p></p> </div>
-  <div><b>Cost to fix bugs</b>  <p></p> <p></p> </div>
-  <div><b>Droid production rate</b>  <p></p> <p></p> </div>
-  <div><b>Percentage of defective droids</b>  <p></p> <p></p> </div>
-  <div><b>Droid production cost</b>  <p></p> <p></p> </div>
-  <div><b>Droid upsell percentage</b>  <p></p> <p></p> </div>
-  <div><b>Droid sell cost</b>  <p></p> <p></p> </div>
-  `
-  element.innerHTML = html2;
+  upperLowerLimitTemplates(sdlc, element)
 
-  const html = `
-  <div><b>Rate of new bugs</b>  <p>${sdlc.rateOfNewBugs.lower.toFixed(0)}%</p> <p>${sdlc.rateOfNewBugs.upper.toFixed(0)}%</p> </div>
-  <div><b>Cost to fix bugs</b>  <p>R.${sdlc.costToFixBugs.lower.toFixed(0)}</p> <p>R.${sdlc.costToFixBugs.upper.toFixed(0)}</p> </div>
-  <div><b>Droid production rate</b>  <p>${sdlc.droidProductionRate.lower.toFixed(0)}</p> <p>${sdlc.droidProductionRate.upper.toFixed(0)}</p> </div>
-  <div><b>Percentage of defective droids</b>  <p>${sdlc.percentageOfDefectiveDroids.lower.toFixed(0)}%</p> <p>${sdlc.percentageOfDefectiveDroids.upper.toFixed(0)}%</p> </div>
-  <div><b>Droid production cost</b>  <p>${sdlc.droidProductionCost.lower.toFixed(0)}</p> <p>${sdlc.droidProductionCost.upper.toFixed(0)}</p> </div>
-  <div><b>Droid upsell percentage</b>  <p>${sdlc.droidUpSellPercentage.lower.toFixed(0)}%</p> <p>${sdlc.droidUpSellPercentage.upper.toFixed(0)}%</p> </div>
-  <div><b>Droid sell cost</b>  <p>R.${sdlc.droidUpSellCost.lower.toFixed(0)}</p> <p>R.${sdlc.droidUpSellCost.upper.toFixed(0)}</p> </div>
-  `
-  element.innerHTML = html
 }
 
 // 3rd screen logic
@@ -1045,7 +1166,7 @@ const thirdScreenAnimationHandler = () => {
   }
 
 }
-const thirdScreenMonthsHandler = (remainingValue,handler)=>{
+const thirdScreenMonthsHandler = (remainingValue, handler) => {
   const january = januaryMonth(remainingValue, sdlc);
   const febuary = othersMotnhs(january.fundStart - january.moneyOut + january.moneyIn, sdlc)
   const march = othersMotnhs(febuary.fundStart - febuary.moneyOut + febuary.moneyIn, sdlc)
@@ -1057,32 +1178,39 @@ const thirdScreenMonthsHandler = (remainingValue,handler)=>{
   const september = othersMotnhs(august.fundStart - august.moneyOut + august.moneyIn, sdlc)
   const octorber = othersMotnhs(september.fundStart - september.moneyOut + september.moneyIn, sdlc)
   const november = othersMotnhs(octorber.fundStart - octorber.moneyOut + octorber.moneyIn, sdlc)
-  const  december = othersMotnhs(november.fundStart - november.moneyOut + november.moneyIn, sdlc)
+  const december = othersMotnhs(november.fundStart - november.moneyOut + november.moneyIn, sdlc)
 
-  const monthsData = [{month:january,str:'January'}, {str:'Febuary',month:febuary}, {month:march,str:'March'},
-  {str:'April',month:aprial}, {month:may,str:'May'}, {month:june,str:'June'}, {month: july,str:'July'},
-  {month:august,str:'August'}, {month:september,str:'September'}, {month:octorber,str:'October'},
-  {month:november,str:'November'}, {month:december,str:'December'}];
+  const monthsData = [{ month: january, str: 'January' }, { str: 'Febuary', month: febuary }, { month: march, str: 'March' },
+  { str: 'April', month: aprial }, { month: may, str: 'May' }, { month: june, str: 'June' }, { month: july, str: 'July' },
+  { month: august, str: 'August' }, { month: september, str: 'September' }, { month: octorber, str: 'October' },
+  { month: november, str: 'November' }, { month: december, str: 'December' }];
 
   finalMonth = (december.fundStart - december.moneyOut + december.moneyIn);
   totalMoneyMade = finalMonth - initialInvestment;
 
-   const tableBody = document.querySelector('.table-result-body')
-  tableBody.innerHTML = listMonths(monthsData[0].month,'january')
+  const tableBody = document.querySelector('.table-result-body')
+  tableBody.innerHTML = listMonths(monthsData[0].month, 'january')
   const btn = document.querySelector('.next-month');
 
-  btn.addEventListener('click',()=>{
-  checkShowMonth = checkShowMonth + 1;
-
-    if(checkShowMonth ===11){
+  btn.addEventListener('click', () => {
+    checkShowMonth = checkShowMonth + 1;
+    window.scrollTo(0, 100 *checkShowMonth);
+    if (checkShowMonth === 11) {
       btn.innerHTML = "Show Results"
+      btn.style.color = '#a3ea2a'
     }
-    if(checkShowMonth ===12 || checkShowMonth > 12) {
+    if (checkShowMonth === 12 || checkShowMonth > 12) {
       handler()
       return
     }
-    else{
-      tableBody.innerHTML = listMonths(monthsData[checkShowMonth].month,monthsData[checkShowMonth].str)
+    else {
+      tableBody.insertAdjacentHTML('beforeend', listMonths(monthsData[checkShowMonth].month, monthsData[checkShowMonth].str))
+      const tableRows = Array.from(tableBody.children)
+      tableRows.forEach((el,i) =>{
+        el.style.background = '#454e6087';
+        if(i === tableRows.length -1)  el.style.background = '#151c2b';
+      })
+      console.log(tableRows);
     }
   })
 
@@ -1100,6 +1228,7 @@ const firstScreenHandler = (handler) => {
 
 
   // user for submiting form to move next page
+
   const userForm = document.querySelector('.user-form');
   userForm?.addEventListener('submit', (e) => e.preventDefault());
 
@@ -1119,12 +1248,12 @@ const secondScreenHandler = (handler, value) => {
   const parentEl = document.querySelector('.wrapper');
   parentEl.insertAdjacentHTML('afterbegin', html);
 
-  sprintValue = +value;
+  sprintsValue = +value;
   const remainingDoc = document.querySelector('#sprint-remaining');
   remainingDoc.innerHTML = value;
 
- 
-  upperLowerLimitCalc({ plaining, defineRequirements, designPrototyping, softwaredevelopment, operationMaintenance, development, testing },sprintValue)
+
+  // upperLowerLimitCalc({ plaining, defineRequirements, designPrototyping, softwaredevelopment, operationMaintenance, development, testing },sprintsValue)
 
   // sdlc form for submiting to move next page
   const sdlcForm = document.querySelector('.sdlc-form-submit');
@@ -1138,14 +1267,14 @@ const secondScreenHandler = (handler, value) => {
 
 }
 // third screen handler
-const thirdScreenHandler = (remainingValue,hadnler) => {
+const thirdScreenHandler = (remainingValue, hadnler) => {
 
   const html = thirdScreenTemp();
   const parentEl = document.querySelector('.wrapper');
   parentEl.insertAdjacentHTML('afterbegin', html);
 
   thirdScreenAnimationHandler();
-  thirdScreenMonthsHandler(remainingValue,hadnler)
+  thirdScreenMonthsHandler(remainingValue, hadnler)
 }
 // fourth screen handler
 const fourthScreenHandler = (handler, values) => {
@@ -1154,15 +1283,15 @@ const fourthScreenHandler = (handler, values) => {
   parentEl.insertAdjacentHTML('afterbegin', html);
 
   const closeBtn = document.querySelector('.model-close');
-if(closeBtn){
-  closeBtn.addEventListener('click', ()=>{
-    document.querySelector('.model-container').remove() 
-    parentEl.innerHTML=''
-    html = fourthScreenTemp(values,false);
-    parentEl.insertAdjacentHTML('afterbegin', html);
-  });
-}
-  
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      document.querySelector('.model-container').remove()
+      parentEl.innerHTML = ''
+      html = fourthScreenTemp(values, false);
+      parentEl.insertAdjacentHTML('afterbegin', html);
+    });
+  }
+
 }
 
 
@@ -1179,10 +1308,11 @@ const modulesHandler = () => {
   else if (screen == 2) {
     wrapper.innerHTML = '';
     return secondScreenHandler(screenAdd, sprintsValue)
+
   }
   else if (screen == 3) {
     wrapper.innerHTML = '';
-    return thirdScreenHandler(remainingValue,screenAdd);
+    return thirdScreenHandler(remainingValue, screenAdd);
   }
 
   else if (screen == 4) {

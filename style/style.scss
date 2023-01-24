@@ -5,6 +5,7 @@
     padding: 0%;
     box-sizing: border-box;
 }
+
 body {
     background-color: #212c42;
     padding: .5rem;
@@ -50,7 +51,7 @@ body {
     text-align: center;
     height: 5rem;
     padding: 1rem;
-    margin-top: 1rem ;
+    margin-top: 1rem;
 
     button,
     input[type='submit'] {
@@ -65,22 +66,45 @@ body {
         border: none;
         color: #ececec;
         font-size: 1.2rem;
+
         &:hover {
             background-color: #212c42;
             border: 1px solid #ececec;
         }
 
-        &:active {
-            border: none;
-        }
+        // &:active {
+        //     border: none;
+        // }
     }
 }
 
 @media screen and (max-width:750px) {
-   .btn-container{
-    button,
-    input[type='submit'] {
-        width: 80%;
+    .btn-container {
+
+        button,
+        input[type='submit'] {
+            width: 80%;
+        }
     }
-   }
+}
+
+
+
+.handleAnimate {
+    animation: fadeInOut 2s linear infinite;
+    color: #a3ea2a;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }
